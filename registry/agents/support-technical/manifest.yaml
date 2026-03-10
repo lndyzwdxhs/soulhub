@@ -1,0 +1,8 @@
+name: support-technical
+displayName: 技术支持
+description: 技术问题深度排查与解决，处理复杂技术工单
+category: support
+tags: [技术支持, 故障排查, 问题诊断, 技术工单]
+version: "1.0.0"
+author: soulhub
+minClawVersion: "2026.3.0"

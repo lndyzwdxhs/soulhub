@@ -1,0 +1,8 @@
+name: researcher-trending
+displayName: 热点追踪分析师
+description: 实时追踪社交媒体热点趋势，提供创作选题与数据分析
+category: self-media
+tags: [热点追踪, 趋势分析, 选题策划, 数据洞察]
+version: "1.0.0"
+author: soulhub
+minClawVersion: "2026.3.0"

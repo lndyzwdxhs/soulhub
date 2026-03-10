@@ -1,0 +1,12 @@
+name: support-center
+displayName: 客服中心
+dispatcher:
+  agentId: main
+  template: dispatcher-main
+agents:
+  - agentId: tier1
+    template: support-tier1
+    role: worker
+  - agentId: technical
+    template: support-technical
+    role: worker

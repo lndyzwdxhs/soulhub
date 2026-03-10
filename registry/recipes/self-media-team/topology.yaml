@@ -1,0 +1,21 @@
+name: self-media-team
+displayName: 自媒体运营团队
+dispatcher:
+  agentId: main
+  template: dispatcher-main
+agents:
+  - agentId: xiaohongshu
+    template: writer-xiaohongshu
+    role: worker
+  - agentId: wechat
+    template: writer-wechat
+    role: worker
+  - agentId: trending
+    template: researcher-trending
+    role: worker
+  - agentId: scheduler
+    template: publisher-scheduler
+    role: worker
+  - agentId: ops
+    template: ops-assistant
+    role: worker

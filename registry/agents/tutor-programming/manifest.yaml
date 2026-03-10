@@ -1,0 +1,8 @@
+name: tutor-programming
+displayName: 编程入门导师
+description: 编程入门教学，引导式学习与实践指导
+category: education
+tags: [编程教学, 入门指导, 代码练习, 学习路径]
+version: "1.0.0"
+author: soulhub
+minClawVersion: "2026.3.0"

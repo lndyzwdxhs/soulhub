@@ -1,0 +1,8 @@
+name: architect-system
+displayName: 系统架构师
+description: 系统架构设计专家，擅长高可用分布式系统设计
+category: development
+tags: [系统架构, 分布式系统, 高可用, 技术选型]
+version: "1.0.0"
+author: soulhub
+minClawVersion: "2026.3.0"

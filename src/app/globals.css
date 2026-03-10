@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Light Theme (default) ── */
+:root {
+  --background: 0 0% 100%;
+  --foreground: 224 71.4% 4.1%;
+  --card: 0 0% 100%;
+  --card-foreground: 224 71.4% 4.1%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 224 71.4% 4.1%;
+  --primary: 220.9 39.3% 11%;
+  --primary-foreground: 210 20% 98%;
+  --secondary: 220 14.3% 95.9%;
+  --secondary-foreground: 220.9 39.3% 11%;
+  --muted: 220 14.3% 95.9%;
+  --muted-foreground: 220 8.9% 46.1%;
+  --accent: 220 14.3% 95.9%;
+  --accent-foreground: 220.9 39.3% 11%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 20% 98%;
+  --border: 220 13% 91%;
+  --input: 220 13% 91%;
+  --ring: 263.4 70% 50.4%;
+  --radius: 0.75rem;
+
+  --glass-bg: 0 0% 0%;
+  --glass-border: 0 0% 0%;
+}
+
+/* ── Dark Theme ── */
+.dark {
+  --background: 224 71% 4%;
+  --foreground: 213 31% 91%;
+  --card: 224 71% 4%;
+  --card-foreground: 213 31% 91%;
+  --popover: 224 71% 4%;
+  --popover-foreground: 213 31% 91%;
+  --primary: 210 40% 98%;
+  --primary-foreground: 222.2 47.4% 11.2%;
+  --secondary: 222.2 47.4% 11.2%;
+  --secondary-foreground: 210 40% 98%;
+  --muted: 223 47% 11%;
+  --muted-foreground: 215.4 16.3% 56.9%;
+  --accent: 216 34% 17%;
+  --accent-foreground: 210 40% 98%;
+  --destructive: 0 63% 31%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 216 34% 17%;
+  --input: 216 34% 17%;
+  --ring: 263.4 70% 50.4%;
+
+  --glass-bg: 0 0% 100%;
+  --glass-border: 0 0% 100%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-violet-600 to-cyan-600;
+  }
+  .dark .text-gradient {
+    @apply from-blue-400 via-violet-400 to-cyan-400;
+  }
+  .glow {
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.15), 0 0 60px rgba(99, 102, 241, 0.05);
+  }
+  .dark .glow {
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.3), 0 0 60px rgba(99, 102, 241, 0.1);
+  }
+  .glow-sm {
+    box-shadow: 0 0 10px rgba(99, 102, 241, 0.1), 0 0 30px rgba(99, 102, 241, 0.03);
+  }
+  .dark .glow-sm {
+    box-shadow: 0 0 10px rgba(99, 102, 241, 0.2), 0 0 30px rgba(99, 102, 241, 0.05);
+  }
+  .glass {
+    background: hsl(var(--glass-bg) / 0.05);
+    -webkit-backdrop-filter: blur(24px);
+    backdrop-filter: blur(24px);
+    border: 1px solid hsl(var(--glass-border) / 0.1);
+  }
+}
+
+/* React Flow theme-aware overrides */
+.composer-flow .react-flow__background {
+  background-color: hsl(var(--background)) !important;
+}
+
+.composer-flow .react-flow__edge-path {
+  stroke: rgba(99, 102, 241, 0.4);
+  stroke-width: 2;
+}
+
+.composer-flow .react-flow__edge.animated .react-flow__edge-path {
+  stroke-dasharray: 5;
+  animation: react-flow-edge-dash 0.5s linear infinite;
+}
+
+@keyframes react-flow-edge-dash {
+  to {
+    stroke-dashoffset: -10;
+  }
+}
+
+.composer-flow .react-flow__connection-line {
+  stroke: rgba(99, 102, 241, 0.6);
+  stroke-width: 2;
+}
+
+.composer-flow .react-flow__selection {
+  background: rgba(99, 102, 241, 0.08);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+}

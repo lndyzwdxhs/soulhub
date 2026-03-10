@@ -1,0 +1,15 @@
+name: dev-squad
+displayName: 开发小队
+dispatcher:
+  agentId: main
+  template: dispatcher-main
+agents:
+  - agentId: python
+    template: coder-python
+    role: worker
+  - agentId: fullstack
+    template: coder-fullstack
+    role: worker
+  - agentId: reviewer
+    template: coder-reviewer
+    role: worker

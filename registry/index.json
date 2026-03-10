@@ -1,0 +1,493 @@
+{
+  "agents": [
+    {
+      "name": "architect-system",
+      "displayName": "系统架构师",
+      "description": "系统架构设计专家，擅长高可用分布式系统设计",
+      "category": "development",
+      "tags": [
+        "系统架构",
+        "分布式系统",
+        "高可用",
+        "技术选型"
+      ],
+      "version": "1.0.0",
+      "author": "soulhub",
+      "minClawVersion": "2026.3.0",
+      "files": {
+        "IDENTITY.md": 1101,
+        "SOUL.md": 1558
+      },
+      "downloads": 0,
+      "stars": 0
+    },
+    {
+      "name": "coder-fullstack",
+      "displayName": "全栈工程师",
+      "description": "全栈Web开发专家，前端React/Vue，后端Node/Python",
+      "category": "development",
+      "tags": [
+        "全栈开发",
+        "React",
+        "Node.js",
+        "Web应用"
+      ],
+      "version": "1.0.0",
+      "author": "soulhub",
+      "minClawVersion": "2026.3.0",
+      "files": {
+        "IDENTITY.md": 1036,
+        "SOUL.md": 1358
+      },
+      "downloads": 0,
+      "stars": 0
+    },
+    {
+      "name": "coder-python",
+      "displayName": "Python专家",
+      "description": "Python开发专家，精通数据处理、自动化脚本与后端服务",
+      "category": "development",
+      "tags": [
+        "Python",
+        "后端开发",
+        "数据处理",
+        "自动化"
+      ],
+      "version": "1.0.0",
+      "author": "soulhub",
+      "minClawVersion": "2026.3.0",
+      "files": {
+        "IDENTITY.md": 1141,
+        "SOUL.md": 1311
+      },
+      "downloads": 0,
+      "stars": 0
+    },
+    {
+      "name": "coder-reviewer",
+      "displayName": "代码审查专家",
+      "description": "专业代码审查，关注代码质量、安全漏洞与最佳实践",
+      "category": "development",
+      "tags": [
+        "代码审查",
+        "代码质量",
+        "安全审计",
+        "最佳实践"
+      ],
+      "version": "1.0.0",
+      "author": "soulhub",
+      "minClawVersion": "2026.3.0",
+      "files": {
+        "IDENTITY.md": 1094,
+        "SOUL.md": 1364
+      },
+      "downloads": 0,
+      "stars": 0
+    },
+    {
+      "name": "data-analyst",
+      "displayName": "数据分析师",
+      "description": "数据分析与可视化专家，驱动数据化决策",
+      "category": "operations",
+      "tags": [
+        "数据分析",
+        "数据可视化",
+        "BI",
+        "业务洞察"
+      ],
+      "version": "1.0.0",
+      "author": "soulhub",
+      "minClawVersion": "2026.3.0",
+      "files": {
+        "IDENTITY.md": 1005,
+        "SOUL.md": 1361
+      },
+      "downloads": 0,
+      "stars": 0
+    },
+    {
+      "name": "devops-k8s",
+      "displayName": "K8s运维专家",
+      "description": "Kubernetes集群运维专家，精通容器编排与云原生架构",
+      "category": "development",
+      "tags": [
+        "Kubernetes",
+        "Docker",
+        "云原生",
+        "DevOps",
+        "运维"
+      ],
+      "version": "1.0.0",
+      "author": "soulhub",
+      "minClawVersion": "2026.3.0",
+      "files": {
+        "IDENTITY.md": 1152,
+        "SOUL.md": 1520
+      },
+      "downloads": 0,
+      "stars": 0
+    },
+    {
+      "name": "dispatcher-main",
+      "displayName": "总调度中心",
+      "description": "多Agent团队总调度，负责任务解析、路由分发与执行监控",
+      "category": "dispatcher",
+      "tags": [
+        "调度",
+        "任务分发",
+        "团队协调",
+        "路由"
+      ],
+      "version": "1.0.0",
+      "author": "soulhub",
+      "minClawVersion": "2026.3.0",
+      "files": {
+        "IDENTITY.md": 1126,
+        "SOUL.md": 1252
+      },
+      "downloads": 0,
+      "stars": 0
+    },
+    {
+      "name": "growth-hacker",
+      "displayName": "增长黑客",
+      "description": "用户增长与运营策略专家，数据驱动的增长实验",
+      "category": "operations",
+      "tags": [
+        "用户增长",
+        "增长策略",
+        "转化优化",
+        "留存分析"
+      ],
+      "version": "1.0.0",
+      "author": "soulhub",
+      "minClawVersion": "2026.3.0",
+      "files": {
+        "IDENTITY.md": 983,
+        "SOUL.md": 1451
+      },
+      "downloads": 0,
+      "stars": 0
+    },
+    {
+      "name": "ops-assistant",
+      "displayName": "杂务管家",
+      "description": "团队日常杂务处理，数据整理、文件管理与流程协调",
+      "category": "operations",
+      "tags": [
+        "日常运营",
+        "杂务处理",
+        "文件管理",
+        "流程协调"
+      ],
+      "version": "1.0.0",
+      "author": "soulhub",
+      "minClawVersion": "2026.3.0",
+      "files": {
+        "IDENTITY.md": 1034,
+        "SOUL.md": 1184
+      },
+      "downloads": 0,
+      "stars": 0
+    },
+    {
+      "name": "publisher-scheduler",
+      "displayName": "发布排期官",
+      "description": "管理多平台内容发布排期，优化发布时间与节奏",
+      "category": "self-media",
+      "tags": [
+        "发布排期",
+        "内容日历",
+        "多平台管理",
+        "节奏控制"
+      ],
+      "version": "1.0.0",
+      "author": "soulhub",
+      "minClawVersion": "2026.3.0",
+      "files": {
+        "IDENTITY.md": 991,
+        "SOUL.md": 1289
+      },
+      "downloads": 0,
+      "stars": 0
+    },
+    {
+      "name": "researcher-trending",
+      "displayName": "热点追踪分析师",
+      "description": "实时追踪社交媒体热点趋势，提供创作选题与数据分析",
+      "category": "self-media",
+      "tags": [
+        "热点追踪",
+        "趋势分析",
+        "选题策划",
+        "数据洞察"
+      ],
+      "version": "1.0.0",
+      "author": "soulhub",
+      "minClawVersion": "2026.3.0",
+      "files": {
+        "IDENTITY.md": 1065,
+        "SOUL.md": 1356
+      },
+      "downloads": 0,
+      "stars": 0
+    },
+    {
+      "name": "seo-optimizer",
+      "displayName": "SEO优化师",
+      "description": "搜索引擎优化专家，提升内容搜索排名与自然流量",
+      "category": "operations",
+      "tags": [
+        "SEO",
+        "搜索优化",
+        "关键词",
+        "自然流量"
+      ],
+      "version": "1.0.0",
+      "author": "soulhub",
+      "minClawVersion": "2026.3.0",
+      "files": {
+        "IDENTITY.md": 1011,
+        "SOUL.md": 1327
+      },
+      "downloads": 0,
+      "stars": 0
+    },
+    {
+      "name": "support-escalation",
+      "displayName": "问题升级协调员",
+      "description": "处理升级问题、用户投诉与跨部门协调",
+      "category": "support",
+      "tags": [
+        "问题升级",
+        "投诉处理",
+        "跨部门协调",
+        "客户关系"
+      ],
+      "version": "1.0.0",
+      "author": "soulhub",
+      "minClawVersion": "2026.3.0",
+      "files": {
+        "IDENTITY.md": 1054,
+        "SOUL.md": 1430
+      },
+      "downloads": 0,
+      "stars": 0
+    },
+    {
+      "name": "support-technical",
+      "displayName": "技术支持",
+      "description": "技术问题深度排查与解决，处理复杂技术工单",
+      "category": "support",
+      "tags": [
+        "技术支持",
+        "故障排查",
+        "问题诊断",
+        "技术工单"
+      ],
+      "version": "1.0.0",
+      "author": "soulhub",
+      "minClawVersion": "2026.3.0",
+      "files": {
+        "IDENTITY.md": 955,
+        "SOUL.md": 1393
+      },
+      "downloads": 0,
+      "stars": 0
+    },
+    {
+      "name": "support-tier1",
+      "displayName": "一线客服",
+      "description": "一线用户支持，处理常见问题与即时响应",
+      "category": "support",
+      "tags": [
+        "客服",
+        "用户支持",
+        "即时响应",
+        "常见问题"
+      ],
+      "version": "1.0.0",
+      "author": "soulhub",
+      "minClawVersion": "2026.3.0",
+      "files": {
+        "IDENTITY.md": 1053,
+        "SOUL.md": 1329
+      },
+      "downloads": 0,
+      "stars": 0
+    },
+    {
+      "name": "tutor-english",
+      "displayName": "英语口语教练",
+      "description": "英语口语练习与纠正，场景化对话训练",
+      "category": "education",
+      "tags": [
+        "英语口语",
+        "对话练习",
+        "发音纠正",
+        "场景训练"
+      ],
+      "version": "1.0.0",
+      "author": "soulhub",
+      "minClawVersion": "2026.3.0",
+      "files": {
+        "IDENTITY.md": 1167,
+        "SOUL.md": 1429
+      },
+      "downloads": 0,
+      "stars": 0
+    },
+    {
+      "name": "tutor-programming",
+      "displayName": "编程入门导师",
+      "description": "编程入门教学，引导式学习与实践指导",
+      "category": "education",
+      "tags": [
+        "编程教学",
+        "入门指导",
+        "代码练习",
+        "学习路径"
+      ],
+      "version": "1.0.0",
+      "author": "soulhub",
+      "minClawVersion": "2026.3.0",
+      "files": {
+        "IDENTITY.md": 1140,
+        "SOUL.md": 1404
+      },
+      "downloads": 0,
+      "stars": 0
+    },
+    {
+      "name": "writer-twitter",
+      "displayName": "Twitter/X创作者",
+      "description": "专注Twitter/X平台内容创作，精通推文与Thread写作",
+      "category": "self-media",
+      "tags": [
+        "Twitter",
+        "X",
+        "推文",
+        "Thread",
+        "英文创作"
+      ],
+      "version": "1.0.0",
+      "author": "soulhub",
+      "minClawVersion": "2026.3.0",
+      "files": {
+        "IDENTITY.md": 1050,
+        "SOUL.md": 1183
+      },
+      "downloads": 0,
+      "stars": 0
+    },
+    {
+      "name": "writer-wechat",
+      "displayName": "公众号创作者",
+      "description": "专注微信公众号长文创作，擅长深度内容与品牌传播",
+      "category": "self-media",
+      "tags": [
+        "微信公众号",
+        "长文",
+        "深度内容",
+        "品牌传播"
+      ],
+      "version": "1.0.0",
+      "author": "soulhub",
+      "minClawVersion": "2026.3.0",
+      "files": {
+        "IDENTITY.md": 1123,
+        "SOUL.md": 1207
+      },
+      "downloads": 0,
+      "stars": 0
+    },
+    {
+      "name": "writer-xiaohongshu",
+      "displayName": "小红书创作者",
+      "description": "专注小红书平台内容创作，精通种草文案与视觉排版",
+      "category": "self-media",
+      "tags": [
+        "小红书",
+        "种草",
+        "生活方式",
+        "内容创作"
+      ],
+      "version": "1.0.0",
+      "author": "soulhub",
+      "minClawVersion": "2026.3.0",
+      "files": {
+        "IDENTITY.md": 1142,
+        "SOUL.md": 1229
+      },
+      "downloads": 0,
+      "stars": 0
+    },
+    {
+      "name": "writer-zhihu",
+      "displayName": "知乎创作者",
+      "description": "专注知乎平台内容创作，擅长专业回答与深度文章",
+      "category": "self-media",
+      "tags": [
+        "知乎",
+        "专业回答",
+        "深度文章",
+        "知识分享"
+      ],
+      "version": "1.0.0",
+      "author": "soulhub",
+      "minClawVersion": "2026.3.0",
+      "files": {
+        "IDENTITY.md": 1050,
+        "SOUL.md": 1211
+      },
+      "downloads": 0,
+      "stars": 0
+    }
+  ],
+  "recipes": [
+    {
+      "name": "dev-squad",
+      "displayName": "开发小队",
+      "description": "精干的软件开发团队，覆盖Python后端、全栈开发与代码审查",
+      "agents": [
+        "coder-python",
+        "coder-fullstack",
+        "coder-reviewer"
+      ],
+      "version": "1.0.0",
+      "author": "soulhub",
+      "downloads": 0,
+      "stars": 0
+    },
+    {
+      "name": "self-media-team",
+      "displayName": "自媒体运营团队",
+      "description": "全平台自媒体内容创作与运营团队，覆盖选题、创作、排期与运营",
+      "agents": [
+        "writer-xiaohongshu",
+        "writer-wechat",
+        "researcher-trending",
+        "publisher-scheduler",
+        "ops-assistant"
+      ],
+      "version": "1.0.0",
+      "author": "soulhub",
+      "downloads": 0,
+      "stars": 0
+    },
+    {
+      "name": "support-center",
+      "displayName": "客服中心",
+      "description": "多层级用户支持团队，覆盖一线客服与技术支持",
+      "agents": [
+        "support-tier1",
+        "support-technical"
+      ],
+      "version": "1.0.0",
+      "author": "soulhub",
+      "downloads": 0,
+      "stars": 0
+    }
+  ],
+  "buildTime": "2026-03-10T07:34:41.338Z"
+}

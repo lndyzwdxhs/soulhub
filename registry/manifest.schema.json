@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SoulHub Agent Manifest",
+  "type": "object",
+  "required": ["name", "displayName", "description", "category", "version", "author"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "Unique agent identifier (lowercase, hyphens only)"
+    },
+    "displayName": {
+      "type": "string",
+      "description": "Human-readable display name"
+    },
+    "description": {
+      "type": "string",
+      "description": "Brief description of the agent's capabilities"
+    },
+    "category": {
+      "type": "string",
+      "enum": ["self-media", "development", "operations", "support", "education", "dispatcher"],
+      "description": "Primary category"
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Search tags"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "author": {
+      "type": "string"
+    },
+    "minClawVersion": {
+      "type": "string",
+      "description": "Minimum OpenClaw version required"
+    },
+    "files": {
+      "type": "object",
+      "properties": {
+        "identity": { "type": "string", "default": "IDENTITY.md" },
+        "soul": { "type": "string", "default": "SOUL.md" },
+        "user": { "type": "string" },
+        "tools": { "type": "string" }
+      }
+    }
+  }
+}

@@ -1,0 +1,8 @@
+name: devops-k8s
+displayName: K8s运维专家
+description: Kubernetes集群运维专家，精通容器编排与云原生架构
+category: development
+tags: [Kubernetes, Docker, 云原生, DevOps, 运维]
+version: "1.0.0"
+author: soulhub
+minClawVersion: "2026.3.0"

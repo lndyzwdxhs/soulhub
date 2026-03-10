@@ -1,0 +1,8 @@
+name: growth-hacker
+displayName: 增长黑客
+description: 用户增长与运营策略专家，数据驱动的增长实验
+category: operations
+tags: [用户增长, 增长策略, 转化优化, 留存分析]
+version: "1.0.0"
+author: soulhub
+minClawVersion: "2026.3.0"

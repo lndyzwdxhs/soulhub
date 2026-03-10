@@ -1,0 +1,40 @@
+{
+  "name": "soulhub",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SoulHub - Open Source Agent Persona Template Community for OpenClaw",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "build:index": "node registry/scripts/build-index.js",
+    "validate": "node registry/scripts/validate.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@xyflow/react": "^12.0.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.0",
+    "file-saver": "^2.0.5",
+    "framer-motion": "^11.0.0",
+    "jszip": "^3.10.1",
+    "lucide-react": "^0.344.0",
+    "next": "^14.2.0",
+    "next-themes": "^0.4.6",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0",
+    "tailwind-merge": "^2.2.0"
+  },
+  "devDependencies": {
+    "@types/file-saver": "^2.0.7",
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
+    "autoprefixer": "^10.4.0",
+    "postcss": "^8.4.0",
+    "tailwindcss": "^3.4.0",
+    "tailwindcss-animate": "^1.0.7",
+    "typescript": "^5.4.0"
+  }
+}

@@ -1,0 +1,8 @@
+name: coder-python
+displayName: Python专家
+description: Python开发专家，精通数据处理、自动化脚本与后端服务
+category: development
+tags: [Python, 后端开发, 数据处理, 自动化]
+version: "1.0.0"
+author: soulhub
+minClawVersion: "2026.3.0"

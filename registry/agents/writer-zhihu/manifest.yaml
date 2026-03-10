@@ -1,0 +1,8 @@
+name: writer-zhihu
+displayName: 知乎创作者
+description: 专注知乎平台内容创作，擅长专业回答与深度文章
+category: self-media
+tags: [知乎, 专业回答, 深度文章, 知识分享]
+version: "1.0.0"
+author: soulhub
+minClawVersion: "2026.3.0"

@@ -1,0 +1,8 @@
+name: tutor-english
+displayName: 英语口语教练
+description: 英语口语练习与纠正，场景化对话训练
+category: education
+tags: [英语口语, 对话练习, 发音纠正, 场景训练]
+version: "1.0.0"
+author: soulhub
+minClawVersion: "2026.3.0"

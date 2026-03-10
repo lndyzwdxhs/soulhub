@@ -1,0 +1,8 @@
+name: dispatcher-main
+displayName: 总调度中心
+description: 多Agent团队总调度，负责任务解析、路由分发与执行监控
+category: dispatcher
+tags: [调度, 任务分发, 团队协调, 路由]
+version: "1.0.0"
+author: soulhub
+minClawVersion: "2026.3.0"

@@ -1,0 +1,8 @@
+name: writer-xiaohongshu
+displayName: 小红书创作者
+description: 专注小红书平台内容创作，精通种草文案与视觉排版
+category: self-media
+tags: [小红书, 种草, 生活方式, 内容创作]
+version: "1.0.0"
+author: soulhub
+minClawVersion: "2026.3.0"

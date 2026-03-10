@@ -1,0 +1,8 @@
+name: writer-wechat
+displayName: 公众号创作者
+description: 专注微信公众号长文创作，擅长深度内容与品牌传播
+category: self-media
+tags: [微信公众号, 长文, 深度内容, 品牌传播]
+version: "1.0.0"
+author: soulhub
+minClawVersion: "2026.3.0"

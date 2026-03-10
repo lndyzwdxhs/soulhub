@@ -1,0 +1,17 @@
+# Topology YAML Format
+# Defines the structure of a multi-agent team recipe.
+
+name: example-team
+displayName: Example Team
+dispatcher:
+  agentId: main
+  template: dispatcher-main
+
+agents:
+  - agentId: coder
+    template: coder-python
+    role: worker
+
+  - agentId: writer
+    template: writer-xiaohongshu
+    role: worker

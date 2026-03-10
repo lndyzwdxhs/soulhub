@@ -1,0 +1,36 @@
+categories:
+  - id: self-media
+    name: 自媒体
+    nameEn: Self Media
+    icon: pen-tool
+    description: 内容创作、社交媒体运营相关 Agent
+
+  - id: development
+    name: 开发
+    nameEn: Development
+    icon: code
+    description: 编程、架构、DevOps 相关 Agent
+
+  - id: operations
+    name: 运营
+    nameEn: Operations
+    icon: settings
+    description: 数据分析、SEO、增长相关 Agent
+
+  - id: support
+    name: 客服
+    nameEn: Support
+    icon: headphones
+    description: 客户服务、技术支持相关 Agent
+
+  - id: education
+    name: 教育
+    nameEn: Education
+    icon: graduation-cap
+    description: 编程教学、语言学习相关 Agent
+
+  - id: dispatcher
+    name: 调度
+    nameEn: Dispatcher
+    icon: network
+    description: 多 Agent 团队调度模板

@@ -1,0 +1,8 @@
+name: ops-assistant
+displayName: 杂务管家
+description: 团队日常杂务处理，数据整理、文件管理与流程协调
+category: operations
+tags: [日常运营, 杂务处理, 文件管理, 流程协调]
+version: "1.0.0"
+author: soulhub
+minClawVersion: "2026.3.0"

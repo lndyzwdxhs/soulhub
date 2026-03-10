@@ -1,0 +1,8 @@
+name: coder-reviewer
+displayName: 代码审查专家
+description: 专业代码审查，关注代码质量、安全漏洞与最佳实践
+category: development
+tags: [代码审查, 代码质量, 安全审计, 最佳实践]
+version: "1.0.0"
+author: soulhub
+minClawVersion: "2026.3.0"

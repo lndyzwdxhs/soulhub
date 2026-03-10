@@ -1,0 +1,8 @@
+name: coder-fullstack
+displayName: 全栈工程师
+description: 全栈Web开发专家，前端React/Vue，后端Node/Python
+category: development
+tags: [全栈开发, React, Node.js, Web应用]
+version: "1.0.0"
+author: soulhub
+minClawVersion: "2026.3.0"
