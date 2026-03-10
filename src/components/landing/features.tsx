@@ -1,38 +1,52 @@
 "use client";
 
 import { motion, useInView } from "framer-motion";
-import { Sparkles, Terminal, MousePointerClick, Link2 } from "lucide-react";
+import { Sparkles, Terminal, MousePointerClick, Link2, FileText, Users } from "lucide-react";
 import { useRef } from "react";
 import { cn } from "@/lib/utils";
 
 const features = [
   {
     icon: Sparkles,
-    title: "Curated Agent Templates",
+    title: "灵魂优先",
     description:
-      "21+ ready-to-use agent personas covering writing, coding, analysis, and more. Community-vetted quality.",
-    highlight: "21+ templates",
+      "不是分享代码或工作流，而是分享 Agent 的人格、技能和行为模式。21+ 精选灵魂模板，社区共同打磨。",
+    highlight: "Soul First",
+  },
+  {
+    icon: FileText,
+    title: "Markdown 原生",
+    description:
+      "以 IDENTITY.md + SOUL.md 为标准格式，人类可读可编辑。像写文档一样定义 Agent 灵魂。",
+    highlight: "人类可读",
   },
   {
     icon: Terminal,
-    title: "One-Line CLI Install",
+    title: "一行命令，灵魂到位",
     description:
-      "Run soulhub install <name> and you're done. No config, no setup, just instant agent personas.",
-    highlight: "Zero config",
+      "运行 soulhub install <name> 即刻完成。零配置、零门槛，灵魂瞬间注入你的项目。",
+    highlight: "秒级安装",
   },
   {
     icon: MousePointerClick,
-    title: "Visual Multi-Agent Composer",
+    title: "可视化 Fusion 编排",
     description:
-      "Drag agents onto a canvas, connect them, auto-generate a dispatcher. Build agent teams visually.",
-    highlight: "Drag & drop",
+      "将 Agent 灵魂拖拽到画布，自动生成调度器与路由规则。团队配方一键导出，协作从未如此简单。",
+    highlight: "拖拽组队",
   },
   {
     icon: Link2,
-    title: "Share Link",
+    title: "一个链接，分享团队",
     description:
-      "Share your multi-agent team setup with a single link. Anyone can import your exact configuration.",
-    highlight: "One link",
+      "将你的多 Agent 团队配方生成分享链接。任何人都能一键导入你的完整团队架构。",
+    highlight: "即传即用",
+  },
+  {
+    icon: Users,
+    title: "开源社区，共建灵魂",
+    description:
+      "GitHub PR 贡献模式，人人都可以提交自己调教好的灵魂。优先适配 OpenClaw，兼容 Dify / CrewAI 等框架。",
+    highlight: "社区驱动",
   },
 ];
 
@@ -72,11 +86,11 @@ export function Features() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
-            Everything You Need to{" "}
-            <span className="text-gradient">Build Agent Teams</span>
+            我们的{" "}
+            <span className="text-gradient">核心理念</span>
           </h2>
           <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
-            From single agents to multi-agent orchestration, SoulHub has you covered.
+            用 Markdown 定义灵魂，用开源社区分享它们 —— 从单个 Agent 到多 Agent 军团，SoulHub 为你而生。
           </p>
         </motion.div>
 
@@ -86,7 +100,7 @@ export function Features() {
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl mx-auto"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto"
         >
           {features.map((feature) => (
             <motion.div

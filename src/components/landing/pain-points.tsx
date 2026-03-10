@@ -1,34 +1,34 @@
 "use client";
 
 import { motion, useInView } from "framer-motion";
-import { RefreshCw, FileQuestion, Puzzle, Share2 } from "lucide-react";
+import { Lock, FileQuestion, Puzzle, Share2 } from "lucide-react";
 import { useRef } from "react";
 import { cn } from "@/lib/utils";
 
 const painPoints = [
   {
-    icon: RefreshCw,
-    title: "Repetitive Prompt Engineering",
+    icon: Lock,
+    title: "平台封闭，灵魂无法迁移",
     description:
-      "Spending hours crafting the same system prompts for every new project, reinventing the wheel each time.",
+      "GPT Store、Coze、Character.AI 上精心调教的 Agent 无法导出、迁移，灵魂被锁在围墙花园里。",
   },
   {
     icon: FileQuestion,
-    title: "No Standardized Format",
+    title: "缺少「人格」这一中间层",
     description:
-      "Every team uses a different format for agent personas. No interoperability, no community sharing.",
+      "PromptBase 只卖单条 Prompt，Dify 侧重完整工作流。缺少专注于 Agent 人格与行为模式的标准化格式。",
   },
   {
     icon: Puzzle,
-    title: "Manual Multi-Agent Setup",
+    title: "多 Agent 协作是手工活",
     description:
-      "Wiring multiple agents together requires complex configuration and manual dispatcher logic.",
+      "将多个 Agent 协作编排需要复杂的配置和手动调度逻辑，缺乏可视化的团队组装方案。",
   },
   {
     icon: Share2,
-    title: "Hard to Share & Reuse",
+    title: "好灵魂无处安放",
     description:
-      "Great agent setups live in private repos and Notion docs. No easy way to share or discover them.",
+      "调教好的 Agent 散落在私人仓库和 Notion 文档里，没有一个社区让它们被发现、被复用。",
   },
 ];
 
@@ -65,11 +65,11 @@ export function PainPoints() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
-            The Problem with{" "}
-            <span className="text-gradient">Agent Prompts</span>
+            Agent 的灵魂{" "}
+            <span className="text-gradient">正在流浪</span>
           </h2>
           <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
-            Building AI agents shouldn&apos;t mean starting from scratch every time.
+            精心调教的 Agent 不该被遗忘在角落，它们值得被看见、被分享、被组队。
           </p>
         </motion.div>
 

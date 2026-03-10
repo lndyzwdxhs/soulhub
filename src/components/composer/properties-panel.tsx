@@ -59,10 +59,10 @@ export function PropertiesPanel({
       <div className="flex h-full w-[320px] flex-col items-center justify-center border-l border-[hsl(var(--glass-border)/0.1)] bg-[hsl(var(--glass-bg)/0.02)] px-8">
         <MousePointerClick className="h-10 w-10 text-[hsl(var(--glass-bg)/0.1)] mb-3" />
         <p className="text-sm text-[hsl(var(--glass-bg)/0.3)] text-center">
-          Select a node to view properties
+          点击节点查看属性
         </p>
         <p className="text-xs text-[hsl(var(--glass-bg)/0.15)] text-center mt-1">
-          Click on any node on the canvas
+          选择画布上的任意节点
         </p>
       </div>
     );
@@ -110,7 +110,7 @@ export function PropertiesPanel({
           <User className="h-4 w-4 text-[hsl(var(--glass-bg)/0.6)]" />
         )}
         <h2 className="text-sm font-semibold text-white">
-          {selectedType === "dispatcher" ? "Dispatcher" : "Worker Agent"}
+          {selectedType === "dispatcher" ? "🦞 调度中心" : "灵魂节点"}
         </h2>
       </div>
 
@@ -120,7 +120,7 @@ export function PropertiesPanel({
         <SectionHeader
           id="info"
           icon={selectedType === "dispatcher" ? Crown : User}
-          label="Information"
+          label="基本信息"
         />
         {expandedSections.has("info") && (
           <div className="space-y-3 pb-3">
@@ -128,7 +128,7 @@ export function PropertiesPanel({
               <>
                 <div>
                   <label className="text-[10px] text-[hsl(var(--glass-bg)/0.4)] uppercase tracking-wider">
-                    Dispatcher Name
+                    调度中心名称
                   </label>
                   <input
                     value={dispatcherName}
@@ -138,11 +138,10 @@ export function PropertiesPanel({
                 </div>
                 <div>
                   <label className="text-[10px] text-[hsl(var(--glass-bg)/0.4)] uppercase tracking-wider">
-                    Connected Agents
+                    已连接灵魂
                   </label>
                   <p className="mt-1 text-xs text-[hsl(var(--glass-bg)/0.6)]">
-                    {composerAgents.length} agent
-                    {composerAgents.length !== 1 ? "s" : ""}
+                    {composerAgents.length} 个灵魂
                   </p>
                 </div>
               </>
@@ -150,7 +149,7 @@ export function PropertiesPanel({
               <>
                 <div>
                   <label className="text-[10px] text-[hsl(var(--glass-bg)/0.4)] uppercase tracking-wider">
-                    Name
+                    名称
                   </label>
                   <p className="mt-1 text-xs text-[hsl(var(--glass-bg)/0.8)]">
                     {selectedAgent.displayName}
@@ -166,7 +165,7 @@ export function PropertiesPanel({
                 </div>
                 <div>
                   <label className="text-[10px] text-[hsl(var(--glass-bg)/0.4)] uppercase tracking-wider">
-                    Description
+                    描述
                   </label>
                   <p className="mt-1 text-xs text-[hsl(var(--glass-bg)/0.6)]">
                     {selectedAgent.description}
@@ -174,7 +173,7 @@ export function PropertiesPanel({
                 </div>
                 <div>
                   <label className="text-[10px] text-[hsl(var(--glass-bg)/0.4)] uppercase tracking-wider">
-                    Category
+                    分类
                   </label>
                   <div className="mt-1 flex items-center gap-1.5">
                     {(() => {
@@ -188,7 +187,7 @@ export function PropertiesPanel({
                 </div>
                 <div>
                   <label className="text-[10px] text-[hsl(var(--glass-bg)/0.4)] uppercase tracking-wider">
-                    Tags
+                    标签
                   </label>
                   <div className="mt-1 flex flex-wrap gap-1">
                     {selectedAgent.tags.map((tag) => (
@@ -212,7 +211,7 @@ export function PropertiesPanel({
             <SectionHeader
               id="routing"
               icon={FileText}
-              label="Routing Rules"
+              label="路由规则"
             />
             {expandedSections.has("routing") && (
               <div className="pb-3">
@@ -231,7 +230,7 @@ export function PropertiesPanel({
             <SectionHeader
               id="identity"
               icon={FileText}
-              label="Generated Files"
+              label="生成文件预览"
             />
             {expandedSections.has("identity") && (
               <div className="space-y-3 pb-3">

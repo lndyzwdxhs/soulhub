@@ -8,8 +8,8 @@ import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 const navLinks = [
-  { label: "Agents", href: "/agents" },
-  { label: "Composer", href: "/composer" },
+  { label: "Souls", href: "/souls" },
+  { label: "Fusion", href: "/fusion" },
   { label: "Docs", href: "/docs" },
 ];
 

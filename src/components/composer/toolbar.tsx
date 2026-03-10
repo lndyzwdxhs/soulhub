@@ -29,13 +29,13 @@ export function Toolbar({
       {/* History controls */}
       <ToolbarButton
         icon={Undo2}
-        label="Undo"
+        label="撤销"
         disabled={!canUndo}
         onClick={onUndo}
       />
       <ToolbarButton
         icon={Redo2}
-        label="Redo"
+        label="重做"
         disabled={!canRedo}
         onClick={onRedo}
       />
@@ -44,7 +44,7 @@ export function Toolbar({
 
       <ToolbarButton
         icon={LayoutGrid}
-        label="Auto Layout"
+        label="自动排列"
         disabled={!hasAgents}
         onClick={onAutoLayout}
       />
@@ -63,12 +63,12 @@ export function Toolbar({
         )}
       >
         <Sparkles className="h-3.5 w-3.5" />
-        Generate Command
+        生成安装命令
       </button>
 
       <ToolbarButton
         icon={Download}
-        label="Download ZIP"
+        label="下载 ZIP"
         disabled={!hasAgents}
         onClick={onDownloadZip}
       />

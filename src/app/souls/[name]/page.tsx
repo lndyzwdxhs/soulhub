@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const agent = index.agents.find((a) => a.name === params.name);
 
   if (!agent) {
-    return { title: "Agent Not Found | SoulHub" };
+    return { title: "灵魂未找到 | SoulHub" };
   }
 
   return {

@@ -9,27 +9,27 @@ const platforms = [
   {
     name: "OpenClaw",
     status: "supported" as const,
-    description: "Full integration with install, compose, and share.",
+    description: "完整支持安装、Fusion 编排与分享。",
   },
   {
     name: "Dify",
     status: "coming" as const,
-    description: "Workflow-based agent platform.",
+    description: "基于工作流的 Agent 平台。",
   },
   {
     name: "CrewAI",
     status: "coming" as const,
-    description: "Multi-agent orchestration framework.",
+    description: "多 Agent 编排框架。",
   },
   {
     name: "AutoGen",
     status: "coming" as const,
-    description: "Microsoft's multi-agent framework.",
+    description: "Microsoft 多 Agent 框架。",
   },
   {
     name: "LangGraph",
     status: "coming" as const,
-    description: "LangChain's agent graph framework.",
+    description: "LangChain Agent 图框架。",
   },
 ];
 
@@ -68,11 +68,11 @@ export function Platforms() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
-            Built for{" "}
-            <span className="text-gradient">Your Platform</span>
+            为你的{" "}
+            <span className="text-gradient">平台而生</span>
           </h2>
           <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
-            Starting with OpenClaw, expanding to the entire AI agent ecosystem.
+            从 OpenClaw 出发，正在走向整个 AI Agent 生态。
           </p>
         </motion.div>
 
@@ -100,12 +100,12 @@ export function Platforms() {
                 {platform.status === "supported" ? (
                   <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/20 px-3 py-1 text-xs font-medium text-emerald-400">
                     <Check className="h-3.5 w-3.5" />
-                    Fully Supported
+                    已完整支持
                   </span>
                 ) : (
                   <span className="inline-flex items-center gap-1.5 rounded-full bg-[hsl(var(--glass-bg)/0.1)] px-3 py-1 text-xs font-medium text-muted-foreground">
                     <Clock className="h-3.5 w-3.5" />
-                    Coming Soon
+                    即将支持
                   </span>
                 )}
               </div>

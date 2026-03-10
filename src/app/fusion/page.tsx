@@ -3,9 +3,9 @@ import { Navbar } from "@/components/ui/navbar";
 import { ComposerClient } from "@/components/composer/composer-client";
 
 export const metadata = {
-  title: "Composer - SoulHub",
+  title: "🦞 Fusion 编排台 - SoulHub",
   description:
-    "Visual multi-Agent orchestration tool. Drag agents, auto-generate dispatchers, and export configurations.",
+    "可视化多 Agent 灵魂融合编排器。拖拽灵魂、自动生成调度中心、一键导出团队配置。",
 };
 
 export default async function ComposerPage() {

@@ -46,7 +46,7 @@ export function Hero() {
         <motion.div variants={itemVariants} className="mb-8">
           <span className="inline-flex items-center gap-2 rounded-full border border-[hsl(var(--glass-border)/0.1)] bg-[hsl(var(--glass-bg)/0.05)] px-4 py-1.5 text-sm text-muted-foreground backdrop-blur-sm">
             <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-            Open Source &middot; Free Forever
+            Open Source &middot; Community Driven &middot; Free Forever
           </span>
         </motion.div>
 
@@ -55,19 +55,23 @@ export function Hero() {
           variants={itemVariants}
           className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-tight"
         >
-          Give Your Agent{" "}
-          <span className="text-gradient">a Soul</span>
+          每只 🦞 都该有{" "}
+          <span className="text-gradient">灵魂</span>
         </motion.h1>
 
         {/* Subtitle */}
-        <motion.p
+        <motion.div
           variants={itemVariants}
-          className="mt-6 text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed"
+          className="mt-6 text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed space-y-2"
         >
-          Discover, share, and orchestrate AI agent persona templates.
-          One-line install. Visual multi-agent composer. Built for{" "}
-          <span className="text-foreground font-medium">OpenClaw</span> and beyond.
-        </motion.p>
+          <p>像 GitHub 存储代码一样，SoulHub 存储<span className="text-foreground font-medium">调教好的小龙虾🦞</span></p>
+          <p>
+            用 <span className="text-foreground font-medium">Markdown</span> 定义 Soul，一行命令安装，可视化编排多 Agent Team
+          </p>
+          <p className="text-foreground font-medium">
+            开源免费，社区共建
+          </p>
+        </motion.div>
 
         {/* CTA Buttons */}
         <motion.div
@@ -75,17 +79,17 @@ export function Hero() {
           className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
         >
           <Link
-            href="/agents"
+            href="/souls"
             className="group inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-blue-500 to-violet-500 px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-violet-500/25 transition-all duration-300 hover:shadow-violet-500/40 hover:scale-105"
           >
-            Browse Agents
+            探索 Souls
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </Link>
           <Link
-            href="/composer"
+            href="/fusion"
             className="inline-flex items-center gap-2 rounded-xl border border-[hsl(var(--glass-border)/0.15)] bg-[hsl(var(--glass-bg)/0.05)] px-8 py-3.5 text-sm font-semibold text-foreground backdrop-blur-sm transition-all duration-300 hover:bg-[hsl(var(--glass-bg)/0.1)] hover:border-[hsl(var(--glass-border)/0.25)] hover:scale-105"
           >
-            Open Composer
+            开始 Fusion
           </Link>
         </motion.div>
 

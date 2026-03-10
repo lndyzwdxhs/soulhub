@@ -72,7 +72,7 @@ export function RoutingEditor({ rules, onUpdateRules }: RoutingEditorProps) {
           className="inline-flex items-center gap-1 rounded-md px-2 py-1 text-[10px] text-blue-300 hover:bg-blue-500/10 transition-colors"
         >
           <Plus className="h-3 w-3" />
-          Add Rule
+          添加规则
         </button>
       </div>
 
@@ -127,7 +127,7 @@ export function RoutingEditor({ rules, onUpdateRules }: RoutingEditorProps) {
                   }}
                   onBlur={() => addKeyword(rule.id)}
                   className="rounded-full bg-[hsl(var(--glass-bg)/0.1)] px-2 py-0.5 text-[10px] text-white outline-none w-16"
-                  placeholder="keyword"
+                  placeholder="关键词"
                 />
               ) : (
                 <button
@@ -149,7 +149,7 @@ export function RoutingEditor({ rules, onUpdateRules }: RoutingEditorProps) {
                 updateRule(rule.id, { description: e.target.value })
               }
               className="w-full bg-transparent text-[10px] text-[hsl(var(--glass-bg)/0.4)] outline-none border-b border-transparent focus:border-[hsl(var(--glass-border)/0.1)] transition-colors"
-              placeholder="Description..."
+              placeholder="描述..."
             />
           </div>
         ))}
@@ -157,7 +157,7 @@ export function RoutingEditor({ rules, onUpdateRules }: RoutingEditorProps) {
 
       {rules.length === 0 && (
         <p className="text-center text-xs text-[hsl(var(--glass-bg)/0.2)] py-4">
-          Add agents to the canvas to generate routing rules
+          拖入灵魂到画布即可自动生成路由规则
         </p>
       )}
     </div>

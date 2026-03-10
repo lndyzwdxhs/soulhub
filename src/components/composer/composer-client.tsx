@@ -405,7 +405,26 @@ export function ComposerClient({ agents }: ComposerClientProps) {
       <AgentPanel agents={agents} />
 
       {/* Center - React Flow Canvas */}
-      <div className="relative flex-1">
+      <div className="relative flex-1 flex flex-col">
+        {/* Page Title */}
+        <div className="flex items-center justify-between px-5 py-3 border-b border-[hsl(var(--glass-border)/0.1)]">
+          <div>
+            <h1 className="text-lg font-bold">
+              <span className="text-gradient">Pick Your 🦞</span>
+            </h1>
+            <p className="text-xs text-muted-foreground mt-0.5">
+              拖拽🦞到画布，自动生成调度中心，可视化编排你的 Agent Team
+            </p>
+          </div>
+          {composerAgents.length > 0 && (
+            <span className="text-xs text-muted-foreground bg-[hsl(var(--glass-bg)/0.05)] px-2 py-1 rounded-md">
+              {composerAgents.length} 个灵魂已就位
+            </span>
+          )}
+        </div>
+
+        {/* Canvas */}
+        <div className="relative flex-1">
         <ReactFlow
           nodes={nodes}
           edges={edges}
@@ -466,10 +485,10 @@ export function ComposerClient({ agents }: ComposerClientProps) {
                 </svg>
               </div>
               <p className="text-sm text-[hsl(var(--glass-bg)/0.25)]">
-                Drag agents from the left panel
+                🦞 从左侧面板拖入灵魂开始编排
               </p>
               <p className="mt-1 text-xs text-[hsl(var(--glass-bg)/0.15)]">
-                A dispatcher will be auto-created
+                调度中心将自动生成
               </p>
             </div>
           </div>
@@ -486,6 +505,7 @@ export function ComposerClient({ agents }: ComposerClientProps) {
           onExport={() => setExportOpen(true)}
           onDownloadZip={downloadZip}
         />
+        </div>
       </div>
 
       {/* Right Panel - Properties */}

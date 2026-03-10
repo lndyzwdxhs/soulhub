@@ -1,0 +1,11 @@
+node_modules
+.next
+.git
+.github
+.gitignore
+.DS_Store
+.env
+.env.local
+.vercel
+*.md
+Makefile

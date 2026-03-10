@@ -69,10 +69,10 @@ export function AgentsPageClient({ agents }: AgentsPageClientProps) {
           className="mb-10"
         >
           <h1 className="text-4xl md:text-5xl font-bold mb-3">
-            <span className="text-gradient">Agent Templates</span>
+            <span className="text-gradient">小龙虾市场</span>
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl">
-            Discover and install curated AI agent personas
+            在这里发现、安装和分享社区调教好的 🦞 Soul，一行命令即可拥有
           </p>
         </motion.div>
 
@@ -107,8 +107,8 @@ export function AgentsPageClient({ agents }: AgentsPageClientProps) {
         <div className="mb-4">
           <p className="text-sm text-muted-foreground">
             {filteredAgents.length === agents.length
-              ? `${agents.length} agents available`
-              : `${filteredAgents.length} of ${agents.length} agents`}
+              ? `共 ${agents.length} 个灵魂`
+              : `${filteredAgents.length} / ${agents.length} 个灵魂`}
           </p>
         </div>
 
@@ -135,11 +135,10 @@ export function AgentsPageClient({ agents }: AgentsPageClientProps) {
               <SearchX className="h-8 w-8 text-muted-foreground" />
             </div>
             <h3 className="text-lg font-medium text-foreground mb-1">
-              No agents found
+              没有找到匹配的灵魂
             </h3>
             <p className="text-sm text-muted-foreground max-w-md">
-              No agents match your current filters. Try adjusting your search
-              query or category selection.
+              当前筛选条件下暂无结果，试试调整搜索关键词或切换分类看看
             </p>
           </motion.div>
         )}

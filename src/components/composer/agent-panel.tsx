@@ -67,7 +67,7 @@ export function AgentPanel({ agents }: AgentPanelProps) {
     <div className="flex h-full w-[280px] flex-col border-r border-[hsl(var(--glass-border)/0.1)] bg-[hsl(var(--glass-bg)/0.02)]">
       {/* Header */}
       <div className="flex items-center justify-between border-b border-[hsl(var(--glass-border)/0.1)] px-4 py-3">
-        <h2 className="text-sm font-semibold text-white">Agents</h2>
+        <h2 className="text-sm font-semibold text-white">🦞🧺 虾笼</h2>
         <span className="text-xs text-[hsl(var(--glass-bg)/0.4)]">{filtered.length}</span>
       </div>
 
@@ -79,7 +79,7 @@ export function AgentPanel({ agents }: AgentPanelProps) {
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search agents..."
+            placeholder="搜索灵魂..."
             className="w-full rounded-lg bg-[hsl(var(--glass-bg)/0.05)] border border-[hsl(var(--glass-border)/0.1)] py-1.5 pl-8 pr-3 text-xs text-white placeholder:text-[hsl(var(--glass-bg)/0.3)] outline-none focus:border-[hsl(var(--glass-border)/0.2)] focus:bg-[hsl(var(--glass-bg)/0.08)] transition-colors"
           />
         </div>
@@ -142,7 +142,7 @@ export function AgentPanel({ agents }: AgentPanelProps) {
         {Object.keys(grouped).length === 0 && (
           <div className="flex flex-col items-center justify-center py-12 text-[hsl(var(--glass-bg)/0.3)]">
             <Search className="h-8 w-8 mb-2" />
-            <p className="text-xs">No agents found</p>
+            <p className="text-xs">未找到灵魂</p>
           </div>
         )}
       </div>

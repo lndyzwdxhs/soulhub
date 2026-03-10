@@ -35,7 +35,7 @@ export function CategoryFilter({ agents, selected, onSelect }: CategoryFilterPro
         )}
       >
         <LayoutGrid className="h-3.5 w-3.5" />
-        All
+        全部
         <span className="text-xs opacity-60">({totalCount})</span>
       </motion.button>
 

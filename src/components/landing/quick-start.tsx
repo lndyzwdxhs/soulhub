@@ -33,23 +33,23 @@ const steps = [
   {
     number: "01",
     icon: Download,
-    title: "Install CLI",
-    description: "Get the SoulHub CLI globally with one command.",
+    title: "安装 CLI 工具",
+    description: "一行命令全局安装 SoulHub CLI。",
     code: "npm install -g @soulhub/cli",
   },
   {
     number: "02",
     icon: Search,
-    title: "Browse & Install",
-    description: "Search for agents and install them into your project.",
+    title: "探索 & 安装灵魂",
+    description: "搜索你需要的 Agent 灵魂，一键注入你的项目。",
     code: "soulhub search writer\nsoulhub install writer-xiaohongshu",
   },
   {
     number: "03",
     icon: MousePointerClick,
-    title: "Or Compose a Team",
-    description: "Open Composer, drag agents onto the canvas, get the install command.",
-    code: "# Open the visual Composer\n# Drag agents → Connect → Export\n# Get: soulhub team install my-team",
+    title: "或者用 Fusion 组装团队",
+    description: "打开可视化 Fusion 编排器，拖拽灵魂组建超级团队。",
+    code: "# 打开 Fusion 可视化编排器\n# 拖拽灵魂 → 连接协作 → 导出团队\n# 获得: soulhub team install my-team",
   },
 ];
 
@@ -86,11 +86,11 @@ export function QuickStart() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
-            Get Started in{" "}
-            <span className="text-gradient">3 Steps</span>
+            三步开启{" "}
+            <span className="text-gradient">灵魂之旅</span>
           </h2>
           <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
-            From zero to a fully configured agent in under a minute.
+            从零到一个完整配置的 Agent 灵魂，不到一分钟。
           </p>
         </motion.div>
 

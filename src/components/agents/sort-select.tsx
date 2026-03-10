@@ -10,9 +10,9 @@ interface SortSelectProps {
 }
 
 const sortOptions: { value: SortOption; label: string; icon: typeof ArrowDownAZ }[] = [
-  { value: "name", label: "Name (A-Z)", icon: ArrowDownAZ },
-  { value: "downloads", label: "Most Downloads", icon: TrendingDown },
-  { value: "newest", label: "Newest", icon: Clock },
+  { value: "name", label: "按名称", icon: ArrowDownAZ },
+  { value: "downloads", label: "最多安装", icon: TrendingDown },
+  { value: "newest", label: "最新发布", icon: Clock },
 ];
 
 export function SortSelect({ value, onChange }: SortSelectProps) {

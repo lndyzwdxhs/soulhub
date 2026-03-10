@@ -50,7 +50,7 @@ export function Footer() {
 
           {/* Tagline */}
           <p className="text-sm text-muted-foreground/60">
-            Built with love for the AI community
+            🦞 每只龙虾都有灵魂 &middot; Every Agent Deserves a Soul
           </p>
 
           {/* Copyright */}

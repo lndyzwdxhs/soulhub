@@ -31,10 +31,10 @@ interface AgentDetailClientProps {
 }
 
 const tabs = [
-  { id: "overview", label: "Overview", icon: Package },
+  { id: "overview", label: "概览", icon: Package },
   { id: "identity", label: "IDENTITY.md", icon: FileText },
   { id: "soul", label: "SOUL.md", icon: FileText },
-  { id: "files", label: "Files", icon: Archive },
+  { id: "files", label: "文件列表", icon: Archive },
 ] as const;
 
 type TabId = (typeof tabs)[number]["id"];
@@ -98,11 +98,11 @@ export function AgentDetailClient({
         >
           {/* Back button */}
           <Link
-            href="/agents"
+            href="/souls"
             className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8 group"
           >
             <ArrowLeft className="h-4 w-4 group-hover:-translate-x-1 transition-transform" />
-            Back to Agents
+            返回 Soul 市集
           </Link>
 
           {/* Header */}
@@ -163,11 +163,11 @@ export function AgentDetailClient({
               </span>
               <span className="flex items-center gap-1.5">
                 <Download className="h-3.5 w-3.5" />
-                {agent.downloads} downloads
+                {agent.downloads} 次安装
               </span>
               <span className="flex items-center gap-1.5">
                 <Star className="h-3.5 w-3.5" />
-                {agent.stars} stars
+                {agent.stars} 收藏
               </span>
             </div>
           </motion.div>
@@ -184,7 +184,7 @@ export function AgentDetailClient({
                 <div className="flex items-center gap-2 mb-3">
                   <Terminal className="h-4 w-4 text-violet-400" />
                   <span className="text-sm font-medium text-foreground">
-                    Install via CLI
+                    一行命令安装灵魂
                   </span>
                 </div>
                 <div className="flex items-center gap-3">
@@ -202,7 +202,7 @@ export function AgentDetailClient({
               className="mt-3 inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors px-4 py-2 rounded-lg hover:bg-[hsl(var(--glass-bg)/0.05)] border border-transparent hover:border-[hsl(var(--glass-border)/0.1)]"
             >
               <Archive className="h-4 w-4" />
-              Download ZIP
+              下载 ZIP 压缩包
             </button>
           </motion.div>
 
@@ -254,7 +254,7 @@ export function AgentDetailClient({
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="glass rounded-xl p-5">
                       <h3 className="text-sm font-semibold text-foreground mb-3">
-                        Summary
+                        灵魂简介
                       </h3>
                       <p className="text-sm text-muted-foreground leading-relaxed">
                         {agent.description}
@@ -262,31 +262,31 @@ export function AgentDetailClient({
                     </div>
                     <div className="glass rounded-xl p-5">
                       <h3 className="text-sm font-semibold text-foreground mb-3">
-                        Details
+                        详细信息
                       </h3>
                       <dl className="space-y-2 text-sm">
                         <div className="flex justify-between">
-                          <dt className="text-muted-foreground">Version</dt>
+                          <dt className="text-muted-foreground">版本</dt>
                           <dd className="text-foreground font-mono">
                             {agent.version}
                           </dd>
                         </div>
                         <div className="flex justify-between">
-                          <dt className="text-muted-foreground">Author</dt>
+                          <dt className="text-muted-foreground">作者</dt>
                           <dd className="text-foreground">{agent.author}</dd>
                         </div>
                         <div className="flex justify-between">
-                          <dt className="text-muted-foreground">Min Claw</dt>
+                          <dt className="text-muted-foreground">最低 Claw 版本</dt>
                           <dd className="text-foreground font-mono">
                             {agent.minClawVersion}
                           </dd>
                         </div>
                         <div className="flex justify-between">
-                          <dt className="text-muted-foreground">Category</dt>
+                          <dt className="text-muted-foreground">分类</dt>
                           <dd className="text-foreground">{categoryLabel}</dd>
                         </div>
                         <div className="flex justify-between">
-                          <dt className="text-muted-foreground">Files</dt>
+                          <dt className="text-muted-foreground">文件数</dt>
                           <dd className="text-foreground">
                             {Object.keys(agent.files).length}
                           </dd>
@@ -295,7 +295,7 @@ export function AgentDetailClient({
                     </div>
                     <div className="glass rounded-xl p-5 md:col-span-2">
                       <h3 className="text-sm font-semibold text-foreground mb-3">
-                        Tags
+                        标签
                       </h3>
                       <div className="flex flex-wrap gap-2">
                         {agent.tags.map((tag) => (
@@ -361,7 +361,7 @@ export function AgentDetailClient({
               className="mt-16"
             >
               <h2 className="text-xl font-semibold text-foreground mb-6">
-                Related Agents
+                🦞 相关灵魂推荐
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {relatedAgents.map((related, idx) => (

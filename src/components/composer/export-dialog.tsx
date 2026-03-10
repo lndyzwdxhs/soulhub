@@ -127,10 +127,10 @@ export function ExportDialog({
           </div>
           <div>
             <h3 className="text-lg font-semibold text-white">
-              Export Configuration
+              🦞 导出团队配置
             </h3>
             <p className="text-xs text-[hsl(var(--glass-bg)/0.4)]">
-              {composerAgents.length} agent{composerAgents.length !== 1 ? "s" : ""} + dispatcher
+              {composerAgents.length} 个灵魂 + 调度中心
             </p>
           </div>
         </div>
@@ -138,7 +138,7 @@ export function ExportDialog({
         {/* Install Command */}
         <div className="mb-4">
           <label className="text-xs text-[hsl(var(--glass-bg)/0.5)] mb-2 block">
-            Install Command
+            安装命令
           </label>
           <div className="relative group">
             <pre className="rounded-lg bg-black/40 border border-[hsl(var(--glass-border)/0.1)] p-3 pr-12 text-xs text-green-300 font-mono overflow-x-auto">
@@ -171,10 +171,8 @@ export function ExportDialog({
             {composerAgents.map((a) => (
               <span
                 key={a.nodeId}
-                className="rounded-full bg-[hsl(var(--glass-bg)/0.1)] px-2 py-0.5 text-[10px] text-[hsl(var(--glass-bg)/0.6)]"
-              >
-                {a.displayName}
-              </span>
+                className="rounded-full bg-[hsl(var(--glass-bg)/0.1)] px-2 py-0.5 text-[10px] text-[hsl(var(--glass-bg)/0.6)]">
+                🦞 {a.displayName}              </span>
             ))}
           </div>
         </div>
@@ -186,7 +184,7 @@ export function ExportDialog({
             className="flex-1 inline-flex items-center justify-center gap-2 rounded-lg border border-[hsl(var(--glass-border)/0.1)] bg-[hsl(var(--glass-bg)/0.05)] px-4 py-2.5 text-sm text-[hsl(var(--glass-bg)/0.7)] hover:bg-[hsl(var(--glass-bg)/0.1)] hover:text-white transition-all"
           >
             <Download className="h-4 w-4" />
-            Download ZIP
+            下载 ZIP 压缩包
           </button>
           <button
             onClick={copyCommand}
@@ -196,7 +194,7 @@ export function ExportDialog({
             )}
           >
             <Copy className="h-4 w-4" />
-            {copied ? "Copied!" : "Copy Command"}
+            {copied ? "已复制 ✅" : "复制命令"}
           </button>
         </div>
       </div>

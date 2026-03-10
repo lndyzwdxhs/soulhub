@@ -16,5 +16,5 @@ export default async function ShareRedirectPage({
 
   // For browser access, redirect to a compose preview
   // For now, redirect to the composer page with the share ID
-  redirect(`/composer?load=${id}`);
+  redirect(`/fusion?load=${id}`);
 }

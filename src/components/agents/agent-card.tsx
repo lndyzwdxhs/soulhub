@@ -45,7 +45,7 @@ export function AgentCard({ agent, index }: AgentCardProps) {
       exit={{ opacity: 0, y: 20 }}
       transition={{ duration: 0.3, delay: index * 0.05 }}
     >
-      <Link href={`/agents/${agent.name}`} className="block group">
+      <Link href={`/souls/${agent.name}`} className="block group">
         <motion.div
           whileHover={{ scale: 1.02, y: -2 }}
           transition={{ type: "spring", stiffness: 300, damping: 20 }}
