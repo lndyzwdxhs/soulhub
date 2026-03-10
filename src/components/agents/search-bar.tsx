@@ -16,7 +16,7 @@ export function SearchBar({ value, onChange }: SearchBarProps) {
         type="text"
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        placeholder="搜索灵魂：名称、描述、标签..."
+        placeholder="：名称、描述、标签..."
         className={cn(
           "w-full pl-10 pr-4 py-2.5 rounded-lg text-sm",
           "bg-[hsl(var(--glass-bg)/0.05)] backdrop-blur-xl border border-[hsl(var(--glass-border)/0.1)]",

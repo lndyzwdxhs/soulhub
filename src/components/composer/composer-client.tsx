@@ -23,7 +23,7 @@ import {
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 
-import type { Agent } from "@/lib/types";
+import type { Agent, Recipe } from "@/lib/types";
 import type { ComposerAgent, RoutingRule, HistoryEntry } from "@/lib/composer-types";
 import { generateRoutingRules } from "@/lib/dispatcher-generator";
 
@@ -43,9 +43,10 @@ const nodeTypes = {
 
 interface ComposerClientProps {
   agents: Agent[];
+  recipes: Recipe[];
 }
 
-export function ComposerClient({ agents }: ComposerClientProps) {
+export function ComposerClient({ agents, recipes }: ComposerClientProps) {
   const [nodes, setNodes, onNodesChange] = useNodesState<Node>([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>([]);
   const [selectedNodeId, setSelectedNodeId] = useState<string | null>(null);
@@ -60,6 +61,7 @@ export function ComposerClient({ agents }: ComposerClientProps) {
   const isUndoRedoRef = useRef(false);
 
   const reactFlowInstanceRef = useRef<ReactFlowInstance | null>(null);
+  const [activeRecipeName, setActiveRecipeName] = useState<string | null>(null);
 
   const pushHistory = useCallback(
     (n: Node[], e: Edge[], a: ComposerAgent[], r: RoutingRule[]) => {
@@ -314,6 +316,91 @@ export function ComposerClient({ agents }: ComposerClientProps) {
     }, 50);
   }, [composerAgents, edges, nodes, pushHistory, routingRules, setNodes]);
 
+  // 一键加载预设团队配方
+  const loadRecipe = useCallback(
+    (recipe: Recipe) => {
+      // 根据 recipe.agents 名称列表，从 agents 中找到对应的 Agent 对象
+      const recipeAgents = recipe.agents
+        .map((name) => agents.find((a) => a.name === name))
+        .filter(Boolean) as Agent[];
+
+      if (recipeAgents.length === 0) return;
+
+      const HORIZONTAL_SPACING = 250;
+      const totalWidth = recipeAgents.length * HORIZONTAL_SPACING;
+      const startX = -totalWidth / 2 + HORIZONTAL_SPACING / 2;
+
+      // 构建 ComposerAgent 和 Node
+      const newComposerAgents: ComposerAgent[] = [];
+      const newWorkerNodes: Node[] = [];
+      const newEdges: Edge[] = [];
+
+      recipeAgents.forEach((agent, idx) => {
+        const nodeId = `worker-${agent.name}-${Date.now()}-${idx}`;
+        newComposerAgents.push({
+          name: agent.name,
+          displayName: agent.displayName,
+          description: agent.description,
+          category: agent.category,
+          tags: agent.tags,
+          nodeId,
+        });
+
+        newWorkerNodes.push({
+          id: nodeId,
+          type: "worker",
+          position: {
+            x: startX + idx * HORIZONTAL_SPACING,
+            y: 200,
+          },
+          data: {
+            label: agent.displayName,
+            description: agent.description,
+            category: agent.category,
+            isSelected: false,
+          },
+        });
+
+        newEdges.push({
+          id: `edge-${DISPATCHER_NODE_ID}-${nodeId}`,
+          source: DISPATCHER_NODE_ID,
+          target: nodeId,
+          animated: true,
+          style: { stroke: "rgba(99, 102, 241, 0.5)", strokeWidth: 2 },
+        });
+      });
+
+      // 创建调度中心节点
+      const dispatcherNode: Node = {
+        id: DISPATCHER_NODE_ID,
+        type: "dispatcher",
+        position: { x: 0, y: 0 },
+        data: {
+          label: dispatcherName,
+          isSelected: false,
+        },
+        draggable: true,
+      };
+
+      const allNodes = [dispatcherNode, ...newWorkerNodes];
+      const newRules = generateRoutingRules(newComposerAgents);
+
+      setNodes(allNodes);
+      setEdges(newEdges);
+      setComposerAgents(newComposerAgents);
+      setRoutingRules(newRules);
+      setSelectedNodeId(null);
+      setActiveRecipeName(recipe.name);
+      pushHistory(allNodes, newEdges, newComposerAgents, newRules);
+
+      // 加载后自动居中视图
+      setTimeout(() => {
+        reactFlowInstanceRef.current?.fitView({ padding: 0.2 });
+      }, 100);
+    },
+    [agents, dispatcherName, pushHistory, setEdges, setNodes]
+  );
+
   // Download ZIP
   const downloadZip = useCallback(async () => {
     const JSZip = (await import("jszip")).default;
@@ -402,7 +489,7 @@ export function ComposerClient({ agents }: ComposerClientProps) {
   return (
     <div className="flex h-[calc(100vh-4rem)] w-full">
       {/* Left Panel - Agent Selection */}
-      <AgentPanel agents={agents} />
+      <AgentPanel agents={agents} recipes={recipes} onLoadRecipe={loadRecipe} activeRecipeName={activeRecipeName} />
 
       {/* Center - React Flow Canvas */}
       <div className="relative flex-1 flex flex-col">
@@ -418,7 +505,7 @@ export function ComposerClient({ agents }: ComposerClientProps) {
           </div>
           {composerAgents.length > 0 && (
             <span className="text-xs text-muted-foreground bg-[hsl(var(--glass-bg)/0.05)] px-2 py-1 rounded-md">
-              {composerAgents.length} 个灵魂已就位
+              {composerAgents.length} 个🦞已就位
             </span>
           )}
         </div>
@@ -485,7 +572,7 @@ export function ComposerClient({ agents }: ComposerClientProps) {
                 </svg>
               </div>
               <p className="text-sm text-[hsl(var(--glass-bg)/0.25)]">
-                🦞 从左侧面板拖入灵魂开始编排
+                从左侧面板拖入想要的 🦞 开始编排
               </p>
               <p className="mt-1 text-xs text-[hsl(var(--glass-bg)/0.15)]">
                 调度中心将自动生成

@@ -30,11 +30,11 @@ function DispatcherNodeComponent({ data }: NodeProps) {
           <Crown className="h-5 w-5 text-white" />
         </div>
         <div className="flex-1 min-w-0">
-          <div className="text-sm font-semibold text-white truncate">
+          <div className="text-sm font-semibold text-foreground truncate">
             {label}
           </div>
           <div className="flex items-center gap-1.5 mt-0.5">
-            <span className="inline-flex items-center rounded-full bg-blue-500/20 px-2 py-0.5 text-[10px] font-medium text-blue-300 border border-blue-500/20">
+            <span className="inline-flex items-center rounded-full bg-blue-500/20 px-2 py-0.5 text-[10px] font-medium text-blue-600 dark:text-blue-300 border border-blue-500/20">
               Auto-generated
             </span>
           </div>

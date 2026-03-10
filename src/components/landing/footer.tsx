@@ -7,7 +7,7 @@ import Link from "next/link";
 const footerLinks = [
   {
     label: "GitHub",
-    href: "https://github.com",
+    href: "https://github.com/lndyzwdxhs/soulhub",
     icon: Github,
   },
   {

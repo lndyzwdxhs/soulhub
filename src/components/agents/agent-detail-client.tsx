@@ -188,7 +188,7 @@ export function AgentDetailClient({
                   </span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <code className="flex-1 text-sm font-mono bg-[hsl(var(--glass-bg)/0.05)] rounded-lg px-4 py-2.5 text-green-300/90 border border-[hsl(var(--glass-border)/0.05)]">
+                  <code className="flex-1 text-sm font-mono bg-[hsl(var(--glass-bg)/0.05)] rounded-lg px-4 py-2.5 text-green-700 dark:text-green-300/90 border border-[hsl(var(--glass-border)/0.05)]">
                     {installCommand}
                   </code>
                   <CopyButton text={installCommand} />

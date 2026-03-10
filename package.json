@@ -12,6 +12,10 @@
     "validate": "node registry/scripts/validate.js"
   },
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lndyzwdxhs/soulhub.git"
+  },
   "dependencies": {
     "@xyflow/react": "^12.0.0",
     "class-variance-authority": "^0.7.0",

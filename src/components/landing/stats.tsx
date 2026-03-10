@@ -52,9 +52,9 @@ function StatItem({ value, suffix, label, delay = 0 }: StatItemProps) {
 }
 
 const stats = [
-  { value: 21, suffix: "+", label: "灵魂模板" },
-  { value: 3, suffix: "", label: "团队配方" },
-  { value: 6, suffix: "", label: "灵魂分类" },
+  { value: 21, suffix: "+", label: "优质小龙虾 🦞" },
+  { value: 3, suffix: "", label: "Agent Team" },
+  { value: 6, suffix: "", label: "🦞龙虾品类" },
   { value: 1, suffix: "", label: "行命令安装" },
 ];
 

@@ -98,30 +98,30 @@ export function Hero() {
           variants={itemVariants}
           className="mt-16 mx-auto max-w-xl"
         >
-          <div className="rounded-2xl border border-gray-200 dark:border-[hsl(var(--glass-border)/0.1)] bg-gray-900 dark:bg-[hsl(var(--glass-bg)/0.05)] backdrop-blur-xl p-1 shadow-2xl">
+          <div className="rounded-2xl border border-[hsl(var(--glass-border)/0.1)] bg-[hsl(var(--glass-bg)/0.05)] backdrop-blur-xl p-1 shadow-2xl">
             {/* Terminal header */}
-            <div className="flex items-center gap-2 px-4 py-3 border-b border-gray-800 dark:border-[hsl(var(--glass-border)/0.05)]">
+            <div className="flex items-center gap-2 px-4 py-3 border-b border-[hsl(var(--glass-border)/0.05)]">
               <div className="flex gap-1.5">
                 <div className="h-3 w-3 rounded-full bg-red-500/70" />
                 <div className="h-3 w-3 rounded-full bg-yellow-500/70" />
                 <div className="h-3 w-3 rounded-full bg-green-500/70" />
               </div>
-              <span className="text-xs text-gray-400 ml-2">Terminal</span>
+              <span className="text-xs text-gray-500 dark:text-gray-400 ml-2">Terminal</span>
             </div>
             {/* Terminal body */}
             <div className="px-5 py-4 font-mono text-sm">
-              <div className="flex items-center gap-2 text-gray-400">
-                <Terminal className="h-4 w-4 text-emerald-400 shrink-0" />
-                <span className="text-emerald-400">$</span>
-                <span className="text-gray-100">
+              <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400">
+                <Terminal className="h-4 w-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
+                <span className="text-emerald-600 dark:text-emerald-400">$</span>
+                <span className="text-gray-800 dark:text-gray-100">
                   npx soulhub install{" "}
-                  <span className="text-cyan-400">writer-xiaohongshu</span>
+                  <span className="text-cyan-600 dark:text-cyan-400">writer-xiaohongshu</span>
                 </span>
               </div>
-              <div className="mt-3 text-gray-500 text-xs leading-relaxed">
+              <div className="mt-3 text-gray-600 dark:text-gray-500 text-xs leading-relaxed">
                 <p>✓ Fetching template writer-xiaohongshu...</p>
                 <p>✓ Installing persona to ./agents/writer-xiaohongshu.yaml</p>
-                <p className="text-emerald-400/80">✓ Done! Agent persona ready.</p>
+                <p className="text-emerald-600/80 dark:text-emerald-400/80">✓ Done! Agent persona ready.</p>
               </div>
             </div>
           </div>

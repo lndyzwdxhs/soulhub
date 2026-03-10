@@ -15,12 +15,12 @@ const CATEGORY_COLORS: Record<string, string> = {
 };
 
 const CATEGORY_BADGE_COLORS: Record<string, string> = {
-  "self-media": "bg-pink-500/15 text-pink-300 border-pink-500/20",
-  development: "bg-emerald-500/15 text-emerald-300 border-emerald-500/20",
-  operations: "bg-amber-500/15 text-amber-300 border-amber-500/20",
-  support: "bg-sky-500/15 text-sky-300 border-sky-500/20",
-  education: "bg-purple-500/15 text-purple-300 border-purple-500/20",
-  dispatcher: "bg-blue-500/15 text-blue-300 border-blue-500/20",
+  "self-media": "bg-pink-500/15 text-pink-600 dark:text-pink-300 border-pink-500/20",
+  development: "bg-emerald-500/15 text-emerald-600 dark:text-emerald-300 border-emerald-500/20",
+  operations: "bg-amber-500/15 text-amber-600 dark:text-amber-300 border-amber-500/20",
+  support: "bg-sky-500/15 text-sky-600 dark:text-sky-300 border-sky-500/20",
+  education: "bg-purple-500/15 text-purple-600 dark:text-purple-300 border-purple-500/20",
+  dispatcher: "bg-blue-500/15 text-blue-600 dark:text-blue-300 border-blue-500/20",
 };
 
 interface WorkerNodeData {
@@ -61,10 +61,10 @@ function WorkerNodeComponent({ data }: NodeProps) {
           <Icon className="h-4 w-4 text-[hsl(var(--glass-bg)/0.7)]" />
         </div>
         <div className="flex-1 min-w-0">
-          <div className="text-xs font-medium text-white truncate">
+          <div className="text-xs font-medium text-foreground truncate">
             {label}
           </div>
-          <div className="mt-0.5 text-[10px] text-[hsl(var(--glass-bg)/0.4)] line-clamp-2 leading-tight">
+          <div className="mt-0.5 text-[10px] text-muted-foreground line-clamp-2 leading-tight">
             {description}
           </div>
         </div>

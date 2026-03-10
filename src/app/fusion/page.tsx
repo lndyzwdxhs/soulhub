@@ -15,7 +15,7 @@ export default async function ComposerPage() {
     <main className="min-h-screen bg-background">
       <Navbar />
       <div className="pt-16">
-        <ComposerClient agents={index.agents} />
+        <ComposerClient agents={index.agents} recipes={index.recipes} />
       </div>
     </main>
   );

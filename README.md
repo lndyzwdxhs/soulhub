@@ -1,254 +1,360 @@
-# SoulHub
+# 🧠 SoulHub — Open Source Agent Soul Store
 
-**开源的 Agent 人格模板社区** —— 分享、发现、一键部署调教好的 AI Agent。
+<p align="center">
+  <strong>Just like GitHub stores code, SoulHub stores well-tuned Agent souls.</strong>
+</p>
 
-> 像 GitHub 存储代码一样，SoulHub 存储调教好的 Agent 灵魂。
+<p align="center">
+  <a href="./README_zh.md">中文文档</a>
+</p>
 
----
+<p align="center">
+  <a href="https://github.com/lndyzwdxhs/soulhub/actions"><img src="https://img.shields.io/github/actions/workflow/status/lndyzwdxhs/soulhub/ci.yml?branch=main&style=for-the-badge" alt="CI status"></a>
+  <a href="https://github.com/lndyzwdxhs/soulhub/releases"><img src="https://img.shields.io/github/v/release/lndyzwdxhs/soulhub?include_prereleases&style=for-the-badge" alt="GitHub release"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge" alt="MIT License"></a>
+  <a href="https://github.com/lndyzwdxhs/soulhub/stargazers"><img src="https://img.shields.io/github/stars/lndyzwdxhs/soulhub?style=for-the-badge" alt="Stars"></a>
+</p>
 
-## 创意来源
+**SoulHub** is an _open-source Agent persona template community_ — share, discover, and deploy well-tuned AI Agents with one click.
+It provides a Web platform for browsing and visual orchestration, a CLI tool for one-command installation, and Team Recipes for batch-deploying multi-Agent collaboration architectures.
 
-在 [OpenClaw](https://github.com/openclaw) 多 Agent 架构的搭建过程中，我们发现一个现象：精心调教好的 Agent（IDENTITY.md + SOUL.md）具备极强的复用性和分享价值。然而，现有的 AI 平台生态面临几个共同问题：
+Not sharing code or workflows, but sharing Agent **personas, skills, and behavior patterns**.
 
-- **封闭性**：GPT Store、Coze 商店、Character.AI 等平台的 Agent 无法导出、迁移
-- **粒度不匹配**：PromptBase 只卖单条 Prompt，Dify 侧重完整工作流，缺少"Agent 人格"这个中间层
-- **缺乏团队视角**：几乎没有平台关注多 Agent 协作团队的模板分享
-
-SoulHub 正是为填补这一空白而生。我们的答案是：**用 Markdown 定义 Agent 灵魂，用开源社区分享它们**。
-
-## 项目宗旨
-
-1. **灵魂优先**：不是分享代码或工作流，而是分享 Agent 的人格、技能、行为模式
-2. **Markdown 原生**：以 `IDENTITY.md` + `SOUL.md` 为标准格式，人类可读可编辑
-3. **团队配方**：支持分享多 Agent 协作架构（如"自媒体 6 人团队"、"研发小队"）
-4. **框架兼容**：优先支持 OpenClaw，格式设计上考虑适配 Dify / CrewAI 等框架
-5. **开源驱动**：GitHub PR 贡献模式，社区共建
+[Web Platform](#web-platform) · [CLI Tool](#cli-tool) · [Agent Templates](#agent-registry) · [Composer](#visual-composer) · [Quick Start](#quick-start) · [Local Development](#local-development) · [Docker Deploy](#docker-deployment) · [Contributing](#contributing)
 
 ---
 
-## 整体架构
+## Why SoulHub?
 
-SoulHub 采用**双仓库架构**，Web 平台与 CLI 工具独立维护：
+While building multi-Agent architectures with [OpenClaw](https://github.com/openclaw), we discovered that well-tuned Agents (IDENTITY.md + SOUL.md) have tremendous reuse and sharing value. However —
+
+| Pain Point | Current State |
+|------------|---------------|
+| **Closed Ecosystem** | Agents on GPT Store, Coze Store, Character.AI, etc. cannot be exported or migrated |
+| **Granularity Mismatch** | PromptBase sells single prompts, Dify focuses on full workflows — missing the "Agent persona" middle layer |
+| **No Team Perspective** | Almost no platform addresses sharing templates for multi-Agent collaboration teams |
+
+SoulHub's answer: **Define Agent souls in Markdown, share them through open source.**
+
+---
+
+## Highlights
+
+- **🧠 Soul-First** — Not code or workflows, but Agent personas, skills, and behavior patterns (IDENTITY.md + SOUL.md).
+- **📝 Markdown Native** — Human-readable and editable, version-control friendly, no vendor lock-in.
+- **🎨 Visual Composer** — Drag & drop Agents onto a canvas, auto-generate dispatchers and routing rules, undo/redo/auto-layout.
+- **👥 Team Recipes** — Share multi-Agent collaboration architectures (e.g., "Social Media Team of 6", "Dev Squad").
+- **🔧 CLI One-Click Install** — `soulhub install writer-xiaohongshu`, one command, ready to go.
+- **🌍 Framework Compatible** — Primary support for OpenClaw, designed to adapt to Dify / CrewAI and more.
+- **🌓 Theme Switching** — System / Light / Dark mode.
+- **🐳 Docker One-Click Deploy** — `make deploy-docker`, build image + start service in one step.
+
+---
+
+## How It Works
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                      soulhub (本仓库)                        │
-│                                                             │
-│  ┌─────────────┐    ┌──────────────┐    ┌───────────────┐  │
-│  │  Next.js    │    │   Registry   │    │  GitHub       │  │
-│  │  Web 平台   │◄───│  Agent 模板  │───►│  Actions CI   │  │
-│  │             │    │  + Recipes   │    │               │  │
-│  └──────┬──────┘    └──────┬───────┘    └───────────────┘  │
-│         │                  │                                │
-│         │   SSR/SSG        │  index.json                   │
-│         │   读取模板        │  构建索引                      │
-│         ▼                  ▼                                │
-│  ┌─────────────────────────────────┐                       │
-│  │        Vercel 部署               │                       │
-│  │   浏览 / 搜索 / 下载 / Composer  │                       │
-│  └─────────────────────────────────┘                       │
-└─────────────────────────────────────────────────────────────┘
-
-┌─────────────────────────────────────────────────────────────┐
-│                   soulhub-cli (独立仓库)                     │
-│                                                             │
-│  ┌─────────────┐         ┌──────────────┐                  │
-│  │  CLI Tool   │────────►│ Remote       │                  │
-│  │  soulhub    │  HTTP   │ Registry     │                  │
-│  │             │◄────────│ (GitHub Raw) │                  │
-│  └─────────────┘         └──────────────┘                  │
-│                                                             │
-│  npm install -g soulhub                                     │
-│  搜索 / 安装 / 更新 / 卸载 / 发布                             │
-└─────────────────────────────────────────────────────────────┘
+                         ┌──────────────────────────┐
+                         │    soulhub (this repo)    │
+                         └────────────┬─────────────┘
+                                      │
+              ┌───────────────────────┼───────────────────────┐
+              │                       │                       │
+              ▼                       ▼                       ▼
+   ┌──────────────────┐   ┌──────────────────┐   ┌──────────────────┐
+   │   Next.js Web    │   │    Registry      │   │   GitHub Actions │
+   │  Platform (SSR)  │◄──│ 21 Agent Templs  │──►│   CI Validate    │
+   │                  │   │  3 Team Recipes  │   │   + Build        │
+   │  Browse/Search   │   │                  │   └──────────────────┘
+   │  Composer        │   │  index.json idx  │
+   │  Download/Share  │   └──────────────────┘
+   └──────────────────┘
+              ▲
+              │ HTTP (GitHub Raw)
+              │
+   ┌──────────────────┐
+   │   soulhub-cli    │
+   │  (separate repo) │
+   │                  │
+   │  Search/Install  │
+   │  Update/Publish  │
+   └──────────────────┘
 ```
-
-### 技术栈
-
-| 层级 | 技术 |
-|------|------|
-| **Web 平台** | Next.js 14 (App Router), React 18, TailwindCSS, Framer Motion |
-| **可视化编排** | React Flow (@xyflow/react v12) |
-| **主题系统** | next-themes（跟随系统 / 亮色 / 暗色） |
-| **CLI 工具** | Node.js, Commander, Chalk, Ora, JSZip |
-| **模板格式** | YAML manifest + Markdown (IDENTITY.md, SOUL.md) |
-| **CI/CD** | GitHub Actions + Vercel |
 
 ---
 
-## 功能概览
+## Agent Registry
 
-### Web 平台
+**21 curated templates** across 6 categories:
 
-- **首页**：项目介绍、痛点分析、功能展示、快速上手指引
-- **Agent 浏览**：按分类筛选、关键词搜索、多维度排序（热度/星标/最新）
-- **Agent 详情**：查看 IDENTITY.md / SOUL.md 内容、文件列表、一键复制安装命令、ZIP 下载
-- **可视化 Composer**：拖拽 Agent 到画布，自动生成调度器和路由规则，支持撤销/重做/自动布局
-- **团队导出**：将组装的 Agent 团队导出为 ZIP 或分享链接
-- **主题切换**：支持跟随系统、亮色、暗色三种模式
+| Category | Example Agents |
+|----------|---------------|
+| 🎨 Content Creation | Xiaohongshu Writer, WeChat Author, Zhihu Creator, Twitter Writer |
+| 💻 Development | Full-Stack Engineer, Python Expert, Code Reviewer, System Architect |
+| 📈 Operations | Data Analyst, SEO Specialist, Growth Hacker |
+| 🎧 Customer Service | Frontline Support, Technical Support, Escalation Dispatcher |
+| 📚 Education | Programming Tutor, English Teacher |
+| 🎯 Orchestration | Master Dispatcher (multi-Agent coordination) |
 
-### Agent Registry
+**3 Team Recipes**: Social Media Team, Dev Squad, Customer Service Center.
 
-- **21 个精选模板**，覆盖 6 大分类：
+Each Agent template consists of:
 
-| 分类 | 示例 Agent |
-|------|-----------|
-| 自媒体 | 小红书写手、微信公众号作者、知乎创作者、Twitter 写手 |
-| 开发 | 全栈工程师、Python 专家、代码审查员、系统架构师 |
-| 运营 | 数据分析师、SEO 优化师、增长黑客 |
-| 客服 | 一线客服、技术支持、升级调度 |
-| 教育 | 编程导师、英语教师 |
-| 调度 | 主调度器（多 Agent 协调） |
-
-- **3 个团队配方**（Recipes）：自媒体团队、研发小队、客服中心
-
-### CLI 工具
-
-独立仓库：[soulhub-cli](https://github.com/soulhub-community/soulhub-cli)
-
-| 命令 | 说明 |
-|------|------|
-| `soulhub search [query]` | 搜索 Agent 模板 |
-| `soulhub info <name>` | 查看 Agent 详细信息 |
-| `soulhub install <name>` | 安装 Agent 模板 |
-| `soulhub list` | 列出已安装的 Agent |
-| `soulhub update [name]` | 更新已安装的 Agent |
-| `soulhub uninstall <name>` | 卸载 Agent |
-| `soulhub publish [dir]` | 发布 Agent 到社区 |
+```
+registry/agents/your-agent-name/
+├── manifest.yaml      # Metadata: name, category, tags, version
+├── IDENTITY.md        # Identity: role, responsibilities, capabilities
+└── SOUL.md            # Behavior: personality, style, workflow
+```
 
 ---
 
 ## Quick Start
 
-### 方式一：通过 CLI 安装 Agent
+### Option 1: CLI One-Line Install
+
+Runtime: **Node ≥ 18**
 
 ```bash
-# 全局安装 CLI
+# Install CLI globally
 npm install -g soulhub
 
-# 搜索 Agent
+# Search for Agents
 soulhub search writer
 
-# 安装一个 Agent 到当前目录
+# Install to current directory
 soulhub install writer-xiaohongshu
 
-# 安装到指定目录
+# Install to a specific directory
 soulhub install coder-fullstack --dir ./my-agents
 
-# 安装团队配方（一次安装多个 Agent）
+# Install a Team Recipe (multiple Agents at once)
 soulhub install --recipe self-media-team
 ```
 
-### 方式二：通过 Web 平台浏览和下载
+### Option 2: Browse on Web Platform
 
-1. 访问 Web 平台，浏览或搜索感兴趣的 Agent
-2. 进入 Agent 详情页，查看 IDENTITY.md 和 SOUL.md 内容
-3. 点击 **Download ZIP** 下载，或复制安装命令
+1. Visit the Web platform, browse or search for Agents
+2. View IDENTITY.md / SOUL.md on the detail page
+3. Click **Download ZIP** or copy the install command
 
-### 方式三：使用 Composer 组装团队
+### Option 3: Assemble with Composer
 
-1. 进入 `/composer` 页面
-2. 从左侧面板拖拽 Agent 到画布
-3. 系统自动创建调度器节点并生成路由规则
-4. 在右侧面板中调整调度器名称和路由规则
-5. 点击 **Export** 导出 ZIP 或生成分享链接
-
----
-
-## Agent 模板格式
-
-每个 Agent 模板由以下文件组成：
-
-```
-registry/agents/your-agent-name/
-├── manifest.yaml      # 元数据：名称、分类、标签、版本（必需）
-├── IDENTITY.md        # 身份定义：角色、职责、能力（必需）
-└── SOUL.md            # 行为模式：性格、风格、工作方式（必需）
-```
-
-### manifest.yaml 示例
-
-```yaml
-name: writer-xiaohongshu
-displayName: 小红书创作专家
-description: 专注于小红书平台的内容创作，擅长种草文、测评、生活分享
-category: self-media
-tags: [小红书, 内容创作, 种草, 社交媒体]
-version: "1.0.0"
-author: soulhub
-minClawVersion: "0.1.0"
-```
+1. Go to the `/composer` page
+2. Drag & drop Agents from the left panel onto the canvas
+3. The system auto-creates a dispatcher node and generates routing rules
+4. Click **Export** to download ZIP or generate a share link
 
 ---
 
-## 本地开发
+## Web Platform
+
+| Feature | Description |
+|---------|-------------|
+| **Agent Browsing** | Filter by category, keyword search, multi-dimension sorting (popularity/stars/latest) |
+| **Agent Detail** | View IDENTITY.md / SOUL.md, file list, one-click copy install command, ZIP download |
+| **Visual Composer** | Drag & drop Agents onto canvas, auto-generate dispatchers and routing rules, undo/redo/auto-layout |
+| **Team Export** | Export assembled Agent teams as ZIP or share links |
+| **Theme Switching** | System / Light / Dark mode |
+| **Landing Page** | Project intro, pain points, feature showcase, quick start guide |
+
+---
+
+## Visual Composer
+
+Composer is SoulHub's core innovation — visually drag & drop to assemble Agents and auto-generate multi-Agent collaboration architectures:
+
+- Drag any Agent from the left panel onto the canvas
+- System auto-creates a Dispatcher node
+- Auto-generates routing rules connecting all Agents
+- Supports undo/redo and auto-layout
+- One-click export as ZIP or shareable link
+
+---
+
+## CLI Tool
+
+Separate repo: [soulhub-cli](https://github.com/lndyzwdxhs/soulhub-cli)
 
 ```bash
-# 克隆仓库
-git clone https://github.com/soulhub-community/soulhub.git
-cd soulhub
-
-# 安装依赖
-npm install
-
-# 启动开发服务器
-npm run dev
-
-# 构建 registry 索引
-npm run build:index
-
-# 校验模板格式
-npm run validate
-
-# 生产构建
-npm run build
+npm install -g soulhub
 ```
 
-## 项目结构
+| Command | Description |
+|---------|-------------|
+| `soulhub search [query]` | Search Agent templates |
+| `soulhub info <name>` | View Agent details |
+| `soulhub install <name>` | Install Agent template locally |
+| `soulhub list` | List installed Agents |
+| `soulhub update [name]` | Update installed Agents |
+| `soulhub uninstall <name>` | Uninstall an Agent |
+| `soulhub publish [dir]` | Publish an Agent to the community |
+
+---
+
+## Local Development
+
+Runtime: **Node ≥ 18**
+
+```bash
+git clone https://github.com/lndyzwdxhs/soulhub.git
+cd soulhub
+
+# Install dependencies
+npm install
+
+# Start dev server (hot reload)
+npm run dev
+
+# Or use Makefile
+make dev
+```
+
+### Common Commands
+
+| Command | Description |
+|---------|-------------|
+| `make dev` | Start dev server |
+| `make dev-turbo` | Turbopack accelerated dev |
+| `make build` | Production build |
+| `make build-index` | Build registry index |
+| `make validate` | Validate registry template format |
+| `make lint` | ESLint check |
+| `make typecheck` | TypeScript type check |
+| `make check` | lint + typecheck full check |
+
+---
+
+## Docker Deployment
+
+Multi-stage build based on Next.js standalone mode — small image size, fast startup.
+
+```bash
+# One-click deploy (build image + start in background), exposed on port 80
+make deploy-docker
+
+# Or step by step
+make docker-build     # Build image
+make docker-run-d     # Run in background
+make docker-logs      # View logs
+make docker-stop      # Stop container
+```
+
+### Vercel Deployment
+
+```bash
+# Production deploy
+make deploy-vercel
+
+# Preview environment
+make deploy-vercel-preview
+```
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| **Web Platform** | Next.js 14 (App Router), React 18, TailwindCSS, Framer Motion |
+| **Visual Orchestration** | React Flow (@xyflow/react v12) |
+| **Theme System** | next-themes (System / Light / Dark) |
+| **CLI Tool** | Node.js, Commander, Chalk, Ora, JSZip |
+| **Template Format** | YAML manifest + Markdown (IDENTITY.md, SOUL.md) |
+| **Containerization** | Docker multi-stage build (Node 18 Alpine) |
+| **CI/CD** | GitHub Actions + Vercel |
+
+---
+
+## Project Structure
 
 ```
 soulhub/
 ├── src/
-│   ├── app/                  # Next.js App Router 页面
-│   │   ├── page.tsx          # 首页（Landing）
-│   │   ├── agents/           # Agent 浏览 + 详情页
-│   │   ├── composer/         # 可视化 Composer
-│   │   ├── api/compose/      # 分享 API
-│   │   └── c/[id]/           # 分享链接重定向
+│   ├── app/                  # Next.js App Router pages
+│   │   ├── page.tsx          # Landing page
+│   │   ├── agents/           # Agent browsing + detail pages
+│   │   ├── composer/         # Visual Composer
+│   │   ├── api/compose/      # Share API
+│   │   └── c/[id]/           # Share link redirect
 │   ├── components/
-│   │   ├── landing/          # 首页组件（Hero, Features, etc.）
-│   │   ├── agents/           # Agent 列表、卡片、详情
-│   │   ├── composer/         # Composer 画布、节点、面板
-│   │   └── ui/               # 通用 UI（Navbar, ThemeToggle, etc.）
-│   └── lib/                  # 工具函数、类型定义、数据加载
+│   │   ├── landing/          # Landing components (Hero, Features, etc.)
+│   │   ├── agents/           # Agent list, cards, detail
+│   │   ├── composer/         # Composer canvas, nodes, panels
+│   │   └── ui/               # Common UI (Navbar, ThemeToggle, etc.)
+│   └── lib/                  # Utilities, types, data loading
 ├── registry/
-│   ├── agents/               # 21 个 Agent 模板
-│   ├── recipes/              # 3 个团队配方
-│   ├── categories.yaml       # 分类定义
-│   ├── index.json            # 构建产物（搜索索引）
-│   └── scripts/              # 构建 + 校验脚本
-├── .github/workflows/        # CI（构建 + registry 校验）
+│   ├── agents/               # 21 Agent templates
+│   ├── recipes/              # 3 Team Recipes
+│   ├── categories.yaml       # Category definitions
+│   ├── index.json            # Build artifact (search index)
+│   └── scripts/              # Build + validation scripts
+├── Dockerfile                # Docker multi-stage build
+├── Makefile                  # Quick command entry
 ├── package.json
 ├── vercel.json
 └── tailwind.config.ts
 ```
 
-## 参与贡献
+---
 
-### 贡献一个 Agent 模板
+## Agent Template Format
 
-1. Fork 本仓库
-2. 在 `registry/agents/` 下创建你的 Agent 目录
-3. 编写 `manifest.yaml`、`IDENTITY.md`、`SOUL.md`
-4. 运行校验：`npm run validate`
-5. 提交 Pull Request
+### manifest.yaml
 
-### 贡献一个团队配方
+```yaml
+name: writer-xiaohongshu
+displayName: Xiaohongshu Content Expert
+description: Specializes in Xiaohongshu content creation — product reviews, lifestyle sharing, recommendation posts
+category: self-media
+tags: [xiaohongshu, content-creation, social-media]
+version: "1.0.0"
+author: soulhub
+minClawVersion: "0.1.0"
+```
 
-在 `registry/recipes/` 下创建配方目录，包含 `manifest.yaml`、`topology.yaml` 和 `README.md`。
+### IDENTITY.md — Defines Who the Agent Is
+
+Role positioning, core responsibilities, skill boundaries.
+
+### SOUL.md — Defines How the Agent Behaves
+
+Personality traits, communication style, workflow, decision principles.
+
+---
+
+## Contributing
+
+### Contribute an Agent Template
+
+1. Fork this repository
+2. Create your Agent directory under `registry/agents/`
+3. Write `manifest.yaml`, `IDENTITY.md`, `SOUL.md`
+4. Run validation: `npm run validate`
+5. Submit a Pull Request
+
+### Contribute a Team Recipe
+
+Create a recipe directory under `registry/recipes/`, including `manifest.yaml`, `topology.yaml`, and `README.md`.
+
+---
+
+## Design Philosophy
+
+1. **Soul-First** — Not sharing code or workflows, but Agent personas, skills, and behavior patterns
+2. **Markdown Native** — IDENTITY.md + SOUL.md as standard format, human-readable and editable
+3. **Team Recipes** — Support sharing multi-Agent collaboration architectures
+4. **Framework Compatible** — Primary support for OpenClaw, designed to adapt to Dify / CrewAI and more
+5. **Open Source Driven** — GitHub PR contribution model, community-built
+
+---
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=lndyzwdxhs/soulhub&type=date)](https://star-history.com/#lndyzwdxhs/soulhub&Date)
 
 ---
 
 ## License
 
-MIT
+[MIT](LICENSE)
