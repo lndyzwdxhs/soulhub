@@ -18,6 +18,9 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
+# 确保 public 目录存在（即使项目中没有静态资源）
+RUN mkdir -p /app/public
+
 # 构建 registry 索引（如有需要）
 RUN npm run build:index || true
 
@@ -38,7 +41,7 @@ RUN adduser --system --uid 1001 nextjs
 # 复制 standalone 输出
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
-COPY --from=builder /app/public ./public 2>/dev/null || true
+COPY --from=builder /app/public ./public
 
 # 复制 registry 数据（运行时可能需要读取）
 COPY --from=builder /app/registry ./registry

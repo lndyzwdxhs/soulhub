@@ -8,7 +8,7 @@ APP_NAME     := soulhub
 IMAGE_NAME   := $(APP_NAME)
 IMAGE_TAG    := latest
 PORT         := 3000
-DOCKER_PORT  := 3000
+DOCKER_PORT  := 80
 
 # ---------- 帮助 ----------
 .PHONY: help
