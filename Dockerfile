@@ -46,6 +46,9 @@ COPY --from=builder /app/public ./public
 # 复制 registry 数据（运行时可能需要读取）
 COPY --from=builder /app/registry ./registry
 
+# 创建 .compose-cache 目录用于保存分享配置，并赋权给 nextjs 用户
+RUN mkdir -p /app/.compose-cache && chown nextjs:nodejs /app/.compose-cache
+
 USER nextjs
 
 EXPOSE 3000

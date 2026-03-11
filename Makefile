@@ -103,17 +103,27 @@ docker-logs: ## 查看 Docker 容器日志
 docker-shell: ## 进入 Docker 容器 Shell
 	docker exec -it $(APP_NAME) /bin/sh
 
+# ---------- 环境准备 ----------
+.PHONY: env
+env: ## 初始化 .env 文件（若不存在则从 .env.example 复制）
+	@if [ ! -f .env ] && [ -f .env.example ]; then \
+		cp .env.example .env; \
+		echo "📋 已从 .env.example 创建 .env"; \
+	else \
+		echo "✅ .env 已存在，跳过"; \
+	fi
+
 # ---------- 一键部署 ----------
 .PHONY: deploy-docker
-deploy-docker: docker-stop docker-build docker-run-d ## 一键 Docker 部署（构建并后台运行）
+deploy-docker: env docker-stop docker-build docker-run-d ## 一键 Docker 部署（构建并后台运行）
 	@echo "\n✅ 部署完成！访问 http://localhost:$(DOCKER_PORT)\n"
 
 .PHONY: deploy-vercel
-deploy-vercel: ## 部署到 Vercel（需要安装 vercel CLI）
+deploy-vercel: env ## 部署到 Vercel（需要安装 vercel CLI）
 	npx vercel --prod
 
 .PHONY: deploy-vercel-preview
-deploy-vercel-preview: ## 部署 Vercel 预览环境
+deploy-vercel-preview: env ## 部署 Vercel 预览环境
 	npx vercel
 
 # ---------- 清理 ----------

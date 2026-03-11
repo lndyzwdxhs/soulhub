@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useCallback } from "react";
-import { X, Copy, Download, Check, Terminal } from "lucide-react";
+import { useState, useCallback, useEffect } from "react";
+import { X, Copy, Download, Check, Terminal, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { ComposerAgent, RoutingRule } from "@/lib/composer-types";
 import {
@@ -25,16 +25,99 @@ export function ExportDialog({
   dispatcherName,
 }: ExportDialogProps) {
   const [copied, setCopied] = useState(false);
+  const [copyError, setCopyError] = useState(false);
+  const [installCommand, setInstallCommand] = useState("");
+  const [saving, setSaving] = useState(false);
+  const [saveError, setSaveError] = useState<string | null>(null);
 
-  const installCommand = `soulhub install --from https://soulhub.dev/share/${dispatcherName.toLowerCase().replace(/\s+/g, "-")}-${Date.now().toString(36)}`;
+  // 当对话框打开时，调用 API 保存配置并获取真实的分享链接
+  useEffect(() => {
+    if (!open) return;
+
+    let cancelled = false;
+
+    async function saveComposition() {
+      setSaving(true);
+      setSaveError(null);
+      setInstallCommand("");
+
+      try {
+        const config = {
+          dispatcherName,
+          agents: composerAgents.map((a) => ({
+            name: a.name,
+            displayName: a.displayName,
+            description: a.description,
+            category: a.category,
+            tags: a.tags,
+            identity: generateDispatcherIdentity(composerAgents, routingRules),
+          })),
+          routingRules: routingRules.map((r) => ({
+            keywords: r.keywords,
+            targetAgent: r.targetAgent,
+          })),
+          dispatcher: {
+            name: dispatcherName,
+            identity: generateDispatcherIdentity(composerAgents, routingRules),
+            soul: generateDispatcherSoul(composerAgents, routingRules),
+          },
+        };
+
+        const res = await fetch("/api/compose", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(config),
+        });
+
+        if (!res.ok) {
+          throw new Error(`保存失败: ${res.statusText}`);
+        }
+
+        const data = await res.json();
+        if (!cancelled) {
+          setInstallCommand(data.installCommand || `soulhub install --from ${data.shareUrl}`);
+        }
+      } catch (err) {
+        if (!cancelled) {
+          setSaveError(err instanceof Error ? err.message : "保存配置失败");
+          // API 失败时不生成假链接，安装命令置空
+          setInstallCommand("");
+        }
+      } finally {
+        if (!cancelled) {
+          setSaving(false);
+        }
+      }
+    }
+
+    saveComposition();
+    return () => { cancelled = true; };
+  }, [open, composerAgents, routingRules, dispatcherName]);
 
   const copyCommand = useCallback(async () => {
     try {
-      await navigator.clipboard.writeText(installCommand);
+      // 优先使用 Clipboard API
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(installCommand);
+      } else {
+        // Fallback: 使用 textarea + execCommand 兼容 HTTP 环境
+        const textarea = document.createElement("textarea");
+        textarea.value = installCommand;
+        textarea.style.position = "fixed";
+        textarea.style.left = "-9999px";
+        textarea.style.top = "-9999px";
+        document.body.appendChild(textarea);
+        textarea.focus();
+        textarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textarea);
+      }
       setCopied(true);
+      setCopyError(false);
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      // Fallback
+      setCopyError(true);
+      setTimeout(() => setCopyError(false), 3000);
     }
   }, [installCommand]);
 
@@ -133,7 +216,7 @@ export function ExportDialog({
         {/* Close */}
         <button
           onClick={onClose}
-          className="absolute right-4 top-4 p-1 rounded-lg text-[hsl(var(--glass-bg)/0.3)] hover:text-white hover:bg-[hsl(var(--glass-bg)/0.1)] transition-colors"
+          className="absolute right-4 top-4 p-1 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
         >
           <X className="h-4 w-4" />
         </button>
@@ -147,7 +230,7 @@ export function ExportDialog({
             <h3 className="text-lg font-semibold text-white">
               🦞 导出团队配置
             </h3>
-            <p className="text-xs text-[hsl(var(--glass-bg)/0.4)]">
+            <p className="text-xs text-muted-foreground">
               {composerAgents.length} 个灵魂 + 调度中心
             </p>
           </div>
@@ -155,42 +238,65 @@ export function ExportDialog({
 
         {/* Install Command */}
         <div className="mb-4">
-          <label className="text-xs text-[hsl(var(--glass-bg)/0.5)] mb-2 block">
+          <label className="text-xs text-muted-foreground mb-2 block">
             安装命令
           </label>
           <div className="relative group">
-            <pre className="rounded-lg bg-black/40 border border-[hsl(var(--glass-border)/0.1)] p-3 pr-12 text-xs text-green-300 font-mono overflow-x-auto">
-              {installCommand}
-            </pre>
-            <button
-              onClick={copyCommand}
-              className={cn(
-                "absolute right-2 top-1/2 -translate-y-1/2 p-1.5 rounded-md transition-all duration-200",
-                copied
-                  ? "bg-green-500/20 text-green-400"
-                  : "text-[hsl(var(--glass-bg)/0.3)] hover:text-white hover:bg-[hsl(var(--glass-bg)/0.1)]"
-              )}
-            >
-              {copied ? (
-                <Check className="h-3.5 w-3.5" />
-              ) : (
-                <Copy className="h-3.5 w-3.5" />
-              )}
-            </button>
+            {saving ? (
+              <div className="rounded-lg bg-gray-900 dark:bg-black/40 border border-border p-3 text-xs text-muted-foreground font-mono flex items-center gap-2">
+                <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                正在生成分享链接...
+              </div>
+            ) : !installCommand ? (
+              <div className="rounded-lg bg-gray-900 dark:bg-black/40 border border-border p-3 text-xs text-yellow-400 font-mono">
+                ⚠ 安装命令不可用，请使用下方"下载 ZIP 压缩包"手动安装
+              </div>
+            ) : (
+              <>
+                <pre className="rounded-lg bg-gray-900 dark:bg-black/40 border border-border p-3 pr-12 text-xs text-green-400 dark:text-green-300 font-mono overflow-x-auto">
+                  {installCommand}
+                </pre>
+                <button
+                  onClick={copyCommand}
+                  className={cn(
+                    "absolute right-2 top-1/2 -translate-y-1/2 p-1.5 rounded-md transition-all duration-200",
+                    copied
+                      ? "bg-green-500/20 text-green-400"
+                      : copyError
+                      ? "bg-red-500/20 text-red-400"
+                      : "text-gray-400 hover:text-white hover:bg-white/10"
+                  )}
+                  title={copyError ? "复制失败，请手动复制" : "复制命令"}
+                >
+                  {copied ? (
+                    <Check className="h-3.5 w-3.5" />
+                  ) : (
+                    <Copy className="h-3.5 w-3.5" />
+                  )}
+                </button>
+              </>
+            )}
           </div>
+          {copyError && (
+            <p className="text-xs text-red-500 mt-1">复制失败，请手动选择命令文本复制</p>
+          )}
+          {saveError && (
+            <p className="text-xs text-yellow-500 mt-1">⚠ {saveError}（使用了本地降级链接）</p>
+          )}
         </div>
 
         {/* Agents summary */}
-        <div className="mb-6 rounded-lg bg-[hsl(var(--glass-bg)/0.05)] border border-[hsl(var(--glass-border)/0.1)] p-3">
-          <p className="text-[10px] text-[hsl(var(--glass-bg)/0.4)] uppercase tracking-wider mb-2">
+        <div className="mb-6 rounded-lg bg-muted/50 border border-border p-3">
+          <p className="text-[10px] text-muted-foreground uppercase tracking-wider mb-2">
             Included Agents
           </p>
           <div className="flex flex-wrap gap-1">
             {composerAgents.map((a) => (
               <span
                 key={a.nodeId}
-                className="rounded-full bg-[hsl(var(--glass-bg)/0.1)] px-2 py-0.5 text-[10px] text-[hsl(var(--glass-bg)/0.6)]">
-                🦞 {a.displayName}              </span>
+                className="rounded-full bg-muted px-2 py-0.5 text-[10px] text-foreground/70">
+                🦞 {a.displayName}
+              </span>
             ))}
           </div>
         </div>
@@ -199,7 +305,7 @@ export function ExportDialog({
         <div className="flex gap-3">
           <button
             onClick={downloadZip}
-            className="flex-1 inline-flex items-center justify-center gap-2 rounded-lg border border-[hsl(var(--glass-border)/0.1)] bg-[hsl(var(--glass-bg)/0.05)] px-4 py-2.5 text-sm text-[hsl(var(--glass-bg)/0.7)] hover:bg-[hsl(var(--glass-bg)/0.1)] hover:text-white transition-all"
+            className="flex-1 inline-flex items-center justify-center gap-2 rounded-lg border border-border bg-muted/50 px-4 py-2.5 text-sm text-foreground/70 hover:bg-muted hover:text-foreground transition-all"
           >
             <Download className="h-4 w-4" />
             下载 ZIP 压缩包

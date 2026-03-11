@@ -15,7 +15,7 @@ export async function GET(
   try {
     const { id } = await params;
 
-    if (!id || !/^[a-z0-9]{6,12}$/.test(id)) {
+    if (!id || !/^[a-z0-9]{4,16}$/.test(id)) {
       return NextResponse.json(
         { error: "Invalid share ID" },
         { status: 400 }
