@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: team
+name: support-center
+version: "1.0.0"
+description: "多层级用户支持团队，覆盖一线客服与技术支持"
+
+dispatcher:
+  name: "dispatcher-main"
+  dir: "dispatcher-main"
+
+agents:
+  - name: tier1
+    dir: support-tier1
+    role: worker
+    displayName: "一线客服"
+  - name: technical
+    dir: support-technical
+    role: worker
+    displayName: "技术支持"
+
+metadata:
+  author: soulhub

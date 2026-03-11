@@ -56,11 +56,11 @@ function buildRecipeEntry(recipeDir, name) {
   const manifest = readManifest(recipeDir);
   if (!manifest) return null;
 
-  const topologyPath = path.join(recipeDir, "topology.yaml");
+  const soulhubYamlPath = path.join(recipeDir, "soulhub.yaml");
   let agents = [];
-  if (fs.existsSync(topologyPath)) {
-    const topo = yaml.load(fs.readFileSync(topologyPath, "utf-8"));
-    agents = (topo.agents || []).map((a) => a.template || a.name);
+  if (fs.existsSync(soulhubYamlPath)) {
+    const pkg = yaml.load(fs.readFileSync(soulhubYamlPath, "utf-8"));
+    agents = (pkg.agents || []).map((a) => a.dir || a.name);
   }
 
   return {

@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: team
+name: dev-squad
+version: "1.0.0"
+description: "精干的软件开发团队，覆盖Python后端、全栈开发与代码审查"
+
+dispatcher:
+  name: "dispatcher-main"
+  dir: "dispatcher-main"
+
+agents:
+  - name: python
+    dir: coder-python
+    role: worker
+    displayName: "Python专家"
+  - name: fullstack
+    dir: coder-fullstack
+    role: worker
+    displayName: "全栈工程师"
+  - name: reviewer
+    dir: coder-reviewer
+    role: worker
+    displayName: "代码审查专家"
+
+metadata:
+  author: soulhub

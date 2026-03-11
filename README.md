@@ -335,7 +335,7 @@ Personality traits, communication style, workflow, decision principles.
 
 ### Contribute a Team Recipe
 
-Create a recipe directory under `registry/recipes/`, including `manifest.yaml`, `topology.yaml`, and `README.md`.
+Create a recipe directory under `registry/recipes/`, including `manifest.yaml`, `soulhub.yaml`, and `README.md`.
 
 ---
 

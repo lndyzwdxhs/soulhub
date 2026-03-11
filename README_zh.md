@@ -335,7 +335,7 @@ minClawVersion: "0.1.0"
 
 ### 贡献一个团队配方
 
-在 `registry/recipes/` 下创建配方目录，包含 `manifest.yaml`、`topology.yaml` 和 `README.md`。
+在 `registry/recipes/` 下创建配方目录，包含 `manifest.yaml`、`soulhub.yaml` 和 `README.md`。
 
 ---
 

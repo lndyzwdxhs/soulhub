@@ -45,10 +45,11 @@ export function ExportDialog({
 
     const zip = new JSZip();
 
+    // Dispatcher 目录名
+    const dispatcherDirName = dispatcherName;
+
     // Dispatcher files
-    const dispatcherDir = zip.folder(
-      dispatcherName.toLowerCase().replace(/\s+/g, "-")
-    );
+    const dispatcherDir = zip.folder(dispatcherDirName);
     if (dispatcherDir) {
       dispatcherDir.file(
         "IDENTITY.md",
@@ -72,23 +73,40 @@ export function ExportDialog({
       }
     }
 
-    // Manifest
-    const manifest = {
-      name: dispatcherName,
-      agents: [
-        {
-          name: dispatcherName.toLowerCase().replace(/\s+/g, "-"),
-          role: "dispatcher",
-        },
-        ...composerAgents.map((a) => ({ name: a.name, role: "worker" })),
-      ],
-      routingRules: routingRules.map((r) => ({
-        keywords: r.keywords,
-        target: r.targetAgent,
-      })),
-      exportedAt: new Date().toISOString(),
-    };
-    zip.file("openclaw-agents.json", JSON.stringify(manifest, null, 2));
+    // 🆕 soulhub.yaml — 统一包描述格式（类似 Helm Chart.yaml）
+    const soulhubYaml = [
+      `apiVersion: v1`,
+      `kind: team`,
+      `name: ${dispatcherName.toLowerCase().replace(/\s+/g, "-")}-team`,
+      `version: "1.0.0"`,
+      `description: "${dispatcherName} 团队"`,
+      ``,
+      `dispatcher:`,
+      `  name: "${dispatcherName}"`,
+      `  dir: "${dispatcherDirName}"`,
+      ``,
+      `agents:`,
+      ...composerAgents.map((a) => [
+        `  - name: ${a.name}`,
+        `    dir: ${a.name}`,
+        `    role: worker`,
+        `    displayName: "${a.displayName}"`,
+      ].join("\n")),
+      ``,
+      ...(routingRules.length > 0 ? [
+        `routing:`,
+        ...routingRules.map((r) => [
+          `  - keywords:`,
+          ...r.keywords.map((k) => `      - "${k}"`),
+          `    target: ${r.targetAgent}`,
+        ].join("\n")),
+      ] : []),
+      ``,
+      `metadata:`,
+      `  author: soulhub`,
+      `  exportedAt: "${new Date().toISOString()}"`,
+    ].join("\n");
+    zip.file("soulhub.yaml", soulhubYaml);
 
     // Install instructions
     zip.file(

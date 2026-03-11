@@ -5,7 +5,7 @@ import path from "node:path";
 // 允许访问的文件白名单
 const ALLOWED_FILES = [
   "manifest.yaml",
-  "topology.yaml",
+  "soulhub.yaml",
   "README.md",
 ];
 

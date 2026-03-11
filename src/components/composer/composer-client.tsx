@@ -411,9 +411,11 @@ export function ComposerClient({ agents, recipes }: ComposerClientProps) {
     );
 
     const zip = new JSZip();
-    const dispatcherDir = zip.folder(
-      dispatcherName.toLowerCase().replace(/\s+/g, "-")
-    );
+
+    // Dispatcher 目录名
+    const dispatcherDirName = dispatcherName;
+
+    const dispatcherDir = zip.folder(dispatcherDirName);
     if (dispatcherDir) {
       dispatcherDir.file(
         "IDENTITY.md",
@@ -439,22 +441,40 @@ export function ComposerClient({ agents, recipes }: ComposerClientProps) {
       }
     }
 
-    zip.file(
-      "openclaw-agents.json",
-      JSON.stringify(
-        {
-          name: dispatcherName,
-          agents: composerAgents.map((a) => ({ name: a.name, role: "worker" })),
-          routingRules: routingRules.map((r) => ({
-            keywords: r.keywords,
-            target: r.targetAgent,
-          })),
-          exportedAt: new Date().toISOString(),
-        },
-        null,
-        2
-      )
-    );
+    // soulhub.yaml — 统一包描述格式
+    const soulhubYaml = [
+      `apiVersion: v1`,
+      `kind: team`,
+      `name: ${dispatcherName.toLowerCase().replace(/\s+/g, "-")}-team`,
+      `version: "1.0.0"`,
+      `description: "${dispatcherName} 团队"`,
+      ``,
+      `dispatcher:`,
+      `  name: "${dispatcherName}"`,
+      `  dir: "${dispatcherDirName}"`,
+      ``,
+      `agents:`,
+      ...composerAgents.map((a) => [
+        `  - name: ${a.name}`,
+        `    dir: ${a.name}`,
+        `    role: worker`,
+        `    displayName: "${a.displayName}"`,
+      ].join("\n")),
+      ``,
+      ...(routingRules.length > 0 ? [
+        `routing:`,
+        ...routingRules.map((r) => [
+          `  - keywords:`,
+          ...r.keywords.map((k: string) => `      - "${k}"`),
+          `    target: ${r.targetAgent}`,
+        ].join("\n")),
+      ] : []),
+      ``,
+      `metadata:`,
+      `  author: soulhub`,
+      `  exportedAt: "${new Date().toISOString()}"`,
+    ].join("\n");
+    zip.file("soulhub.yaml", soulhubYaml);
 
     const blob = await zip.generateAsync({ type: "blob" });
     saveAs(

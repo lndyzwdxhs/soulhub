@@ -1,0 +1,34 @@
+apiVersion: v1
+kind: team
+name: self-media-team
+version: "1.0.0"
+description: "全平台自媒体内容创作与运营团队，覆盖选题、创作、排期与运营"
+
+dispatcher:
+  name: "dispatcher-main"
+  dir: "dispatcher-main"
+
+agents:
+  - name: xiaohongshu
+    dir: writer-xiaohongshu
+    role: worker
+    displayName: "小红书创作者"
+  - name: wechat
+    dir: writer-wechat
+    role: worker
+    displayName: "公众号创作者"
+  - name: trending
+    dir: researcher-trending
+    role: worker
+    displayName: "热点追踪分析师"
+  - name: scheduler
+    dir: publisher-scheduler
+    role: worker
+    displayName: "发布排期官"
+  - name: ops
+    dir: ops-assistant
+    role: worker
+    displayName: "杂务管家"
+
+metadata:
+  author: soulhub
