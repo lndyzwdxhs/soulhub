@@ -3,8 +3,44 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Copy, Check } from "lucide-react";
 import Link from "next/link";
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
+
+// 兼容性复制函数，优先使用 Clipboard API，fallback 到 execCommand
+function copyToClipboard(text: string): Promise<void> {
+  // 优先尝试 Clipboard API
+  if (navigator.clipboard && typeof navigator.clipboard.writeText === "function") {
+    return navigator.clipboard.writeText(text).catch(() => {
+      // Clipboard API 失败时 fallback
+      return fallbackCopy(text);
+    });
+  }
+  // 直接 fallback
+  return fallbackCopy(text);
+}
+
+function fallbackCopy(text: string): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    // 不可见但仍可选中
+    textarea.style.position = "fixed";
+    textarea.style.left = "-9999px";
+    textarea.style.top = "-9999px";
+    textarea.style.opacity = "0";
+    document.body.appendChild(textarea);
+    textarea.focus();
+    textarea.select();
+    try {
+      document.execCommand("copy");
+      resolve();
+    } catch (err) {
+      reject(err);
+    } finally {
+      document.body.removeChild(textarea);
+    }
+  });
+}
 
 // 打字机标题组件 — 循环展示：打字 → 停顿 → 淡出 → 重新打字
 function TypewriterTitle() {
@@ -279,9 +315,10 @@ function TerminalPreview() {
     .trim();
 
   const handleCopy = useCallback(() => {
-    navigator.clipboard.writeText(copyText);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    copyToClipboard(copyText).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
   }, [copyText]);
 
   return (
@@ -369,9 +406,10 @@ function Step02Terminal() {
     .trim();
 
   const handleCopy = useCallback(() => {
-    navigator.clipboard.writeText(copyText);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    copyToClipboard(copyText).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
   }, [copyText]);
 
   return (
@@ -439,9 +477,10 @@ function OpenClawTerminal() {
     .trim();
 
   const handleCopy = useCallback(() => {
-    navigator.clipboard.writeText(copyText);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    copyToClipboard(copyText).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
   }, [copyText]);
 
   return (

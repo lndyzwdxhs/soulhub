@@ -73,5 +73,5 @@ export function getCategoryIcon(categoryId: string): LucideIcon {
 
 export function getCategoryLabel(categoryId: string): string {
   const category = CATEGORIES.find((c) => c.id === categoryId);
-  return category?.nameEn ?? categoryId;
+  return category?.name ?? categoryId;
 }

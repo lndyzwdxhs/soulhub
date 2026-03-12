@@ -19,7 +19,7 @@ export function AgentPanel({ agents, recipes, onLoadRecipe, activeRecipeName }: 
   const [activeTab, setActiveTab] = useState<PanelTab>("agents");
   const [search, setSearch] = useState("");
   const [expandedCategories, setExpandedCategories] = useState<Set<string>>(
-    () => new Set(CATEGORIES.map((c) => c.id))
+    () => new Set(CATEGORIES.length > 0 ? [CATEGORIES[0].id] : [])
   );
 
   const filtered = useMemo(() => {
@@ -156,7 +156,7 @@ export function AgentPanel({ agents, recipes, onLoadRecipe, activeRecipeName }: 
                       <ChevronRight className="h-3 w-3" />
                     )}
                     <Icon className="h-3.5 w-3.5" />
-                    <span className="font-medium">{cat.nameEn}</span>
+                    <span className="font-medium">{cat.name}</span>
                     <span className="ml-auto text-[hsl(var(--glass-bg)/0.3)]">{catAgents.length}</span>
                   </button>
 

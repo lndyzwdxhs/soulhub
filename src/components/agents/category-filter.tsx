@@ -58,7 +58,7 @@ export function CategoryFilter({ agents, selected, onSelect }: CategoryFilterPro
             )}
           >
             <Icon className="h-3.5 w-3.5" />
-            {cat.nameEn}
+            {cat.name}
             <span className="text-xs opacity-60">({cat.count})</span>
           </motion.button>
         );

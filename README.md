@@ -1,7 +1,11 @@
-# 🧠 SoulHub — Open Source Agent Soul Store
+# 🦞 SoulHub — Open Source Agent Soul Store
 
 <p align="center">
   <strong>Just like GitHub stores code, SoulHub stores well-tuned Agent souls.</strong>
+</p>
+
+<p align="center">
+  <em>Every Agent Deserves a Soul 🦞</em>
 </p>
 
 <p align="center">
@@ -20,7 +24,7 @@ It provides a Web platform for browsing and visual orchestration, a CLI tool for
 
 Not sharing code or workflows, but sharing Agent **personas, skills, and behavior patterns**.
 
-[Web Platform](#web-platform) · [CLI Tool](#cli-tool) · [Agent Templates](#agent-registry) · [Composer](#visual-composer) · [Quick Start](#quick-start) · [Local Development](#local-development) · [Docker Deploy](#docker-deployment) · [Contributing](#contributing)
+[Web Platform](#web-platform) · [CLI Tool](#cli-tool) · [Agent Registry](#agent-registry) · [Fusion Orchestrator](#fusion-orchestrator) · [Quick Start](#quick-start) · [Local Development](#local-development) · [Docker Deploy](#docker-deployment) · [Contributing](#contributing)
 
 ---
 
@@ -42,12 +46,13 @@ SoulHub's answer: **Define Agent souls in Markdown, share them through open sour
 
 - **🧠 Soul-First** — Not code or workflows, but Agent personas, skills, and behavior patterns (IDENTITY.md + SOUL.md).
 - **📝 Markdown Native** — Human-readable and editable, version-control friendly, no vendor lock-in.
-- **🎨 Visual Composer** — Drag & drop Agents onto a canvas, auto-generate dispatchers and routing rules, undo/redo/auto-layout.
-- **👥 Team Recipes** — Share multi-Agent collaboration architectures (e.g., "Social Media Team of 6", "Dev Squad").
+- **🎨 Fusion Orchestrator** — Drag & drop Agents onto a canvas, auto-generate dispatchers and routing rules, undo/redo/auto-layout.
+- **👥 Team Recipes** — Share multi-Agent collaboration architectures (e.g., "Social Media Team", "Dev Squad").
 - **🔧 CLI One-Click Install** — `soulhub install writer-xiaohongshu`, one command, ready to go.
 - **🌍 Framework Compatible** — Primary support for OpenClaw, designed to adapt to Dify / CrewAI and more.
 - **🌓 Theme Switching** — System / Light / Dark mode.
 - **🐳 Docker One-Click Deploy** — `make deploy-docker`, build image + start service in one step.
+- **📖 Docs Center** — Getting started guide, Soul spec reference, community contribution guide.
 
 ---
 
@@ -65,9 +70,9 @@ SoulHub's answer: **Define Agent souls in Markdown, share them through open sour
    │   Next.js Web    │   │    Registry      │   │   GitHub Actions │
    │  Platform (SSR)  │◄──│ 21 Agent Templs  │──►│   CI Validate    │
    │                  │   │  3 Team Recipes  │   │   + Build        │
-   │  Browse/Search   │   │                  │   └──────────────────┘
-   │  Composer        │   │  index.json idx  │
-   │  Download/Share  │   └──────────────────┘
+   │  /souls  Browse  │   │                  │   └──────────────────┘
+   │  /fusion Orch.   │   │  index.json idx  │
+   │  /docs   Docs    │   └──────────────────┘
    └──────────────────┘
               ▲
               │ HTTP (GitHub Raw)
@@ -89,14 +94,14 @@ SoulHub's answer: **Define Agent souls in Markdown, share them through open sour
 
 | Category | Example Agents |
 |----------|---------------|
-| 🎨 Content Creation | Xiaohongshu Writer, WeChat Author, Zhihu Creator, Twitter Writer |
-| 💻 Development | Full-Stack Engineer, Python Expert, Code Reviewer, System Architect |
-| 📈 Operations | Data Analyst, SEO Specialist, Growth Hacker |
-| 🎧 Customer Service | Frontline Support, Technical Support, Escalation Dispatcher |
+| 🎨 Self Media | Xiaohongshu Writer, WeChat Author, Zhihu Creator, Twitter Writer, Trending Researcher, Publish Scheduler |
+| 💻 Development | Full-Stack Engineer, Python Expert, Code Reviewer, System Architect, K8s DevOps |
+| 📈 Operations | Data Analyst, SEO Specialist, Growth Hacker, Ops Assistant |
+| 🎧 Support | Frontline Support, Technical Support, Escalation Dispatcher |
 | 📚 Education | Programming Tutor, English Teacher |
-| 🎯 Orchestration | Master Dispatcher (multi-Agent coordination) |
+| 🎯 Dispatcher | Master Dispatcher (multi-Agent coordination) |
 
-**3 Team Recipes**: Social Media Team, Dev Squad, Customer Service Center.
+**3 Team Recipes**: Social Media Team, Dev Squad, Support Center.
 
 Each Agent template consists of:
 
@@ -134,13 +139,13 @@ soulhub install --recipe self-media-team
 
 ### Option 2: Browse on Web Platform
 
-1. Visit the Web platform, browse or search for Agents
+1. Visit the Web platform, go to `/souls` to browse or search for Agents
 2. View IDENTITY.md / SOUL.md on the detail page
 3. Click **Download ZIP** or copy the install command
 
-### Option 3: Assemble with Composer
+### Option 3: Assemble with Fusion
 
-1. Go to the `/composer` page
+1. Go to the `/fusion` page
 2. Drag & drop Agents from the left panel onto the canvas
 3. The system auto-creates a dispatcher node and generates routing rules
 4. Click **Export** to download ZIP or generate a share link
@@ -151,23 +156,25 @@ soulhub install --recipe self-media-team
 
 | Feature | Description |
 |---------|-------------|
-| **Agent Browsing** | Filter by category, keyword search, multi-dimension sorting (popularity/stars/latest) |
-| **Agent Detail** | View IDENTITY.md / SOUL.md, file list, one-click copy install command, ZIP download |
-| **Visual Composer** | Drag & drop Agents onto canvas, auto-generate dispatchers and routing rules, undo/redo/auto-layout |
+| **Soul Browsing** (`/souls`) | Filter by category, keyword search, multi-dimension sorting (popularity/stars/latest) |
+| **Soul Detail** (`/souls/[name]`) | View IDENTITY.md / SOUL.md, file list, one-click copy install command, ZIP download |
+| **Fusion Orchestrator** (`/fusion`) | Drag & drop Agents onto canvas, auto-generate dispatchers and routing rules, undo/redo/auto-layout |
 | **Team Export** | Export assembled Agent teams as ZIP or share links |
+| **Docs Center** (`/docs`) | Getting started, Soul spec, CLI guide, Fusion orchestration, API reference, community guide |
 | **Theme Switching** | System / Light / Dark mode |
-| **Landing Page** | Project intro, pain points, feature showcase, quick start guide |
+| **Landing Page** (`/`) | Project intro, pain points, feature showcase, quick start guide |
 
 ---
 
-## Visual Composer
+## Fusion Orchestrator
 
-Composer is SoulHub's core innovation — visually drag & drop to assemble Agents and auto-generate multi-Agent collaboration architectures:
+Fusion is SoulHub's core innovation — visually drag & drop to assemble Agents and auto-generate multi-Agent collaboration architectures:
 
 - Drag any Agent from the left panel onto the canvas
 - System auto-creates a Dispatcher node
 - Auto-generates routing rules connecting all Agents
 - Supports undo/redo and auto-layout
+- Properties panel for editing Agent and routing details
 - One-click export as ZIP or shareable link
 
 ---
@@ -216,12 +223,17 @@ make dev
 |---------|-------------|
 | `make dev` | Start dev server |
 | `make dev-turbo` | Turbopack accelerated dev |
+| `make dev-debug` | Start dev server with Node.js debug mode (port 9229) |
 | `make build` | Production build |
+| `make start` | Start production server (requires build first) |
 | `make build-index` | Build registry index |
 | `make validate` | Validate registry template format |
 | `make lint` | ESLint check |
 | `make typecheck` | TypeScript type check |
 | `make check` | lint + typecheck full check |
+| `make clean` | Clean build artifacts |
+| `make clean-all` | Deep clean (including node_modules) |
+| `make reinstall` | Clean and reinstall dependencies |
 
 ---
 
@@ -238,6 +250,7 @@ make docker-build     # Build image
 make docker-run-d     # Run in background
 make docker-logs      # View logs
 make docker-stop      # Stop container
+make docker-shell     # Enter container shell
 ```
 
 ### Vercel Deployment
@@ -255,9 +268,9 @@ make deploy-vercel-preview
 ## Tech Stack
 
 | Layer | Technology |
-|-------|-----------|
+|-------|-----------:|
 | **Web Platform** | Next.js 14 (App Router), React 18, TailwindCSS, Framer Motion |
-| **Visual Orchestration** | React Flow (@xyflow/react v12) |
+| **Fusion Orchestrator** | React Flow (@xyflow/react v12) |
 | **Theme System** | next-themes (System / Light / Dark) |
 | **CLI Tool** | Node.js, Commander, Chalk, Ora, JSZip |
 | **Template Format** | YAML manifest + Markdown (IDENTITY.md, SOUL.md) |
@@ -273,22 +286,26 @@ soulhub/
 ├── src/
 │   ├── app/                  # Next.js App Router pages
 │   │   ├── page.tsx          # Landing page
-│   │   ├── agents/           # Agent browsing + detail pages
-│   │   ├── composer/         # Visual Composer
+│   │   ├── souls/            # Soul browsing + detail pages
+│   │   ├── fusion/           # Fusion Orchestrator (visual drag & drop)
+│   │   ├── docs/             # Documentation center
 │   │   ├── api/compose/      # Share API
-│   │   └── c/[id]/           # Share link redirect
+│   │   ├── c/[id]/           # Share link redirect
+│   │   └── index.json/       # Registry index API
 │   ├── components/
-│   │   ├── landing/          # Landing components (Hero, Features, etc.)
+│   │   ├── landing/          # Landing components (Hero, Features, Pain Points, etc.)
 │   │   ├── agents/           # Agent list, cards, detail
-│   │   ├── composer/         # Composer canvas, nodes, panels
-│   │   └── ui/               # Common UI (Navbar, ThemeToggle, etc.)
+│   │   ├── composer/         # Fusion canvas, nodes, panels, export
+│   │   └── ui/               # Common UI (Navbar, ThemeToggle, CopyButton, etc.)
 │   └── lib/                  # Utilities, types, data loading
 ├── registry/
 │   ├── agents/               # 21 Agent templates
 │   ├── recipes/              # 3 Team Recipes
-│   ├── categories.yaml       # Category definitions
+│   ├── categories.yaml       # Category definitions (6 categories)
 │   ├── index.json            # Build artifact (search index)
+│   ├── manifest.schema.json  # Manifest validation schema
 │   └── scripts/              # Build + validation scripts
+├── .github/workflows/        # CI (build + validate + index)
 ├── Dockerfile                # Docker multi-stage build
 ├── Makefile                  # Quick command entry
 ├── package.json
@@ -310,7 +327,7 @@ category: self-media
 tags: [xiaohongshu, content-creation, social-media]
 version: "1.0.0"
 author: soulhub
-minClawVersion: "0.1.0"
+minClawVersion: "2026.3.0"
 ```
 
 ### IDENTITY.md — Defines Who the Agent Is
