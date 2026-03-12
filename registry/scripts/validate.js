@@ -12,7 +12,7 @@ const yaml = require("js-yaml");
 const AGENTS_DIR = path.join(__dirname, "..", "agents");
 const REQUIRED_FIELDS = ["name", "displayName", "description", "category", "version", "author"];
 const REQUIRED_FILES = ["IDENTITY.md", "SOUL.md"];
-const VALID_CATEGORIES = ["self-media", "development", "operations", "support", "education", "dispatcher"];
+const VALID_CATEGORIES = ["self-media", "development", "operations", "support", "education", "dispatcher", "clawtown"];
 
 let errors = 0;
 
