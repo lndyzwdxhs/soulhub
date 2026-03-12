@@ -17,7 +17,7 @@ const footerLinks = [
   },
   {
     label: "OpenClaw",
-    href: "https://openclaw.com",
+    href: "https://openclaw.ai",
     icon: Globe,
   },
 ];
