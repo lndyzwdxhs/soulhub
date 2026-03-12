@@ -1,12 +1,6 @@
-name: Build Registry Index
+name: Validate Registry (PR)
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'registry/agents/**'
-      - 'registry/recipes/**'
-      - 'registry/scripts/**'
   pull_request:
     branches: [main]
     paths:
@@ -14,13 +8,13 @@ on:
       - 'registry/recipes/**'
 
 jobs:
-  build-index:
+  validate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: '20'
 
@@ -32,23 +26,15 @@ jobs:
       - name: Validate agent templates
         run: node registry/scripts/validate.js
 
-      - name: Build index.json
+      - name: Build index (dry-run)
         run: node registry/scripts/build-index.js
 
-      - name: Check for index changes
-        id: check
-        run: |
-          if git diff --quiet registry/index.json; then
-            echo "changed=false" >> $GITHUB_OUTPUT
-          else
-            echo "changed=true" >> $GITHUB_OUTPUT
-          fi
+      - name: Package (dry-run)
+        run: node registry/scripts/package.js
 
-      - name: Commit updated index
-        if: steps.check.outputs.changed == 'true' && github.event_name == 'push'
+      - name: Verify dist output
         run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git add registry/index.json
-          git commit -m "chore: rebuild registry index"
-          git push
+          echo "📦 打包产物预览:"
+          find registry/dist -type f | head -50
+          echo ""
+          echo "✅ 验证通过，PR 合并后将自动发布到 COS"

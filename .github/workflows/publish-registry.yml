@@ -1,0 +1,80 @@
+name: Publish Registry to COS
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'registry/agents/**'
+      - 'registry/recipes/**'
+      - 'registry/scripts/**'
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '20'
+
+      - name: Install registry dependencies
+        run: |
+          cd registry
+          npm install js-yaml
+
+      - name: Validate agent templates
+        run: node registry/scripts/validate.js
+
+      - name: Build index.json
+        run: node registry/scripts/build-index.js
+
+      - name: Commit updated index (if changed)
+        run: |
+          if ! git diff --quiet registry/index.json; then
+            git config --local user.email "github-actions[bot]@users.noreply.github.com"
+            git config --local user.name "github-actions[bot]"
+            git add registry/index.json
+            git commit -m "chore: rebuild registry index"
+            git push
+          fi
+
+      - name: Package agents and recipes
+        run: node registry/scripts/package.js
+
+      - name: Install coscmd
+        run: sudo pip install coscmd
+
+      - name: Configure coscmd
+        env:
+          SECRET_ID: ${{ secrets.COS_SECRET_ID }}
+          SECRET_KEY: ${{ secrets.COS_SECRET_KEY }}
+          BUCKET: soulhub-1251783334
+        run: coscmd config -a $SECRET_ID -s $SECRET_KEY -b $BUCKET -e cos.accelerate.myqcloud.com
+
+      - name: Upload to COS
+        run: |
+          echo "📤 上传 index.json..."
+          coscmd upload registry/dist/index.json registry/index.json
+
+          echo "📤 上传 agent 包..."
+          for dir in registry/dist/agents/*/; do
+            agent_name=$(basename "$dir")
+            for file in "$dir"*.tar.gz; do
+              [ -f "$file" ] && coscmd upload "$file" "registry/agents/$agent_name/$(basename "$file")"
+            done
+          done
+
+          echo "📤 上传 recipe 描述文件..."
+          for dir in registry/dist/recipes/*/; do
+            recipe_name=$(basename "$dir")
+            for file in "$dir"*.yaml; do
+              [ -f "$file" ] && coscmd upload "$file" "registry/recipes/$recipe_name/$(basename "$file")"
+            done
+          done
+
+          echo "✅ Registry 已发布到 COS"
