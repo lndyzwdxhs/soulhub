@@ -633,6 +633,7 @@ export function ComposerClient({ agents, recipes }: ComposerClientProps) {
         composerAgents={composerAgents}
         routingRules={routingRules}
         dispatcherName={dispatcherName}
+        activeRecipeName={activeRecipeName}
       />
     </div>
   );

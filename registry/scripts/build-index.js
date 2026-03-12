@@ -25,6 +25,15 @@ function getFileSize(filePath) {
   return fs.statSync(filePath).size;
 }
 
+function getSkills(agentDir) {
+  const skillsDir = path.join(agentDir, "skills");
+  if (!fs.existsSync(skillsDir)) return [];
+  return fs.readdirSync(skillsDir, { withFileTypes: true })
+    .filter((d) => d.isDirectory())
+    .map((d) => d.name)
+    .sort();
+}
+
 function buildAgentEntry(agentDir, name) {
   const manifest = readManifest(agentDir);
   if (!manifest) return null;
@@ -37,6 +46,8 @@ function buildAgentEntry(agentDir, name) {
     }
   }
 
+  const skills = getSkills(agentDir);
+
   return {
     name: manifest.name || name,
     displayName: manifest.displayName || name,
@@ -47,6 +58,7 @@ function buildAgentEntry(agentDir, name) {
     author: manifest.author || "community",
     minClawVersion: manifest.minClawVersion || "2026.3.0",
     files,
+    skills,
     downloads: 0,
     stars: 0,
   };

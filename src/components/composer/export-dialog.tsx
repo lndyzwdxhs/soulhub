@@ -15,6 +15,7 @@ interface ExportDialogProps {
   composerAgents: ComposerAgent[];
   routingRules: RoutingRule[];
   dispatcherName: string;
+  activeRecipeName?: string | null;
 }
 
 export function ExportDialog({
@@ -23,6 +24,7 @@ export function ExportDialog({
   composerAgents,
   routingRules,
   dispatcherName,
+  activeRecipeName,
 }: ExportDialogProps) {
   const [copied, setCopied] = useState(false);
   const [copyError, setCopyError] = useState(false);
@@ -30,9 +32,18 @@ export function ExportDialog({
   const [saving, setSaving] = useState(false);
   const [saveError, setSaveError] = useState<string | null>(null);
 
-  // 当对话框打开时，调用 API 保存配置并获取真实的分享链接
+  // 当对话框打开时，生成安装命令
+  // 预制团队（有 activeRecipeName）直接生成简洁命令，自定义团队调用 API 获取分享链接
   useEffect(() => {
     if (!open) return;
+
+    // 预制团队：直接使用 registry 名称，无需调用 API
+    if (activeRecipeName) {
+      setInstallCommand(`soulhub install ${activeRecipeName}`);
+      setSaving(false);
+      setSaveError(null);
+      return;
+    }
 
     let cancelled = false;
 
@@ -92,7 +103,7 @@ export function ExportDialog({
 
     saveComposition();
     return () => { cancelled = true; };
-  }, [open, composerAgents, routingRules, dispatcherName]);
+  }, [open, composerAgents, routingRules, dispatcherName, activeRecipeName]);
 
   const copyCommand = useCallback(async () => {
     try {

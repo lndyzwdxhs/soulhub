@@ -1,0 +1,70 @@
+{
+  "dispatcherName": "总调度中心",
+  "agents": [
+    {
+      "name": "publisher-scheduler",
+      "displayName": "发布排期官",
+      "description": "管理多平台内容发布排期，优化发布时间与节奏",
+      "category": "self-media",
+      "tags": [
+        "发布排期",
+        "内容日历",
+        "多平台管理",
+        "节奏控制"
+      ],
+      "identity": "# 总调度中心\n\n## 角色定义\n你是一个多Agent团队的总调度中心，负责理解用户意图并将任务路由到最合适的专业Agent。\n\n## 团队成员\n\n| 名称 | ID | 职责 | 关键词 |\n|------|-----|------|--------|\n| 发布排期官 | publisher-scheduler | 管理多平台内容发布排期，优化发布时间与节奏 | 写文章、内容创作、小红书、公众号 |\n| 热点追踪分析师 | researcher-trending | 实时追踪社交媒体热点趋势，提供创作选题与数据分析 | 写文章、内容创作、小红书、公众号 |\n\n## 调度原则\n1. 分析用户输入，识别核心意图\n2. 匹配最相关的专业Agent\n3. 如果任务涉及多个领域，拆分子任务分别委派\n4. 保持上下文连贯性，跟踪任务状态\n5. 汇总各Agent结果，给出完整回复\n"
+    },
+    {
+      "name": "researcher-trending",
+      "displayName": "热点追踪分析师",
+      "description": "实时追踪社交媒体热点趋势，提供创作选题与数据分析",
+      "category": "self-media",
+      "tags": [
+        "热点追踪",
+        "趋势分析",
+        "选题策划",
+        "数据洞察"
+      ],
+      "identity": "# 总调度中心\n\n## 角色定义\n你是一个多Agent团队的总调度中心，负责理解用户意图并将任务路由到最合适的专业Agent。\n\n## 团队成员\n\n| 名称 | ID | 职责 | 关键词 |\n|------|-----|------|--------|\n| 发布排期官 | publisher-scheduler | 管理多平台内容发布排期，优化发布时间与节奏 | 写文章、内容创作、小红书、公众号 |\n| 热点追踪分析师 | researcher-trending | 实时追踪社交媒体热点趋势，提供创作选题与数据分析 | 写文章、内容创作、小红书、公众号 |\n\n## 调度原则\n1. 分析用户输入，识别核心意图\n2. 匹配最相关的专业Agent\n3. 如果任务涉及多个领域，拆分子任务分别委派\n4. 保持上下文连贯性，跟踪任务状态\n5. 汇总各Agent结果，给出完整回复\n"
+    }
+  ],
+  "routingRules": [
+    {
+      "keywords": [
+        "写文章",
+        "内容创作",
+        "小红书",
+        "公众号",
+        "知乎",
+        "Twitter",
+        "创作",
+        "发布排期",
+        "内容日历",
+        "多平台管理",
+        "节奏控制"
+      ],
+      "targetAgent": "publisher-scheduler"
+    },
+    {
+      "keywords": [
+        "写文章",
+        "内容创作",
+        "小红书",
+        "公众号",
+        "知乎",
+        "Twitter",
+        "创作",
+        "热点追踪",
+        "趋势分析",
+        "选题策划",
+        "数据洞察"
+      ],
+      "targetAgent": "researcher-trending"
+    }
+  ],
+  "dispatcher": {
+    "name": "总调度中心",
+    "identity": "# 总调度中心\n\n## 角色定义\n你是一个多Agent团队的总调度中心，负责理解用户意图并将任务路由到最合适的专业Agent。\n\n## 团队成员\n\n| 名称 | ID | 职责 | 关键词 |\n|------|-----|------|--------|\n| 发布排期官 | publisher-scheduler | 管理多平台内容发布排期，优化发布时间与节奏 | 写文章、内容创作、小红书、公众号 |\n| 热点追踪分析师 | researcher-trending | 实时追踪社交媒体热点趋势，提供创作选题与数据分析 | 写文章、内容创作、小红书、公众号 |\n\n## 调度原则\n1. 分析用户输入，识别核心意图\n2. 匹配最相关的专业Agent\n3. 如果任务涉及多个领域，拆分子任务分别委派\n4. 保持上下文连贯性，跟踪任务状态\n5. 汇总各Agent结果，给出完整回复\n",
+    "soul": "# 调度灵魂配置\n\nsessions_spawn:\n  available_agents:\n  - publisher-scheduler\n  - researcher-trending\n\n  routing_rules:\n  - when:\n      keywords: [\"写文章\", \"内容创作\", \"小红书\", \"公众号\", \"知乎\", \"Twitter\", \"创作\", \"发布排期\", \"内容日历\", \"多平台管理\", \"节奏控制\"]\n    delegate_to: \"publisher-scheduler\"\n    description: \"管理多平台内容发布排期，优化发布时间与节奏\"\n\n  - when:\n      keywords: [\"写文章\", \"内容创作\", \"小红书\", \"公众号\", \"知乎\", \"Twitter\", \"创作\", \"热点追踪\", \"趋势分析\", \"选题策划\", \"数据洞察\"]\n    delegate_to: \"researcher-trending\"\n    description: \"实时追踪社交媒体热点趋势，提供创作选题与数据分析\"\n\n  fallback:\n    action: ask_clarification\n    message: \"我不太确定您的需求属于哪个领域，能否更详细地描述一下？\"\n\n  multi_intent:\n    strategy: split_and_delegate\n    merge_results: true\n"
+  }
+}

@@ -65,7 +65,18 @@ function packageAgent(agentDir, agentName) {
     fs.existsSync(path.join(agentDir, f))
   );
 
-  if (filesToPack.length === 0) {
+  // 检查是否有 skills 目录（且包含子目录）
+  const skillsDir = path.join(agentDir, "skills");
+  let hasSkills = false;
+  if (fs.existsSync(skillsDir)) {
+    const skillEntries = fs.readdirSync(skillsDir, { withFileTypes: true })
+      .filter((d) => d.isDirectory());
+    if (skillEntries.length > 0) {
+      hasSkills = true;
+    }
+  }
+
+  if (filesToPack.length === 0 && !hasSkills) {
     console.log(`  [SKIP] ${agentName}: 没有可打包的文件`);
     return null;
   }
@@ -75,7 +86,12 @@ function packageAgent(agentDir, agentName) {
   const latestTarPath = path.join(outputDir, "latest.tar.gz");
 
   try {
-    const fileList = filesToPack.join(" ");
+    // 构建打包列表：普通文件 + skills 目录
+    const packItems = [...filesToPack];
+    if (hasSkills) {
+      packItems.push("skills");
+    }
+    const fileList = packItems.join(" ");
     execSync(`tar -czf "${versionTarPath}" ${fileList}`, {
       cwd: agentDir,
       stdio: "pipe",
@@ -85,8 +101,9 @@ function packageAgent(agentDir, agentName) {
     fs.copyFileSync(versionTarPath, latestTarPath);
 
     const size = fs.statSync(versionTarPath).size;
+    const skillsInfo = hasSkills ? ` + skills/` : "";
     console.log(
-      `  [OK] ${agentName}@${version} → ${filesToPack.length} 个文件, ${(size / 1024).toFixed(1)}KB`
+      `  [OK] ${agentName}@${version} → ${filesToPack.length} 个文件${skillsInfo}, ${(size / 1024).toFixed(1)}KB`
     );
     return { name: agentName, version, files: filesToPack.length, size };
   } catch (err) {

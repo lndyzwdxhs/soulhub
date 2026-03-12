@@ -5,6 +5,7 @@ import {
   Headphones,
   GraduationCap,
   Network,
+  Gamepad2,
   type LucideIcon,
 } from "lucide-react";
 import type { AgentIndex, Category } from "./types";
@@ -52,6 +53,13 @@ export const CATEGORIES: Category[] = [
     icon: "network",
     description: "Task routing and multi-agent orchestration",
   },
+  {
+    id: "clawtown",
+    name: "ClawTown角色",
+    nameEn: "ClawTown",
+    icon: "gamepad-2",
+    description: "ClawTown 小镇模拟游戏角色，每只小龙虾都有独特的人格与故事",
+  },
 ];
 
 const iconMap: Record<string, LucideIcon> = {
@@ -61,6 +69,7 @@ const iconMap: Record<string, LucideIcon> = {
   headphones: Headphones,
   "graduation-cap": GraduationCap,
   network: Network,
+  "gamepad-2": Gamepad2,
 };
 
 export function getCategoryIcon(categoryId: string): LucideIcon {

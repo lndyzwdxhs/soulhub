@@ -34,3 +34,9 @@ categories:
     nameEn: Dispatcher
     icon: network
     description: 多 Agent 团队调度模板
+
+  - id: clawtown
+    name: ClawTown角色
+    nameEn: ClawTown
+    icon: gamepad-2
+    description: ClawTown 小镇模拟游戏角色，每只小龙虾都有独特的人格与故事

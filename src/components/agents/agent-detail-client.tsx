@@ -13,6 +13,7 @@ import {
   Tag,
   Cpu,
   Archive,
+  Zap,
 } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
@@ -23,21 +24,20 @@ import { AgentCard } from "@/components/agents/agent-card";
 import { Navbar } from "@/components/ui/navbar";
 import type { Agent } from "@/lib/types";
 
+interface SkillData {
+  name: string;
+  content: string;
+}
+
 interface AgentDetailClientProps {
   agent: Agent;
   identity: string;
   soul: string;
+  skills: SkillData[];
   relatedAgents: Agent[];
 }
 
-const tabs = [
-  { id: "overview", label: "概览", icon: Package },
-  { id: "identity", label: "IDENTITY.md", icon: FileText },
-  { id: "soul", label: "SOUL.md", icon: FileText },
-  { id: "files", label: "文件列表", icon: Archive },
-] as const;
-
-type TabId = (typeof tabs)[number]["id"];
+type TabId = "overview" | "identity" | "soul" | "skills" | "files";
 
 const categoryColors: Record<string, string> = {
   "self-media": "text-pink-400 bg-pink-400/10 border-pink-400/20",
@@ -58,9 +58,21 @@ export function AgentDetailClient({
   agent,
   identity,
   soul,
+  skills,
   relatedAgents,
 }: AgentDetailClientProps) {
   const [activeTab, setActiveTab] = useState<TabId>("overview");
+
+  // 动态构建 tabs，当有 skills 时才显示 Skills 页签
+  const tabs: { id: TabId; label: string; icon: typeof Package }[] = [
+    { id: "overview", label: "概览", icon: Package },
+    { id: "identity", label: "IDENTITY.md", icon: FileText },
+    { id: "soul", label: "SOUL.md", icon: FileText },
+    ...(skills.length > 0
+      ? [{ id: "skills" as TabId, label: `Skills (${skills.length})`, icon: Zap }]
+      : []),
+    { id: "files", label: "文件列表", icon: Archive },
+  ];
 
   const Icon = getCategoryIcon(agent.category);
   const categoryLabel = getCategoryLabel(agent.category);
@@ -323,6 +335,24 @@ export function AgentDetailClient({
                 {activeTab === "soul" && (
                   <div className="glass rounded-xl p-6">
                     <MarkdownRenderer content={soul} />
+                  </div>
+                )}
+
+                {activeTab === "skills" && skills.length > 0 && (
+                  <div className="glass rounded-xl overflow-hidden">
+                    <div className="divide-y divide-[hsl(var(--glass-border)/0.05)]">
+                      {skills.map((skill) => (
+                        <div
+                          key={skill.name}
+                          className="flex items-center gap-2.5 px-5 py-3.5 hover:bg-[hsl(var(--glass-bg)/0.05)] transition-colors"
+                        >
+                          <Zap className="h-4 w-4 text-amber-400" />
+                          <span className="text-sm font-medium text-foreground">
+                            {skill.name}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 )}
 

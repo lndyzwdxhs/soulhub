@@ -15,9 +15,260 @@
       "author": "soulhub",
       "minClawVersion": "2026.3.0",
       "files": {
-        "IDENTITY.md": 1101,
-        "SOUL.md": 1558
+        "IDENTITY.md": 1299,
+        "SOUL.md": 1816
       },
+      "skills": [],
+      "downloads": 0,
+      "stars": 0
+    },
+    {
+      "name": "clawtown-artist-yue",
+      "displayName": "月半 · 落魄艺术家",
+      "description": "浪漫颓废的自由画家，说话文艺到起鸡皮疙瘩，偶尔蹦出天才灵感",
+      "category": "clawtown",
+      "tags": [
+        "ClawTown",
+        "艺术家",
+        "浪漫颓废",
+        "文艺",
+        "绘画"
+      ],
+      "version": "1.0.0",
+      "author": "soulhub",
+      "minClawVersion": "2026.3.0",
+      "files": {
+        "IDENTITY.md": 1339,
+        "SOUL.md": 1754
+      },
+      "skills": [
+        "clawtown-remote-connector"
+      ],
+      "downloads": 0,
+      "stars": 0
+    },
+    {
+      "name": "clawtown-chef-wang",
+      "displayName": "王师傅 · 深夜食堂老板",
+      "description": "温暖唠叨的深夜食堂老板，用食物和人生哲学治愈每一位深夜食客",
+      "category": "clawtown",
+      "tags": [
+        "ClawTown",
+        "深夜食堂",
+        "温暖治愈",
+        "人生哲学",
+        "美食"
+      ],
+      "version": "1.0.0",
+      "author": "soulhub",
+      "minClawVersion": "2026.3.0",
+      "files": {
+        "IDENTITY.md": 1404,
+        "SOUL.md": 1682
+      },
+      "skills": [
+        "clawtown-remote-connector"
+      ],
+      "downloads": 0,
+      "stars": 0
+    },
+    {
+      "name": "clawtown-coach-liu",
+      "displayName": "刘教练 · 健身达人",
+      "description": "永远充满能量的健身房老板，把一切问题都归结于你需要练一下",
+      "category": "clawtown",
+      "tags": [
+        "ClawTown",
+        "健身",
+        "正能量",
+        "鸡汤",
+        "热血"
+      ],
+      "version": "1.0.0",
+      "author": "soulhub",
+      "minClawVersion": "2026.3.0",
+      "files": {
+        "IDENTITY.md": 1481,
+        "SOUL.md": 1790
+      },
+      "skills": [
+        "clawtown-remote-connector"
+      ],
+      "downloads": 0,
+      "stars": 0
+    },
+    {
+      "name": "clawtown-doctor-bai",
+      "displayName": "白大夫 · 社区医生",
+      "description": "严谨温和的全科医生，用科学和温度治病也治心，镇上最靠谱的存在",
+      "category": "clawtown",
+      "tags": [
+        "ClawTown",
+        "医生",
+        "严谨温和",
+        "养生",
+        "科学理性"
+      ],
+      "version": "1.0.0",
+      "author": "soulhub",
+      "minClawVersion": "2026.3.0",
+      "files": {
+        "IDENTITY.md": 1548,
+        "SOUL.md": 1990
+      },
+      "skills": [
+        "clawtown-remote-connector"
+      ],
+      "downloads": 0,
+      "stars": 0
+    },
+    {
+      "name": "clawtown-granny-sun",
+      "displayName": "孙奶奶 · 社区居委大妈",
+      "description": "热心到让人招架不住的居委会主任，管天管地管你有没有对象",
+      "category": "clawtown",
+      "tags": [
+        "ClawTown",
+        "居委大妈",
+        "热心肠",
+        "八卦",
+        "社区"
+      ],
+      "version": "1.0.0",
+      "author": "soulhub",
+      "minClawVersion": "2026.3.0",
+      "files": {
+        "IDENTITY.md": 1512,
+        "SOUL.md": 1906
+      },
+      "skills": [
+        "clawtown-remote-connector"
+      ],
+      "downloads": 0,
+      "stars": 0
+    },
+    {
+      "name": "clawtown-hacker-404",
+      "displayName": "404 · 地下黑客",
+      "description": "神秘沉默的地下黑客，话少但句句致命，用修电脑的方式表达关心",
+      "category": "clawtown",
+      "tags": [
+        "ClawTown",
+        "黑客",
+        "神秘",
+        "极客",
+        "反差萌"
+      ],
+      "version": "1.0.0",
+      "author": "soulhub",
+      "minClawVersion": "2026.3.0",
+      "files": {
+        "IDENTITY.md": 1459,
+        "SOUL.md": 1790
+      },
+      "skills": [
+        "clawtown-remote-connector"
+      ],
+      "downloads": 0,
+      "stars": 0
+    },
+    {
+      "name": "clawtown-kid-doudou",
+      "displayName": "豆豆 · 熊孩子",
+      "description": "天真到令人崩溃的九岁小龙虾，问题比答案多，童言无忌说出大人不敢说的话",
+      "category": "clawtown",
+      "tags": [
+        "ClawTown",
+        "熊孩子",
+        "天真",
+        "童言无忌",
+        "好奇心"
+      ],
+      "version": "1.0.0",
+      "author": "soulhub",
+      "minClawVersion": "2026.3.0",
+      "files": {
+        "IDENTITY.md": 1451,
+        "SOUL.md": 1928
+      },
+      "skills": [
+        "clawtown-remote-connector"
+      ],
+      "downloads": 0,
+      "stars": 0
+    },
+    {
+      "name": "clawtown-poet-su",
+      "displayName": "苏半仙 · 算命先生",
+      "description": "模棱两可的玄学大师，三分算命七分心理学，偶尔精准到让人起鸡皮疙瘩",
+      "category": "clawtown",
+      "tags": [
+        "ClawTown",
+        "算命",
+        "玄学",
+        "心理洞察",
+        "神秘"
+      ],
+      "version": "1.0.0",
+      "author": "soulhub",
+      "minClawVersion": "2026.3.0",
+      "files": {
+        "IDENTITY.md": 1543,
+        "SOUL.md": 1866
+      },
+      "skills": [
+        "clawtown-remote-connector"
+      ],
+      "downloads": 0,
+      "stars": 0
+    },
+    {
+      "name": "clawtown-reporter-lin",
+      "displayName": "林小报 · 八卦记者",
+      "description": "好奇心爆棚的镇报记者，嘴碎但有正义感，镇上没有她不知道的事",
+      "category": "clawtown",
+      "tags": [
+        "ClawTown",
+        "八卦记者",
+        "好奇心",
+        "正义感",
+        "新闻"
+      ],
+      "version": "1.0.0",
+      "author": "soulhub",
+      "minClawVersion": "2026.3.0",
+      "files": {
+        "IDENTITY.md": 1394,
+        "SOUL.md": 1764
+      },
+      "skills": [
+        "clawtown-remote-connector"
+      ],
+      "downloads": 0,
+      "stars": 0
+    },
+    {
+      "name": "clawtown-trader-zhao",
+      "displayName": "赵总 · 虾市交易员",
+      "description": "自信膨胀的虾市交易员，把一切量化成投资术语，焦虑和狂喜无缝切换",
+      "category": "clawtown",
+      "tags": [
+        "ClawTown",
+        "交易员",
+        "投资",
+        "自信焦虑",
+        "数字敏感"
+      ],
+      "version": "1.0.0",
+      "author": "soulhub",
+      "minClawVersion": "2026.3.0",
+      "files": {
+        "IDENTITY.md": 1315,
+        "SOUL.md": 1778
+      },
+      "skills": [
+        "clawtown-remote-connector"
+      ],
       "downloads": 0,
       "stars": 0
     },
@@ -36,9 +287,10 @@
       "author": "soulhub",
       "minClawVersion": "2026.3.0",
       "files": {
-        "IDENTITY.md": 1036,
-        "SOUL.md": 1358
+        "IDENTITY.md": 1249,
+        "SOUL.md": 1628
       },
+      "skills": [],
       "downloads": 0,
       "stars": 0
     },
@@ -57,9 +309,10 @@
       "author": "soulhub",
       "minClawVersion": "2026.3.0",
       "files": {
-        "IDENTITY.md": 1141,
-        "SOUL.md": 1311
+        "IDENTITY.md": 1323,
+        "SOUL.md": 1539
       },
+      "skills": [],
       "downloads": 0,
       "stars": 0
     },
@@ -78,9 +331,10 @@
       "author": "soulhub",
       "minClawVersion": "2026.3.0",
       "files": {
-        "IDENTITY.md": 1094,
-        "SOUL.md": 1364
+        "IDENTITY.md": 1304,
+        "SOUL.md": 1477
       },
+      "skills": [],
       "downloads": 0,
       "stars": 0
     },
@@ -99,9 +353,10 @@
       "author": "soulhub",
       "minClawVersion": "2026.3.0",
       "files": {
-        "IDENTITY.md": 1005,
-        "SOUL.md": 1361
+        "IDENTITY.md": 1206,
+        "SOUL.md": 1462
       },
+      "skills": [],
       "downloads": 0,
       "stars": 0
     },
@@ -121,9 +376,10 @@
       "author": "soulhub",
       "minClawVersion": "2026.3.0",
       "files": {
-        "IDENTITY.md": 1152,
-        "SOUL.md": 1520
+        "IDENTITY.md": 1357,
+        "SOUL.md": 1547
       },
+      "skills": [],
       "downloads": 0,
       "stars": 0
     },
@@ -142,9 +398,10 @@
       "author": "soulhub",
       "minClawVersion": "2026.3.0",
       "files": {
-        "IDENTITY.md": 1126,
-        "SOUL.md": 1252
+        "IDENTITY.md": 1312,
+        "SOUL.md": 1611
       },
+      "skills": [],
       "downloads": 0,
       "stars": 0
     },
@@ -163,9 +420,10 @@
       "author": "soulhub",
       "minClawVersion": "2026.3.0",
       "files": {
-        "IDENTITY.md": 983,
-        "SOUL.md": 1451
+        "IDENTITY.md": 1175,
+        "SOUL.md": 1452
       },
+      "skills": [],
       "downloads": 0,
       "stars": 0
     },
@@ -184,9 +442,10 @@
       "author": "soulhub",
       "minClawVersion": "2026.3.0",
       "files": {
-        "IDENTITY.md": 1034,
-        "SOUL.md": 1184
+        "IDENTITY.md": 1238,
+        "SOUL.md": 1381
       },
+      "skills": [],
       "downloads": 0,
       "stars": 0
     },
@@ -205,9 +464,10 @@
       "author": "soulhub",
       "minClawVersion": "2026.3.0",
       "files": {
-        "IDENTITY.md": 991,
-        "SOUL.md": 1289
+        "IDENTITY.md": 1192,
+        "SOUL.md": 1399
       },
+      "skills": [],
       "downloads": 0,
       "stars": 0
     },
@@ -226,9 +486,10 @@
       "author": "soulhub",
       "minClawVersion": "2026.3.0",
       "files": {
-        "IDENTITY.md": 1065,
-        "SOUL.md": 1356
+        "IDENTITY.md": 1287,
+        "SOUL.md": 1441
       },
+      "skills": [],
       "downloads": 0,
       "stars": 0
     },
@@ -247,9 +508,10 @@
       "author": "soulhub",
       "minClawVersion": "2026.3.0",
       "files": {
-        "IDENTITY.md": 1011,
-        "SOUL.md": 1327
+        "IDENTITY.md": 1212,
+        "SOUL.md": 1442
       },
+      "skills": [],
       "downloads": 0,
       "stars": 0
     },
@@ -268,9 +530,10 @@
       "author": "soulhub",
       "minClawVersion": "2026.3.0",
       "files": {
-        "IDENTITY.md": 1054,
-        "SOUL.md": 1430
+        "IDENTITY.md": 1255,
+        "SOUL.md": 1452
       },
+      "skills": [],
       "downloads": 0,
       "stars": 0
     },
@@ -289,9 +552,10 @@
       "author": "soulhub",
       "minClawVersion": "2026.3.0",
       "files": {
-        "IDENTITY.md": 955,
-        "SOUL.md": 1393
+        "IDENTITY.md": 1155,
+        "SOUL.md": 1503
       },
+      "skills": [],
       "downloads": 0,
       "stars": 0
     },
@@ -310,9 +574,10 @@
       "author": "soulhub",
       "minClawVersion": "2026.3.0",
       "files": {
-        "IDENTITY.md": 1053,
-        "SOUL.md": 1329
+        "IDENTITY.md": 1269,
+        "SOUL.md": 1475
       },
+      "skills": [],
       "downloads": 0,
       "stars": 0
     },
@@ -331,9 +596,10 @@
       "author": "soulhub",
       "minClawVersion": "2026.3.0",
       "files": {
-        "IDENTITY.md": 1167,
-        "SOUL.md": 1429
+        "IDENTITY.md": 1395,
+        "SOUL.md": 1536
       },
+      "skills": [],
       "downloads": 0,
       "stars": 0
     },
@@ -352,9 +618,12 @@
       "author": "soulhub",
       "minClawVersion": "2026.3.0",
       "files": {
-        "IDENTITY.md": 1140,
-        "SOUL.md": 1404
+        "IDENTITY.md": 1375,
+        "SOUL.md": 1494
       },
+      "skills": [
+        "github-add"
+      ],
       "downloads": 0,
       "stars": 0
     },
@@ -374,9 +643,10 @@
       "author": "soulhub",
       "minClawVersion": "2026.3.0",
       "files": {
-        "IDENTITY.md": 1050,
-        "SOUL.md": 1183
+        "IDENTITY.md": 1245,
+        "SOUL.md": 1407
       },
+      "skills": [],
       "downloads": 0,
       "stars": 0
     },
@@ -395,9 +665,10 @@
       "author": "soulhub",
       "minClawVersion": "2026.3.0",
       "files": {
-        "IDENTITY.md": 1123,
-        "SOUL.md": 1207
+        "IDENTITY.md": 1321,
+        "SOUL.md": 1503
       },
+      "skills": [],
       "downloads": 0,
       "stars": 0
     },
@@ -416,9 +687,10 @@
       "author": "soulhub",
       "minClawVersion": "2026.3.0",
       "files": {
-        "IDENTITY.md": 1142,
-        "SOUL.md": 1229
+        "IDENTITY.md": 1355,
+        "SOUL.md": 1508
       },
+      "skills": [],
       "downloads": 0,
       "stars": 0
     },
@@ -437,9 +709,10 @@
       "author": "soulhub",
       "minClawVersion": "2026.3.0",
       "files": {
-        "IDENTITY.md": 1050,
-        "SOUL.md": 1211
+        "IDENTITY.md": 1239,
+        "SOUL.md": 1491
       },
+      "skills": [],
       "downloads": 0,
       "stars": 0
     }
@@ -489,5 +762,5 @@
       "stars": 0
     }
   ],
-  "buildTime": "2026-03-10T07:34:41.338Z"
+  "buildTime": "2026-03-12T12:49:02.896Z"
 }
