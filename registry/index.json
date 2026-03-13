@@ -470,7 +470,9 @@
         "IDENTITY.md": 2517,
         "SOUL.md": 2864
       },
-      "skills": [],
+      "skills": [
+        "wechat-publisher-personal"
+      ],
       "downloads": 0,
       "stars": 0
     },
@@ -787,5 +789,5 @@
       "stars": 0
     }
   ],
-  "buildTime": "2026-03-13T03:12:18.431Z"
+  "buildTime": "2026-03-13T03:29:10.256Z"
 }
