@@ -44,13 +44,14 @@ export function AgentCard({ agent, index }: AgentCardProps) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 20 }}
       transition={{ duration: 0.3, delay: index * 0.05 }}
+      className="h-full"
     >
-      <Link href={`/souls/${agent.name}`} className="block group">
+      <Link href={`/souls/${agent.name}`} className="block group h-full">
         <motion.div
           whileHover={{ scale: 1.02, y: -2 }}
           transition={{ type: "spring", stiffness: 300, damping: 20 }}
           className={cn(
-            "relative rounded-xl p-5 h-full",
+            "relative rounded-xl p-5 h-full flex flex-col",
             "bg-[hsl(var(--glass-bg)/0.05)] backdrop-blur-xl border border-[hsl(var(--glass-border)/0.1)]",
             "transition-shadow duration-300",
             "group-hover:glow-sm group-hover:border-[hsl(var(--glass-border)/0.2)]"
@@ -70,17 +71,17 @@ export function AgentCard({ agent, index }: AgentCardProps) {
           </div>
 
           {/* Title */}
-          <h3 className="text-base font-semibold text-foreground mb-1.5 group-hover:text-gradient transition-colors duration-200">
+          <h3 className="text-base font-semibold text-foreground mb-1.5 group-hover:text-gradient transition-colors duration-200 truncate">
             {agent.displayName}
           </h3>
 
           {/* Description */}
-          <p className="text-sm text-muted-foreground line-clamp-2 mb-3 leading-relaxed">
+          <p className="text-sm text-muted-foreground line-clamp-2 mb-3 leading-relaxed min-h-[2.75rem]">
             {agent.description}
           </p>
 
           {/* Tags */}
-          <div className="flex flex-wrap gap-1.5 mb-4">
+          <div className="flex flex-wrap gap-1.5 mb-4 min-h-[28px] max-h-[28px] overflow-hidden">
             {visibleTags.map((tag) => (
               <span
                 key={tag}
@@ -97,7 +98,7 @@ export function AgentCard({ agent, index }: AgentCardProps) {
           </div>
 
           {/* Bottom row */}
-          <div className="flex items-center justify-between pt-3 border-t border-[hsl(var(--glass-border)/0.05)]">
+          <div className="flex items-center justify-between pt-3 border-t border-[hsl(var(--glass-border)/0.05)] mt-auto">
             <span className="text-xs text-muted-foreground/60 font-mono">
               v{agent.version}
             </span>

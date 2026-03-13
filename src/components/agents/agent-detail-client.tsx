@@ -79,7 +79,7 @@ export function AgentDetailClient({
   const colorClass =
     categoryColors[agent.category] ||
     "text-muted-foreground bg-[hsl(var(--glass-bg)/0.05)] border-[hsl(var(--glass-border)/0.1)]";
-  const installCommand = `npx soulhub install ${agent.name}`;
+  const installCommand = `soulhub install ${agent.name}`;
 
   const handleDownloadZip = useCallback(async () => {
     const JSZip = (await import("jszip")).default;
