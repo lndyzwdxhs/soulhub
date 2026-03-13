@@ -1,0 +1,8 @@
+name: publisher-multi-platform
+displayName: 一文多发助手
+description: 一篇 Markdown 同时发布到微信公众号和小红书，微信端通过 wenyan-cli 渲染精美排版，小红书端自动适配短笔记+图片格式
+category: self-media
+tags: [一文多发, 微信公众号, 小红书, 个人发布, wenyan-cli, Markdown, 浏览器自动化]
+version: "2.0.0"
+author: soulhub
+minClawVersion: "2026.3.0"
