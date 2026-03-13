@@ -12,6 +12,7 @@ const CATEGORY_COLORS: Record<string, string> = {
   support: "border-l-sky-400",
   education: "border-l-purple-400",
   dispatcher: "border-l-blue-400",
+  clawtown: "border-l-orange-400",
 };
 
 const CATEGORY_BADGE_COLORS: Record<string, string> = {
@@ -21,6 +22,7 @@ const CATEGORY_BADGE_COLORS: Record<string, string> = {
   support: "bg-sky-500/15 text-sky-600 dark:text-sky-300 border-sky-500/20",
   education: "bg-purple-500/15 text-purple-600 dark:text-purple-300 border-purple-500/20",
   dispatcher: "bg-blue-500/15 text-blue-600 dark:text-blue-300 border-blue-500/20",
+  clawtown: "bg-orange-500/15 text-orange-600 dark:text-orange-300 border-orange-500/20",
 };
 
 interface WorkerNodeData {

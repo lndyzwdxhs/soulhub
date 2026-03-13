@@ -119,16 +119,16 @@ function TypewriterTitle() {
   );
 }
 
-const openclawTabs = [
+const clawOptions = [
   {
-    id: "one-liner" as const,
-    label: "One-liner",
-    command: "# Install OpenClaw — 🦞 的运行时引擎\ncurl -fsSL https://openclaw.ai/install.sh | bash",
+    id: "lightclaw" as const,
+    label: "LightClaw",
+    command: "# Install LightClaw — 轻量级 Claw 引擎\ncurl -fsSL https://finnie-1258344699.cos.ap-guangzhou.myqcloud.com/install.sh | bash\nsource ~/.zshrc  # 或 source ~/.bashrc\nlightclaw init\nlightclaw run",
   },
   {
-    id: "npm" as const,
-    label: "npm",
-    command: "# Install OpenClaw\nnpm install -g openclaw\n\n# Meet your lobster\nopenclaw onboard",
+    id: "openclaw" as const,
+    label: "OpenClaw",
+    command: "# Install OpenClaw — 🦞 的运行时引擎\ncurl -fsSL https://openclaw.ai/install.sh | bash",
   },
 ];
 
@@ -244,27 +244,16 @@ export function Hero() {
             一分钟，从零到一，复刻一个优质小龙虾🦞。
           </p>
 
-          {/* Step 01 - 安装 OpenClaw (前置依赖) */}
+          {/* Step 01 - 安装 Claw (前置依赖) */}
           <div className="mx-auto max-w-xl">
             <div className="flex items-center gap-3 mb-3 text-left">
               <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-blue-500/20 to-violet-500/20 border border-[hsl(var(--glass-border)/0.1)] text-xs font-bold text-gradient">
                 01
               </span>
-              <span className="text-sm font-semibold">安装 OpenClaw</span>
-              <span className="text-xs text-muted-foreground">前置依赖 · 🦞 的运行时引擎</span>
+              <span className="text-sm font-semibold">安装 Claw 引擎</span>
+              <span className="text-xs text-muted-foreground">前置依赖 · 🦞 的运行时</span>
             </div>
-            <OpenClawTerminal />
-            <p className="mt-2 text-xs text-muted-foreground text-left">
-              了解更多请访问{" "}
-              <a
-                href="https://openclaw.ai"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-400 hover:text-blue-300 underline underline-offset-2 transition-colors"
-              >
-                openclaw.ai
-              </a>
-            </p>
+            <ClawTerminal />
           </div>
 
           {/* Step 02 - Terminal (安装 CLI) */}
@@ -273,8 +262,8 @@ export function Hero() {
               <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-blue-500/20 to-violet-500/20 border border-[hsl(var(--glass-border)/0.1)] text-xs font-bold text-gradient">
                 02
               </span>
-              <span className="text-sm font-semibold">安装 CLI 工具</span>
-              <span className="text-xs text-muted-foreground">一行命令全局安装 SoulHub CLI</span>
+              <span className="text-sm font-semibold">安装 SoulHub CLI</span>
+              <span className="text-xs text-muted-foreground">一行命令全局安装 CLI 工具</span>
             </div>
             <TerminalPreview />
           </div>
@@ -463,11 +452,11 @@ function Step02Terminal() {
   );
 }
 
-function OpenClawTerminal() {
-  const [activeTab, setActiveTab] = useState<"one-liner" | "npm">("one-liner");
+function ClawTerminal() {
+  const [activeClaw, setActiveClaw] = useState<"lightclaw" | "openclaw">("lightclaw");
   const [copied, setCopied] = useState(false);
 
-  const activeCommand = openclawTabs.find((t) => t.id === activeTab)!;
+  const activeCommand = clawOptions.find((t) => t.id === activeClaw)!;
 
   // 复制时去掉注释行和空行
   const copyText = activeCommand.command
@@ -493,15 +482,15 @@ function OpenClawTerminal() {
             <div className="h-3 w-3 rounded-full bg-yellow-500/70" />
             <div className="h-3 w-3 rounded-full bg-green-500/70" />
           </div>
-          {/* 页签 */}
+          {/* 页签 - 切换不同 Claw */}
           <div className="flex gap-1 ml-1">
-            {openclawTabs.map((tab) => (
+            {clawOptions.map((tab) => (
               <button
                 key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
+                onClick={() => setActiveClaw(tab.id)}
                 className={cn(
                   "px-3 py-1 rounded-lg text-xs font-medium transition-all duration-200",
-                  activeTab === tab.id
+                  activeClaw === tab.id
                     ? "bg-[hsl(var(--glass-bg)/0.1)] text-foreground border border-[hsl(var(--glass-border)/0.15)]"
                     : "text-muted-foreground hover:text-foreground hover:bg-[hsl(var(--glass-bg)/0.05)]"
                 )}
@@ -531,9 +520,9 @@ function OpenClawTerminal() {
           {activeCommand.command.split("\n").map((line, i) => {
             const isComment = line.startsWith("#");
             const isEmpty = line.trim() === "";
-            if (isEmpty) return <div key={`${activeTab}-${i}`} className="h-3" />;
+            if (isEmpty) return <div key={`${activeClaw}-${i}`} className="h-3" />;
             return (
-              <div key={`${activeTab}-${i}`} className={cn("whitespace-nowrap", i > 0 && "mt-1.5")}>
+              <div key={`${activeClaw}-${i}`} className={cn("whitespace-nowrap", i > 0 && "mt-1.5")}>
                 <span className="text-emerald-600 dark:text-emerald-400 select-none">
                   {"$ "}
                 </span>
