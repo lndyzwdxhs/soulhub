@@ -39,7 +39,7 @@ function buildAgentEntry(agentDir, name) {
   if (!manifest) return null;
 
   const files = {};
-  for (const f of ["IDENTITY.md", "SOUL.md", "USER.md.template", "TOOLS.md.template"]) {
+  for (const f of ["IDENTITY.md", "SOUL.md", "HEARTBEAT.md", "USER.md.template", "TOOLS.md.template"]) {
     const fp = path.join(agentDir, f);
     if (fs.existsSync(fp)) {
       files[f] = getFileSize(fp);

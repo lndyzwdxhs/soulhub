@@ -46,6 +46,7 @@ export default async function AgentDetailPage({ params }: PageProps) {
 
   let identity = "";
   let soul = "";
+  let heartbeat = "";
 
   try {
     identity = fs.readFileSync(
@@ -60,6 +61,15 @@ export default async function AgentDetailPage({ params }: PageProps) {
     soul = fs.readFileSync(path.join(registryPath, "SOUL.md"), "utf-8");
   } catch {
     soul = "*SOUL.md not found.*";
+  }
+
+  try {
+    heartbeat = fs.readFileSync(
+      path.join(registryPath, "HEARTBEAT.md"),
+      "utf-8"
+    );
+  } catch {
+    heartbeat = "";
   }
 
   // Find related agents (same category, excluding current)
@@ -98,6 +108,7 @@ export default async function AgentDetailPage({ params }: PageProps) {
       agent={agent}
       identity={identity}
       soul={soul}
+      heartbeat={heartbeat}
       skills={skillsData}
       relatedAgents={relatedAgents}
     />

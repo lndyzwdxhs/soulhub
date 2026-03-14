@@ -33,11 +33,12 @@ interface AgentDetailClientProps {
   agent: Agent;
   identity: string;
   soul: string;
+  heartbeat: string;
   skills: SkillData[];
   relatedAgents: Agent[];
 }
 
-type TabId = "overview" | "identity" | "soul" | "skills" | "files";
+type TabId = "overview" | "identity" | "soul" | "heartbeat" | "skills" | "files";
 
 const categoryColors: Record<string, string> = {
   "self-media": "text-pink-400 bg-pink-400/10 border-pink-400/20",
@@ -59,6 +60,7 @@ export function AgentDetailClient({
   agent,
   identity,
   soul,
+  heartbeat,
   skills,
   relatedAgents,
 }: AgentDetailClientProps) {
@@ -69,6 +71,9 @@ export function AgentDetailClient({
     { id: "overview", label: "概览", icon: Package },
     { id: "identity", label: "IDENTITY.md", icon: FileText },
     { id: "soul", label: "SOUL.md", icon: FileText },
+    ...(heartbeat
+      ? [{ id: "heartbeat" as TabId, label: "HEARTBEAT.md", icon: FileText }]
+      : []),
     ...(skills.length > 0
       ? [{ id: "skills" as TabId, label: `Skills (${skills.length})`, icon: Zap }]
       : []),
@@ -336,6 +341,12 @@ export function AgentDetailClient({
                 {activeTab === "soul" && (
                   <div className="glass rounded-xl p-6">
                     <MarkdownRenderer content={soul} />
+                  </div>
+                )}
+
+                {activeTab === "heartbeat" && heartbeat && (
+                  <div className="glass rounded-xl p-6">
+                    <MarkdownRenderer content={heartbeat} />
                   </div>
                 )}
 

@@ -23,8 +23,8 @@
       "stars": 0
     },
     {
-      "name": "clawtown-artist-yue",
-      "displayName": "月半 · 落魄艺术家",
+      "name": "clawtown-artist",
+      "displayName": "落魄艺术家",
       "description": "浪漫颓废的自由画家，说话文艺到起鸡皮疙瘩，偶尔蹦出天才灵感",
       "category": "clawtown",
       "tags": [
@@ -48,8 +48,8 @@
       "stars": 0
     },
     {
-      "name": "clawtown-chef-wang",
-      "displayName": "王师傅 · 深夜食堂老板",
+      "name": "clawtown-chef",
+      "displayName": "深夜食堂老板",
       "description": "温暖唠叨的深夜食堂老板，用食物和人生哲学治愈每一位深夜食客",
       "category": "clawtown",
       "tags": [
@@ -73,8 +73,8 @@
       "stars": 0
     },
     {
-      "name": "clawtown-coach-liu",
-      "displayName": "刘教练 · 健身达人",
+      "name": "clawtown-coach",
+      "displayName": "健身达人",
       "description": "永远充满能量的健身房老板，把一切问题都归结于你需要练一下",
       "category": "clawtown",
       "tags": [
@@ -98,8 +98,8 @@
       "stars": 0
     },
     {
-      "name": "clawtown-doctor-bai",
-      "displayName": "白大夫 · 社区医生",
+      "name": "clawtown-doctor",
+      "displayName": "社区医生",
       "description": "严谨温和的全科医生，用科学和温度治病也治心，镇上最靠谱的存在",
       "category": "clawtown",
       "tags": [
@@ -123,8 +123,8 @@
       "stars": 0
     },
     {
-      "name": "clawtown-granny-sun",
-      "displayName": "孙奶奶 · 社区居委大妈",
+      "name": "clawtown-granny",
+      "displayName": "社区居委大妈",
       "description": "热心到让人招架不住的居委会主任，管天管地管你有没有对象",
       "category": "clawtown",
       "tags": [
@@ -148,8 +148,8 @@
       "stars": 0
     },
     {
-      "name": "clawtown-hacker-404",
-      "displayName": "404 · 地下黑客",
+      "name": "clawtown-hacker",
+      "displayName": "地下黑客",
       "description": "神秘沉默的地下黑客，话少但句句致命，用修电脑的方式表达关心",
       "category": "clawtown",
       "tags": [
@@ -173,8 +173,8 @@
       "stars": 0
     },
     {
-      "name": "clawtown-kid-doudou",
-      "displayName": "豆豆 · 熊孩子",
+      "name": "clawtown-kid",
+      "displayName": "熊孩子",
       "description": "天真到令人崩溃的九岁小龙虾，问题比答案多，童言无忌说出大人不敢说的话",
       "category": "clawtown",
       "tags": [
@@ -198,8 +198,8 @@
       "stars": 0
     },
     {
-      "name": "clawtown-poet-su",
-      "displayName": "苏半仙 · 算命先生",
+      "name": "clawtown-poet",
+      "displayName": "算命先生",
       "description": "模棱两可的玄学大师，三分算命七分心理学，偶尔精准到让人起鸡皮疙瘩",
       "category": "clawtown",
       "tags": [
@@ -223,8 +223,8 @@
       "stars": 0
     },
     {
-      "name": "clawtown-reporter-lin",
-      "displayName": "林小报 · 八卦记者",
+      "name": "clawtown-reporter",
+      "displayName": "八卦记者",
       "description": "好奇心爆棚的镇报记者，嘴碎但有正义感，镇上没有她不知道的事",
       "category": "clawtown",
       "tags": [
@@ -248,8 +248,8 @@
       "stars": 0
     },
     {
-      "name": "clawtown-trader-zhao",
-      "displayName": "赵总 · 虾市交易员",
+      "name": "clawtown-trader",
+      "displayName": "虾市交易员",
       "description": "自信膨胀的虾市交易员，把一切量化成投资术语，焦虑和狂喜无缝切换",
       "category": "clawtown",
       "tags": [
