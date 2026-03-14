@@ -7,13 +7,13 @@ description: Guide for using the SoulHub platform to install the SoulHub CLI and
 
 SoulHub is an open-source AI Agent persona template community — "Just like GitHub stores code, SoulHub stores well-tuned Agent souls." It provides a CLI tool (`soulhub`) to search, install, update, and manage Agent templates that deploy into an OpenClaw runtime environment.
 
-## CRITICAL: Non-Interactive Execution Rules
+## Execution Rules
 
-**All CLI commands MUST be executed in non-interactive mode to avoid blocking the agent.** Follow these mandatory rules:
+**The CLI now runs in fully non-interactive mode by default.** Follow these rules:
 
-1. **ALWAYS specify `--worker` or `--main` flag** when running `soulhub install` — NEVER run `soulhub install <name>` without a role flag, as it triggers an interactive prompt that will hang.
-2. **Single agent defaults to `--worker` (sub-agent)** — unless the user explicitly requests main agent installation, always use `--worker`.
-3. **ALWAYS specify `--claw-dir`** to avoid the multi-directory selection prompt — auto-detect the claw type from the current working directory (see Claw Type Auto-Detection below).
+1. **Single agent defaults to worker (sub-agent)** and installs to **all detected claw directories** — no flags needed for the default behavior.
+2. Use `--main` flag only when the user explicitly requests main agent installation.
+3. Use `--claw-dir` to install to a **specific** claw directory only (instead of all detected ones).
 
 ## Claw Type Auto-Detection
 
@@ -106,46 +106,44 @@ soulhub info <agent-name> --identity
 soulhub info <agent-name> --soul
 ```
 
-### Step 3: Install the Agent (Non-Interactive)
+### Step 3: Install the Agent
 
-**IMPORTANT**: Always use `--worker` or `--main` flag. Default is `--worker` (sub-agent).
-
-First, auto-detect the claw directory from the current working directory:
-
-```bash
-# Detect claw dir from pwd (example logic):
-# pwd = ~/.lightclaw/workspace → CLAW_DIR=~/.lightclaw
-# pwd = ~/.openclaw/workspace-python → CLAW_DIR=~/.openclaw
-```
+**Default behavior**: Installs as worker (sub-agent) to all detected claw directories.
 
 Install from SoulHub Registry:
 
 ```bash
-# Install as sub-agent/worker (DEFAULT for single agent)
-soulhub install <agent-name> --worker --claw-dir <detected-claw-dir>
+# Install as worker to all detected claws (DEFAULT)
+soulhub install <agent-name>
 
 # Install as main Agent ONLY when explicitly requested
-soulhub install <agent-name> --main --claw-dir <detected-claw-dir>
+soulhub install <agent-name> --main
+
+# Install to a specific claw directory only
+soulhub install <agent-name> --claw-dir <claw-dir>
 ```
 
 Install from local source:
 
 ```bash
 # From local directory
-soulhub install --from ./my-agent/ --worker --claw-dir <detected-claw-dir>
+soulhub install --from ./my-agent/
 
 # From ZIP file
-soulhub install --from ./agent.zip --worker --claw-dir <detected-claw-dir>
+soulhub install --from ./agent.zip
 
 # From URL
-soulhub install --from https://example.com/agent.zip --worker --claw-dir <detected-claw-dir>
+soulhub install --from https://example.com/agent.zip
 ```
 
 Advanced options:
 
 ```bash
-# Specify custom target directory
-soulhub install <agent-name> --worker --dir ./custom-path --claw-dir <detected-claw-dir>
+# Specify custom target directory (bypasses claw detection)
+soulhub install <agent-name> --dir ./custom-path
+
+# Install to a specific claw as main agent
+soulhub install <agent-name> --main --claw-dir ~/.lightclaw
 ```
 
 ### Step 4: Verify Installation
@@ -157,23 +155,28 @@ soulhub list
 soulhub ls
 ```
 
-### Non-Interactive Checklist
+### Install Behavior Summary
 
-Before executing any `soulhub install` command, verify:
-- [ ] `--worker` or `--main` flag is present (prevents role selection prompt)
-- [ ] `--claw-dir` is specified OR only one claw installation exists on the system (prevents directory selection prompt)
-- [ ] The claw directory was auto-detected from the working directory path or environment variables
+| Command | Behavior |
+|---------|----------|
+| `soulhub install <name>` | Install as worker to **all** detected claws |
+| `soulhub install <name> --main` | Install as main agent to **all** detected claws |
+| `soulhub install <name> --claw-dir <path>` | Install as worker to **specific** claw only |
+| `soulhub install <name> --main --claw-dir <path>` | Install as main agent to **specific** claw only |
 
 ## Installing a Team (Multi-Agent)
 
-Teams use the Dispatcher + Worker pattern. The CLI automatically detects `kind: team` and handles role assignment (dispatcher → main, workers → worker) — **no interactive prompts are triggered for team installs**.
+Teams use the Dispatcher + Worker pattern. The CLI automatically detects `kind: team` and handles role assignment (dispatcher → main, workers → worker).
 
 ```bash
-# From registry (team install is already non-interactive for role assignment)
-soulhub install dev-squad --claw-dir <detected-claw-dir>
+# From registry (installs to all detected claws)
+soulhub install dev-squad
 
 # From local ZIP (e.g., exported from SoulHub Fusion editor)
-soulhub install --from ./team-export.zip --claw-dir <detected-claw-dir>
+soulhub install --from ./team-export.zip
+
+# Install to a specific claw only
+soulhub install dev-squad --claw-dir ~/.lightclaw
 ```
 
 The CLI automatically installs the dispatcher as the main Agent and workers into their respective workspace directories.
@@ -332,7 +335,7 @@ metadata:
 
 - **Config file**: `~/.soulhub/config.json`
 - **Custom registry**: Set `SOULHUB_REGISTRY_URL` environment variable
-- **Claw directory discovery priority**: `--claw-dir` flag > `OPENCLAW_HOME` / `LIGHTCLAW_HOME` env vars > `~/.openclaw` / `~/.lightclaw`
+- **Claw directory discovery priority**: `--claw-dir` flag (single claw) > `OPENCLAW_HOME` / `LIGHTCLAW_HOME` env vars > auto-detect all: `~/.openclaw` + `~/.lightclaw`
 
 ## Common Workflows
 
@@ -348,21 +351,18 @@ soulhub search
 # 3. Pick one and view details
 soulhub info coder-fullstack --identity
 
-# 4. Auto-detect claw dir from working directory
-#    e.g., pwd = ~/.lightclaw/workspace → CLAW_DIR=~/.lightclaw
+# 4. Install as worker (default, installs to all detected claws)
+soulhub install coder-fullstack
 
-# 5. Install as sub-agent (non-interactive, default)
-soulhub install coder-fullstack --worker --claw-dir ~/.lightclaw
-
-# 6. Verify
+# 5. Verify
 soulhub list
 ```
 
 ### Deploy a Dev Team
 
 ```bash
-# Install the pre-built dev squad team (non-interactive, team auto-assigns roles)
-soulhub install dev-squad --claw-dir ~/.lightclaw
+# Install the pre-built dev squad team (auto-assigns roles, installs to all claws)
+soulhub install dev-squad
 
 # This installs:
 #   - dispatcher-main as the main agent

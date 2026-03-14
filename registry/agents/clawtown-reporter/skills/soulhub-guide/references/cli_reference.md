@@ -53,56 +53,45 @@ soulhub info coder-fullstack --soul
 
 Install an Agent or Team from the registry or local source.
 
-**CRITICAL: Non-Interactive Usage Required**
-
-To prevent interactive prompts that block execution, you MUST:
-1. Always specify `--worker` or `--main` (single agent defaults to `--worker`)
-2. Always specify `--claw-dir` or ensure only one claw installation exists
+**Default behavior**: Installs as worker (sub-agent) to all detected claw directories.
 
 **Arguments:**
 - `name` (optional): Agent/Team name from registry. Omit when using `--from`
 
 **Options:**
 - `--from <source>`: Install from local directory, ZIP file, or URL instead of registry
-- `--main`: Install as main Agent (deploys to `workspace/`) — use only when explicitly requested
-- `--worker`: Install as worker/sub-agent (deploys to `workspace-<agentId>/`) — **DEFAULT for single agent**
+- `--main`: Install as main Agent (deploys to `workspace/`)
 - `--dir <path>`: Custom target directory for installation
-- `--claw-dir <path>`: Specify claw installation directory — **ALWAYS specify to avoid interactive prompt**
+- `--claw-dir <path>`: Install to a specific claw directory only (instead of all detected ones)
 
 **Behavior:**
 - Automatically detects package type (`kind: agent` or `kind: team`)
-- For teams: installs dispatcher as main, workers into separate workspaces (no role prompt triggered)
+- Single agent: defaults to worker, installs to all detected claw directories
+- For teams: installs dispatcher as main, workers into separate workspaces
 - Creates automatic backup before installation (supports rollback)
-- **Without `--main` or `--worker`: triggers interactive prompt — NEVER do this**
+- Use `--claw-dir` to target a specific claw instead of all
 
-**Interactive Prompts to Avoid:**
-| Prompt | Trigger Condition | Prevention |
-|--------|-------------------|------------|
-| Role selection | Neither `--main` nor `--worker` specified | Always add `--worker` (default) or `--main` |
-| Directory selection | Multiple claw dirs found, no `--claw-dir` | Always add `--claw-dir <path>` |
-
-**Claw Directory Auto-Detection from Working Directory:**
-```
-pwd = ~/.lightclaw/workspace       → --claw-dir ~/.lightclaw
-pwd = ~/.openclaw/workspace-python → --claw-dir ~/.openclaw
-pwd = /path/to/.lightclaw/...      → --claw-dir /path/to/.lightclaw
-```
-
-**Examples (all non-interactive):**
+**Examples:**
 ```bash
-# Install as sub-agent (DEFAULT)
-soulhub install coder-python --worker --claw-dir ~/.lightclaw
+# Install as worker to all detected claws (DEFAULT)
+soulhub install coder-python
 
-# Install as main agent (only when explicitly requested)
+# Install as main agent to all detected claws
+soulhub install coder-python --main
+
+# Install to a specific claw only
+soulhub install coder-python --claw-dir ~/.lightclaw
+
+# Install as main agent to a specific claw
 soulhub install coder-python --main --claw-dir ~/.openclaw
 
-# Install team (role auto-assigned, just need --claw-dir)
-soulhub install dev-squad --claw-dir ~/.lightclaw
+# Install team (role auto-assigned)
+soulhub install dev-squad
 
-# Install from local source as sub-agent
-soulhub install --from ./my-custom-agent/ --worker --claw-dir ~/.lightclaw
+# Install from local source
+soulhub install --from ./my-custom-agent/
 
-# Install from ZIP
+# Install from ZIP to a specific claw
 soulhub install --from ./team-export.zip --claw-dir ~/.openclaw
 ```
 
@@ -205,7 +194,7 @@ soulhub publish
 3. `~/.openclaw` or `~/.lightclaw` default paths
 4. `$(pwd)/.openclaw` or `$(pwd)/.lightclaw`
 
-**NOTE**: If multiple claw installations are found and `--claw-dir` is not specified, an interactive directory selection prompt is triggered — this MUST be avoided.
+**NOTE**: Without `--claw-dir`, the CLI installs to **all** detected claw directories. Use `--claw-dir` to target a specific one.
 
 ### Claw Type Detection from Working Directory
 

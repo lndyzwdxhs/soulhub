@@ -68,7 +68,7 @@ SoulHub's answer: **Define Agent souls in Markdown, share them through open sour
               ▼                       ▼                       ▼
    ┌──────────────────┐   ┌──────────────────┐   ┌──────────────────┐
    │   Next.js Web    │   │    Registry      │   │   GitHub Actions │
-   │  Platform (SSR)  │◄──│ 21 Agent Templs  │──►│   CI Validate    │
+   │  Platform (SSR)  │◄──│ 32 Agent Templs  │──►│   CI Validate    │
    │                  │   │  3 Team Recipes  │   │   + Build        │
    │  /souls  Browse  │   │                  │   └──────────────────┘
    │  /fusion Orch.   │   │  index.json idx  │
@@ -90,7 +90,7 @@ SoulHub's answer: **Define Agent souls in Markdown, share them through open sour
 
 ## Agent Registry
 
-**21 curated templates** across 6 categories:
+**32 curated templates** across 7 categories:
 
 | Category | Example Agents |
 |----------|---------------|
@@ -100,6 +100,7 @@ SoulHub's answer: **Define Agent souls in Markdown, share them through open sour
 | 🎧 Support | Frontline Support, Technical Support, Escalation Dispatcher |
 | 📚 Education | Programming Tutor, English Teacher |
 | 🎯 Dispatcher | Master Dispatcher (multi-Agent coordination) |
+| 🎮 ClawTown | Reporter, Chef, Artist, Doctor, Coach, Granny, Hacker, Kid, Poet, Trader |
 
 **3 Team Recipes**: Social Media Team, Dev Squad, Support Center.
 
@@ -109,7 +110,9 @@ Each Agent template consists of:
 registry/agents/your-agent-name/
 ├── manifest.yaml      # Metadata: name, category, tags, version
 ├── IDENTITY.md        # Identity: role, responsibilities, capabilities
-└── SOUL.md            # Behavior: personality, style, workflow
+├── SOUL.md            # Behavior: personality, style, workflow
+├── HEARTBEAT.md       # (Optional) Heartbeat: daily routines, status updates
+└── skills/            # (Optional) Skill modules: domain-specific abilities
 ```
 
 ---
@@ -127,11 +130,17 @@ npm install -g soulhub
 # Search for Agents
 soulhub search writer
 
-# Install to current directory
+# Install as worker to all detected claws (default)
 soulhub install writer-xiaohongshu
+
+# Install as main agent
+soulhub install writer-xiaohongshu --main
 
 # Install to a specific directory
 soulhub install coder-fullstack --dir ./my-agents
+
+# Install to a specific claw only
+soulhub install coder-fullstack --claw-dir ~/.lightclaw
 
 # Install a Team Recipe (multiple Agents at once)
 soulhub install --recipe self-media-team
@@ -190,12 +199,12 @@ npm install -g soulhub
 | Command | Description |
 |---------|-------------|
 | `soulhub search [query]` | Search Agent templates |
-| `soulhub info <name>` | View Agent details |
-| `soulhub install <name>` | Install Agent template locally |
+| `soulhub info <name>` | View Agent details (identity, soul, skills, etc.) |
+| `soulhub install <name>` | Install Agent (default: as worker, to all detected claws) |
+| `soulhub install <name> --main` | Install Agent as main agent |
 | `soulhub list` | List installed Agents |
 | `soulhub update [name]` | Update installed Agents |
-| `soulhub uninstall <name>` | Uninstall an Agent |
-| `soulhub publish [dir]` | Publish an Agent to the community |
+| `soulhub rollback` | Rollback to previous installation state |
 
 ---
 
@@ -273,7 +282,7 @@ make deploy-vercel-preview
 | **Fusion Orchestrator** | React Flow (@xyflow/react v12) |
 | **Theme System** | next-themes (System / Light / Dark) |
 | **CLI Tool** | Node.js, Commander, Chalk, Ora, JSZip |
-| **Template Format** | YAML manifest + Markdown (IDENTITY.md, SOUL.md) |
+| **Template Format** | YAML manifest + Markdown (IDENTITY.md, SOUL.md, HEARTBEAT.md) + Skills |
 | **Containerization** | Docker multi-stage build (Node 18 Alpine) |
 | **CI/CD** | GitHub Actions + Vercel |
 
@@ -299,9 +308,9 @@ soulhub/
 │   │   └── ui/               # Common UI (Navbar, ThemeToggle, CopyButton, etc.)
 │   └── lib/                  # Utilities, types, data loading
 ├── registry/
-│   ├── agents/               # 21 Agent templates
+│   ├── agents/               # 32 Agent templates
 │   ├── recipes/              # 3 Team Recipes
-│   ├── categories.yaml       # Category definitions (6 categories)
+│   ├── categories.yaml       # Category definitions (7 categories)
 │   ├── index.json            # Build artifact (search index)
 │   ├── manifest.schema.json  # Manifest validation schema
 │   └── scripts/              # Build + validation scripts
@@ -337,6 +346,14 @@ Role positioning, core responsibilities, skill boundaries.
 ### SOUL.md — Defines How the Agent Behaves
 
 Personality traits, communication style, workflow, decision principles.
+
+### HEARTBEAT.md — Defines Agent's Daily Life (Optional)
+
+Daily routines, status updates, activity patterns. Currently used by ClawTown characters.
+
+### skills/ — Skill Modules (Optional)
+
+Domain-specific skill packs containing references, templates, and specialized instructions.
 
 ---
 
