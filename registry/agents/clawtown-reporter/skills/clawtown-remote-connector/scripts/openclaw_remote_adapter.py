@@ -43,15 +43,16 @@ class AdapterConfig:
     password: str
     resident_invite_code: str
     self_introduction: str
+    name: str = ""  # 显示名称，来自 SOUL.md/IDENTITY.md，不传则回退到 openclaw_id
     interval: float = 8.0
     request_timeout: float = 10.0
     ws_ping_interval: float = 20.0
-ws_connect_duration: float = 1200.0  # WebSocket 单次连接持续时间（秒），0 表示永久保持，默认 1200s（20 分钟）
+    ws_connect_duration: float = 0.0  # WebSocket 单次连接持续时间（秒），0 表示永久保持，默认 0（永久连接）
     auto_survival: bool = True
     connect_ws: bool = True
     once: bool = False
     verbose: bool = True
-    snapshot_dir: str = ".lightclaw/workspace"
+    snapshot_dir: str = "/root/.lightclaw/workspace"
 
 
 class ClawTownRemoteAdapter:
@@ -95,16 +96,24 @@ class ClawTownRemoteAdapter:
         # 提取关键字段用于比较
         self_status = data.get("self_status") or {}
         nearby = data.get("nearby_residents") or []
+        my_quests = data.get("my_quests") or {}
+        pending_msgs = data.get("pending_messages") or []
         current_keys = {
             "location": data.get("location"),
             "energy": self_status.get("energy"),
             "social_need": self_status.get("social_need"),
             "reputation": self_status.get("reputation"),
+            "my_rank": self_status.get("my_rank"),
             "busy": self_status.get("busy"),
             "world_time": data.get("world_time"),
             "tick": data.get("tick"),
             "nearby_count": len(nearby),
             "nearby_names": ",".join(sorted([r.get("name", "") for r in nearby[:5]])),
+            "accepted_quests": str(my_quests.get("accepted") or []),
+            "published_quests": str(my_quests.get("published") or []),
+            "available_quests_count": len(data.get("available_quests") or []),
+            "pending_msg_count": len(pending_msgs),
+            "reputation_ranking": str(data.get("reputation_ranking") or []),
         }
 
         # 增量更新：只有关键字段变化时才写入
@@ -156,18 +165,20 @@ class ClawTownRemoteAdapter:
                 reputation = 0
         busy = self_status.get("busy", False)
         busy_info = self_status.get("busy_remaining_seconds", 0)
+        my_rank = self_status.get("my_rank")
 
         energy_bar = self._make_bar(energy, energy_max)
         social_bar = self._make_bar(social_need, social_max)
 
         busy_text = f"（忙碌中，还需 {busy_info} 秒）" if busy else ""
+        rank_text = f"（排名第 {my_rank}）" if my_rank else "（暂无排名）"
 
         lines.extend([
             "## 我",
             f"- **位置**: {location_name} ({location})",
             f"- **精力**: {energy}/{energy_max} {energy_bar} {busy_text}",
             f"- **社交需求**: {social_need}/{social_max} {social_bar}",
-            f"- **声望**: {reputation}",
+            f"- **声望**: {reputation} {rank_text}",
             "",
         ])
 
@@ -187,6 +198,66 @@ class ClawTownRemoteAdapter:
                 activity = r.get("activity", "idle")
                 status_icon = "💬" if activity == "chatting" else "👤"
                 lines.append(f"- {status_icon} {name} - {activity}")
+            lines.append("")
+
+        # 声望排行榜
+        reputation_ranking = data.get("reputation_ranking") or []
+        if reputation_ranking:
+            lines.append("## 🏆 声望排行榜")
+            for r in reputation_ranking:
+                rank = r.get("rank", "?")
+                name = r.get("name", "?")
+                rep = r.get("reputation", 0)
+                emoji = r.get("avatar_emoji", "🦞")
+                medal = {1: "🥇", 2: "🥈", 3: "🥉"}.get(rank, f"#{rank}")
+                lines.append(f"- {medal} {emoji} {name} — 声望 {rep}")
+            if my_rank and my_rank > len(reputation_ranking):
+                lines.append(f"- ... 我的排名: 第 {my_rank} 名（声望 {reputation}）")
+            lines.append("")
+
+        # 我的任务
+        my_quests = data.get("my_quests") or {}
+        accepted_quests = my_quests.get("accepted") or []
+        published_quests = my_quests.get("published") or []
+        if accepted_quests or published_quests:
+            lines.append("## 我的任务")
+            lines.append("")
+            lines.append("⚠️ **重要规则：完成任务后不要自动提交（submit_quest），必须等主人确认任务状态后才能提交！**")
+            lines.append("")
+            if accepted_quests:
+                lines.append("### 我接取的任务")
+                for q in accepted_quests:
+                    qid = q.get("quest_id", "?")
+                    title = q.get("title", "未知任务")
+                    status = q.get("status", "?")
+                    reward = q.get("reward", 0)
+                    status_icon = {"open": "📋", "accepted": "🔨", "submitted": "📤"}.get(status, "❓")
+                    lines.append(f"- {status_icon} [{status}] {title} (ID: {qid}, 奖励: {reward}声望)")
+                lines.append("")
+            if published_quests:
+                lines.append("### 我发布的任务")
+                for q in published_quests:
+                    qid = q.get("quest_id", "?")
+                    title = q.get("title", "未知任务")
+                    status = q.get("status", "?")
+                    reward = q.get("reward", 0)
+                    status_icon = {"open": "📋", "accepted": "🔨", "submitted": "📤"}.get(status, "❓")
+                    lines.append(f"- {status_icon} [{status}] {title} (ID: {qid}, 奖励: {reward}声望)")
+                lines.append("")
+
+        # 市场可接任务
+        available_quests = data.get("available_quests") or []
+        if available_quests:
+            lines.append(f"## 市场可接任务 ({len(available_quests)})")
+            for q in available_quests[:5]:
+                qid = q.get("quest_id", "?")
+                title = q.get("title", "未知任务")
+                publisher = q.get("publisher", "?")
+                reward = q.get("reward", 0)
+                category = q.get("category", "general")
+                lines.append(f"- 📋 {title} — 发布者: {publisher}, 奖励: {reward}声望, 分类: {category} (ID: {qid})")
+            if len(available_quests) > 5:
+                lines.append(f"- ...还有 {len(available_quests) - 5} 个任务")
             lines.append("")
 
         # 未读消息
@@ -367,15 +438,18 @@ class ClawTownRemoteAdapter:
             raise AdapterError(f"认证成功但缺少必要字段: {body}")
 
     def register(self) -> dict[str, Any]:
+        json_body: dict[str, Any] = {
+            "openclaw_id": self.config.openclaw_id,
+            "password": self.config.password,
+            "invite_code": self.config.resident_invite_code,
+            "self_introduction": self.config.self_introduction,
+        }
+        if self.config.name:
+            json_body["name"] = self.config.name
         body = self._request(
             "POST",
             "/api/v1/auth/register",
-            json_body={
-                "openclaw_id": self.config.openclaw_id,
-                "password": self.config.password,
-                "invite_code": self.config.resident_invite_code,
-                "self_introduction": self.config.self_introduction,
-            },
+            json_body=json_body,
             allow_reauth=False,
         )
         self._store_auth_payload(body)
@@ -1252,26 +1326,81 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--password", required=True, help="账号密码")
     parser.add_argument("--resident-invite-code", required=True, help="居民邀请码")
     parser.add_argument("--self-introduction", default="我是一个正在探索 ClawTown 的远程居民。", help="首次注册时的自我介绍")
+    parser.add_argument("--name", default="", help="显示名称（来自 SOUL.md/IDENTITY.md），不传则默认用 openclaw_id")
     parser.add_argument("--interval", type=float, default=8.0, help="主循环间隔秒数")
     parser.add_argument("--request-timeout", type=float, default=10.0, help="HTTP 请求超时时间")
     parser.add_argument("--ws-ping-interval", type=float, default=20.0, help="WebSocket ping 间隔")
-parser.add_argument("--ws-connect-duration", type=float, default=1200.0, help="WebSocket 单次连接持续时间（秒），0 表示永久保持，默认 1200s（20 分钟），到时间自动断开不再重连")
+    parser.add_argument("--ws-connect-duration", type=float, default=0.0, help="WebSocket 单次连接持续时间（秒），0 表示永久保持，默认 0（永久连接），断线自动重连")
     parser.add_argument("--no-auto-survival", action="store_true", help="关闭自动生存动作")
     parser.add_argument("--no-ws", action="store_true", help="不建立 WebSocket 长连接")
     parser.add_argument("--once", action="store_true", help="只执行一次认证+感知+生存检查后退出")
     parser.add_argument("--quiet", action="store_true", help="减少日志输出")
-    parser.add_argument("--snapshot-dir", default=".lightclaw/workspace", help="状态快照输出目录（默认 .lightclaw/workspace）")
+    parser.add_argument("--snapshot-dir", default="/root/.lightclaw/workspace", help="状态快照输出目录（默认 /root/.lightclaw/workspace）")
+    parser.add_argument("--daemon", action="store_true", help="以后台守护进程方式运行，日志输出到 --log-file 指定的文件")
+    parser.add_argument("--log-file", default="/tmp/clawtown_adapter.log", help="守护进程模式下的日志文件路径（默认 /tmp/clawtown_adapter.log）")
     return parser
+
+
+def _daemonize(log_file: str) -> None:
+    """将当前进程转为守护进程（Unix double-fork）。
+
+    关键：在 fork **之前**先关闭并重定向 stdout/stderr，
+    确保父进程退出后不残留对调用方管道的引用，
+    避免 CodeBuddy agent 等管道环境被阻塞。
+    """
+    import os
+
+    # ── 1. 先把消息打到原 stdout，然后立即切走 ──
+    sys.stdout.write(f"[daemon] 正在后台启动，日志文件: {log_file}\n")
+    sys.stdout.flush()
+    sys.stderr.flush()
+
+    # 打开日志文件和 /dev/null（fd 保持到进程结束）
+    log_fd = os.open(log_file, os.O_WRONLY | os.O_CREAT | os.O_APPEND, 0o644)
+    devnull_fd = os.open(os.devnull, os.O_RDONLY)
+
+    # 在 fork 前就把 stdin/stdout/stderr 全部切走，
+    # 这样 fork 出的子进程不会继承调用方的管道 fd
+    os.dup2(devnull_fd, sys.stdin.fileno())
+    os.dup2(log_fd, sys.stdout.fileno())
+    os.dup2(log_fd, sys.stderr.fileno())
+    os.close(log_fd)
+    os.close(devnull_fd)
+
+    # ── 2. 第一次 fork ──
+    pid = os.fork()
+    if pid > 0:
+        # 父进程立即退出，管道已无引用，调用方不会阻塞
+        os._exit(0)
+
+    # 子进程：脱离控制终端
+    os.setsid()
+
+    # ── 3. 第二次 fork，防止重新获取终端 ──
+    pid = os.fork()
+    if pid > 0:
+        os._exit(0)
+
+    # 孙进程继续执行 main() 后续逻辑
 
 
 def main() -> int:
     args = build_parser().parse_args()
+
+    # 守护进程模式：自动后台运行
+    if getattr(args, "daemon", False):
+        if sys.platform == "win32":
+            print("[error] --daemon 模式不支持 Windows，请使用 nohup 或任务计划程序", file=sys.stderr)
+            return 1
+        _daemonize(args.log_file)
+
     config = AdapterConfig(
         base_url=args.base_url,
         openclaw_id=args.openclaw_id,
         password=args.password,
         resident_invite_code=args.resident_invite_code,
         self_introduction=args.self_introduction,
+        name=args.name,
         interval=args.interval,
         request_timeout=args.request_timeout,
         ws_ping_interval=args.ws_ping_interval,
