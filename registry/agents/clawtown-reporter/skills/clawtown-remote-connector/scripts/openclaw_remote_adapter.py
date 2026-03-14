@@ -1344,33 +1344,21 @@ def build_parser() -> argparse.ArgumentParser:
 def _daemonize(log_file: str) -> None:
     """将当前进程转为守护进程（Unix double-fork）。
 
-    关键：在 fork **之前**先关闭并重定向 stdout/stderr，
-    确保父进程退出后不残留对调用方管道的引用，
-    避免 CodeBuddy agent 等管道环境被阻塞。
+    正确顺序：先 fork 让父进程退出（释放调用方管道），
+    再在子进程中重定向 fd，避免 Python 层 stdout 对象
+    持有原管道引用导致调用方阻塞。
     """
     import os
 
-    # ── 1. 先把消息打到原 stdout，然后立即切走 ──
+    # ── 1. 先把消息打到原 stdout ──
     sys.stdout.write(f"[daemon] 正在后台启动，日志文件: {log_file}\n")
     sys.stdout.flush()
     sys.stderr.flush()
 
-    # 打开日志文件和 /dev/null（fd 保持到进程结束）
-    log_fd = os.open(log_file, os.O_WRONLY | os.O_CREAT | os.O_APPEND, 0o644)
-    devnull_fd = os.open(os.devnull, os.O_RDONLY)
-
-    # 在 fork 前就把 stdin/stdout/stderr 全部切走，
-    # 这样 fork 出的子进程不会继承调用方的管道 fd
-    os.dup2(devnull_fd, sys.stdin.fileno())
-    os.dup2(log_fd, sys.stdout.fileno())
-    os.dup2(log_fd, sys.stderr.fileno())
-    os.close(log_fd)
-    os.close(devnull_fd)
-
     # ── 2. 第一次 fork ──
     pid = os.fork()
     if pid > 0:
-        # 父进程立即退出，管道已无引用，调用方不会阻塞
+        # 父进程立即退出，调用方管道引用随之释放，不会阻塞
         os._exit(0)
 
     # 子进程：脱离控制终端
@@ -1380,6 +1368,37 @@ def _daemonize(log_file: str) -> None:
     pid = os.fork()
     if pid > 0:
         os._exit(0)
+
+    # ── 4. 孙进程：重定向 stdin/stdout/stderr ──
+    sys.stdout.flush()
+    sys.stderr.flush()
+
+    log_fd = os.open(log_file, os.O_WRONLY | os.O_CREAT | os.O_APPEND, 0o644)
+    devnull_fd = os.open(os.devnull, os.O_RDONLY)
+
+    os.dup2(devnull_fd, 0)   # stdin → /dev/null
+    os.dup2(log_fd, 1)       # stdout → log_file
+    os.dup2(log_fd, 2)       # stderr → log_file
+    os.close(log_fd)
+    os.close(devnull_fd)
+
+    # ── 5. 关闭所有继承的多余 fd（fd 3 以上）──
+    # 调用方（subprocess/Agent）传入的管道 fd 可能是 3、4、5 等，
+    # 若不关闭，调用方会因管道另一端仍有引用而一直阻塞等待。
+    try:
+        max_fd = os.sysconf("SC_OPEN_MAX")
+    except (AttributeError, ValueError):
+        max_fd = 1024
+    for fd in range(3, max_fd):
+        try:
+            os.close(fd)
+        except OSError:
+            pass
+
+    # 重新绑定 Python 层的 sys.stdout/stderr，使 print() 也写入日志
+    sys.stdin = open(os.devnull, "r")
+    sys.stdout = open(log_file, "a", buffering=1, encoding="utf-8")
+    sys.stderr = sys.stdout
 
     # 孙进程继续执行 main() 后续逻辑
 
