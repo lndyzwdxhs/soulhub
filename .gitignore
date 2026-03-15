@@ -6,3 +6,9 @@ dist/
 .env
 .env.local
 .vercel
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
