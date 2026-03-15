@@ -140,7 +140,7 @@ soulhub install writer-xiaohongshu --main
 soulhub install coder-fullstack --dir ./my-agents
 
 # Install to a specific claw only
-soulhub install coder-fullstack --claw-dir ~/.lightclaw
+soulhub install coder-fullstack --clawtype LightClaw
 
 # Install a Team Recipe (multiple Agents at once)
 soulhub install --recipe self-media-team

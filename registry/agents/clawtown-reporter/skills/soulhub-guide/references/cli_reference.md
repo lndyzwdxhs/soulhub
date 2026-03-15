@@ -62,14 +62,14 @@ Install an Agent or Team from the registry or local source.
 - `--from <source>`: Install from local directory, ZIP file, or URL instead of registry
 - `--main`: Install as main Agent (deploys to `workspace/`)
 - `--dir <path>`: Custom target directory for installation
-- `--claw-dir <path>`: Install to a specific claw directory only (instead of all detected ones)
+- `--clawtype <type>`: Specify claw type: OpenClaw or LightClaw (case-insensitive). Install to that claw only instead of all detected ones
 
 **Behavior:**
 - Automatically detects package type (`kind: agent` or `kind: team`)
 - Single agent: defaults to worker, installs to all detected claw directories
 - For teams: installs dispatcher as main, workers into separate workspaces
 - Creates automatic backup before installation (supports rollback)
-- Use `--claw-dir` to target a specific claw instead of all
+- Use `--clawtype` to target a specific claw instead of all
 
 **Examples:**
 ```bash
@@ -80,10 +80,10 @@ soulhub install coder-python
 soulhub install coder-python --main
 
 # Install to a specific claw only
-soulhub install coder-python --claw-dir ~/.lightclaw
+soulhub install coder-python --clawtype LightClaw
 
 # Install as main agent to a specific claw
-soulhub install coder-python --main --claw-dir ~/.openclaw
+soulhub install coder-python --main --clawtype OpenClaw
 
 # Install team (role auto-assigned)
 soulhub install dev-squad
@@ -92,7 +92,7 @@ soulhub install dev-squad
 soulhub install --from ./my-custom-agent/
 
 # Install from ZIP to a specific claw
-soulhub install --from ./team-export.zip --claw-dir ~/.openclaw
+soulhub install --from ./team-export.zip --clawtype OpenClaw
 ```
 
 ---
@@ -189,19 +189,18 @@ soulhub publish
 
 ### Claw Directory Discovery Priority
 
-1. `--claw-dir` CLI flag (ALWAYS prefer this in non-interactive mode)
+1. `--clawtype` CLI flag (ALWAYS prefer this in non-interactive mode)
 2. `OPENCLAW_HOME` or `LIGHTCLAW_HOME` environment variable
 3. `~/.openclaw` or `~/.lightclaw` default paths
 4. `$(pwd)/.openclaw` or `$(pwd)/.lightclaw`
 
-**NOTE**: Without `--claw-dir`, the CLI installs to **all** detected claw directories. Use `--claw-dir` to target a specific one.
+**NOTE**: Without `--clawtype`, the CLI installs to **all** detected claw directories. Use `--clawtype` to target a specific one.
 
 ### Claw Type Detection from Working Directory
 
-| Working Directory | Detected Claw Type | `--claw-dir` Value |
+| Working Directory | Detected Claw Type | `--clawtype` Value |
 |-------------------|--------------------|--------------------|
-| `~/.lightclaw/workspace` | LightClaw | `~/.lightclaw` |
-| `~/.lightclaw/workspace-xxx` | LightClaw | `~/.lightclaw` |
-| `~/.openclaw/workspace` | OpenClaw | `~/.openclaw` |
-| `~/.openclaw/workspace-xxx` | OpenClaw | `~/.openclaw` |
-| `/custom/path/.lightclaw/workspace` | LightClaw | `/custom/path/.lightclaw` |
+| `~/.lightclaw/workspace` | LightClaw | `LightClaw` |
+| `~/.lightclaw/workspace-xxx` | LightClaw | `LightClaw` |
+| `~/.openclaw/workspace` | OpenClaw | `OpenClaw` |
+| `~/.openclaw/workspace-xxx` | OpenClaw | `OpenClaw` |

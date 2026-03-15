@@ -13,23 +13,23 @@ SoulHub is an open-source AI Agent persona template community — "Just like Git
 
 1. **Single agent defaults to worker (sub-agent)** and installs to **all detected claw directories** — no flags needed for the default behavior.
 2. Use `--main` flag only when the user explicitly requests main agent installation.
-3. Use `--claw-dir` to install to a **specific** claw directory only (instead of all detected ones).
+3. Use `--clawtype` to install to a **specific** claw type only (instead of all detected ones). Only `OpenClaw` or `LightClaw` is supported (case-insensitive).
 
 ## Claw Type Auto-Detection
 
 The claw type (OpenClaw or LightClaw) can be determined by inspecting the current working directory path:
 
-| Working Directory Pattern | Claw Type | `--claw-dir` Value |
+| Working Directory Pattern | Claw Type | `--clawtype` Value |
 |---------------------------|-----------|---------------------|
-| `~/.lightclaw/workspace*` | LightClaw | `~/.lightclaw` |
-| `~/.openclaw/workspace*` | OpenClaw | `~/.openclaw` |
-| Contains `lightclaw` in path | LightClaw | Extract the claw root from path |
-| Contains `openclaw` in path | OpenClaw | Extract the claw root from path |
+| `~/.lightclaw/workspace*` | LightClaw | `LightClaw` |
+| `~/.openclaw/workspace*` | OpenClaw | `OpenClaw` |
+| Contains `lightclaw` in path | LightClaw | `LightClaw` |
+| Contains `openclaw` in path | OpenClaw | `OpenClaw` |
 
 **Detection logic**: Check if the current working directory (`pwd`) is under a claw installation directory. For example:
-- If `pwd` = `~/.lightclaw/workspace` → claw type is `lightclaw`, use `--claw-dir ~/.lightclaw`
-- If `pwd` = `~/.openclaw/workspace-python` → claw type is `openclaw`, use `--claw-dir ~/.openclaw`
-- If `pwd` = `/home/user/.lightclaw/workspace` → claw type is `lightclaw`, use `--claw-dir /home/user/.lightclaw`
+- If `pwd` = `~/.lightclaw/workspace` → claw type is `lightclaw`, use `--clawtype LightClaw`
+- If `pwd` = `~/.openclaw/workspace-python` → claw type is `openclaw`, use `--clawtype OpenClaw`
+- If `pwd` = `/home/user/.lightclaw/workspace` → claw type is `lightclaw`, use `--clawtype LightClaw`
 
 **Fallback priority** (if working directory detection fails):
 1. `OPENCLAW_HOME` or `LIGHTCLAW_HOME` environment variable
@@ -120,7 +120,7 @@ soulhub install <agent-name>
 soulhub install <agent-name> --main
 
 # Install to a specific claw directory only
-soulhub install <agent-name> --claw-dir <claw-dir>
+soulhub install <agent-name> --clawtype <claw-type>
 ```
 
 Install from local source:
@@ -143,7 +143,7 @@ Advanced options:
 soulhub install <agent-name> --dir ./custom-path
 
 # Install to a specific claw as main agent
-soulhub install <agent-name> --main --claw-dir ~/.lightclaw
+soulhub install <agent-name> --main --clawtype LightClaw
 ```
 
 ### Step 4: Verify Installation
@@ -161,8 +161,8 @@ soulhub ls
 |---------|----------|
 | `soulhub install <name>` | Install as worker to **all** detected claws |
 | `soulhub install <name> --main` | Install as main agent to **all** detected claws |
-| `soulhub install <name> --claw-dir <path>` | Install as worker to **specific** claw only |
-| `soulhub install <name> --main --claw-dir <path>` | Install as main agent to **specific** claw only |
+| `soulhub install <name> --clawtype <type>` | Install as worker to **specific** claw only |
+| `soulhub install <name> --main --clawtype <type>` | Install as main agent to **specific** claw only |
 
 ## Installing a Team (Multi-Agent)
 
@@ -176,7 +176,7 @@ soulhub install dev-squad
 soulhub install --from ./team-export.zip
 
 # Install to a specific claw only
-soulhub install dev-squad --claw-dir ~/.lightclaw
+soulhub install dev-squad --clawtype LightClaw
 ```
 
 The CLI automatically installs the dispatcher as the main Agent and workers into their respective workspace directories.
@@ -335,7 +335,7 @@ metadata:
 
 - **Config file**: `~/.soulhub/config.json`
 - **Custom registry**: Set `SOULHUB_REGISTRY_URL` environment variable
-- **Claw directory discovery priority**: `--claw-dir` flag (single claw) > `OPENCLAW_HOME` / `LIGHTCLAW_HOME` env vars > auto-detect all: `~/.openclaw` + `~/.lightclaw`
+- **Claw directory discovery priority**: `--clawtype` flag (single claw) > `OPENCLAW_HOME` / `LIGHTCLAW_HOME` env vars > auto-detect all: `~/.openclaw` + `~/.lightclaw`
 
 ## Common Workflows
 
