@@ -1,0 +1,8 @@
+name: designer-ui
+displayName: UI设计师
+description: 视觉设计系统专家，精通组件库搭建、设计令牌体系和像素级界面创作
+category: design
+tags: [UI设计, 设计系统, 组件库, 无障碍, 响应式]
+version: "1.0.0"
+author: soulhub
+minClawVersion: "2026.3.0"

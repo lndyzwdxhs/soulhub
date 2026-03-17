@@ -1,0 +1,8 @@
+name: security-engineer
+displayName: 安全工程师
+description: 应用安全专家，精通威胁建模、漏洞评估、安全代码审查和安全架构设计
+category: security
+tags: [应用安全, 威胁建模, 漏洞评估, 安全审计, OWASP]
+version: "1.0.0"
+author: soulhub
+minClawVersion: "2026.3.0"

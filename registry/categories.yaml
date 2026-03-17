@@ -29,11 +29,35 @@ categories:
     icon: graduation-cap
     description: 编程教学、语言学习相关 Agent
 
+  - id: design
+    name: 设计
+    nameEn: Design
+    icon: palette
+    description: UI/UX 设计、视觉设计、交互设计相关 Agent
+
+  - id: product
+    name: 产品
+    nameEn: Product
+    icon: compass
+    description: 产品管理、项目管理、需求分析相关 Agent
+
+  - id: security
+    name: 安全
+    nameEn: Security
+    icon: shield
+    description: 应用安全、威胁建模、安全审计相关 Agent
+
   - id: dispatcher
     name: 调度
     nameEn: Dispatcher
     icon: network
     description: 多 Agent 团队调度模板
+
+  - id: research
+    name: 科研
+    nameEn: Research
+    icon: microscope
+    description: 药物发现、生物信息学、化学信息学等科学研究相关 Agent
 
   - id: clawtown
     name: ClawTown角色

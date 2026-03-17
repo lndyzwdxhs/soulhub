@@ -300,6 +300,77 @@
       "stars": 0
     },
     {
+      "name": "coder-backend",
+      "displayName": "后端架构师",
+      "description": "资深后端架构师，擅长可扩展系统设计、数据库架构、API开发和云基础设施",
+      "category": "development",
+      "tags": [
+        "后端开发",
+        "系统设计",
+        "微服务",
+        "API",
+        "云原生"
+      ],
+      "version": "1.0.0",
+      "author": "soulhub",
+      "minClawVersion": "2026.3.0",
+      "files": {
+        "IDENTITY.md": 1588,
+        "SOUL.md": 2060
+      },
+      "skills": [],
+      "downloads": 0,
+      "stars": 0
+    },
+    {
+      "name": "coder-database",
+      "displayName": "数据库优化师",
+      "description": "数据库性能专家，精通Schema设计、查询优化、索引策略和性能调优",
+      "category": "development",
+      "tags": [
+        "数据库",
+        "PostgreSQL",
+        "MySQL",
+        "查询优化",
+        "索引",
+        "性能调优"
+      ],
+      "version": "1.0.0",
+      "author": "soulhub",
+      "minClawVersion": "2026.3.0",
+      "files": {
+        "IDENTITY.md": 1603,
+        "SOUL.md": 1984
+      },
+      "skills": [],
+      "downloads": 0,
+      "stars": 0
+    },
+    {
+      "name": "coder-frontend",
+      "displayName": "前端工程师",
+      "description": "现代Web前端开发专家，精通React/Vue生态，专注性能优化与无障碍设计",
+      "category": "development",
+      "tags": [
+        "前端开发",
+        "React",
+        "Vue",
+        "TypeScript",
+        "性能优化",
+        "无障碍"
+      ],
+      "version": "1.0.0",
+      "author": "soulhub",
+      "minClawVersion": "2026.3.0",
+      "files": {
+        "IDENTITY.md": 1592,
+        "SOUL.md": 1849
+      },
+      "skills": [],
+      "downloads": 0,
+      "stars": 0
+    },
+    {
       "name": "coder-fullstack",
       "displayName": "全栈工程师",
       "description": "全栈Web开发专家，前端React/Vue，后端Node/Python",
@@ -382,6 +453,52 @@
       "files": {
         "IDENTITY.md": 1206,
         "SOUL.md": 1462
+      },
+      "skills": [],
+      "downloads": 0,
+      "stars": 0
+    },
+    {
+      "name": "designer-ui",
+      "displayName": "UI设计师",
+      "description": "视觉设计系统专家，精通组件库搭建、设计令牌体系和像素级界面创作",
+      "category": "design",
+      "tags": [
+        "UI设计",
+        "设计系统",
+        "组件库",
+        "无障碍",
+        "响应式"
+      ],
+      "version": "1.0.0",
+      "author": "soulhub",
+      "minClawVersion": "2026.3.0",
+      "files": {
+        "IDENTITY.md": 1829,
+        "SOUL.md": 1932
+      },
+      "skills": [],
+      "downloads": 0,
+      "stars": 0
+    },
+    {
+      "name": "designer-ux",
+      "displayName": "UX架构师",
+      "description": "用户体验架构专家，擅长用户旅程设计、信息架构、交互模式和可用性评估",
+      "category": "design",
+      "tags": [
+        "UX设计",
+        "用户体验",
+        "信息架构",
+        "交互设计",
+        "可用性测试"
+      ],
+      "version": "1.0.0",
+      "author": "soulhub",
+      "minClawVersion": "2026.3.0",
+      "files": {
+        "IDENTITY.md": 1752,
+        "SOUL.md": 2080
       },
       "skills": [],
       "downloads": 0,
@@ -477,6 +594,52 @@
       "stars": 0
     },
     {
+      "name": "product-manager",
+      "displayName": "产品经理",
+      "description": "资深产品经理，精通产品全生命周期管理，从发现到度量，以结果为导向",
+      "category": "product",
+      "tags": [
+        "产品管理",
+        "需求分析",
+        "路线图",
+        "用户研究",
+        "PRD"
+      ],
+      "version": "1.0.0",
+      "author": "soulhub",
+      "minClawVersion": "2026.3.0",
+      "files": {
+        "IDENTITY.md": 1927,
+        "SOUL.md": 2478
+      },
+      "skills": [],
+      "downloads": 0,
+      "stars": 0
+    },
+    {
+      "name": "product-project-manager",
+      "displayName": "项目经理",
+      "description": "资深项目经理，擅长将需求规格转化为可执行的开发任务，精通范围管理和迭代交付",
+      "category": "product",
+      "tags": [
+        "项目管理",
+        "任务拆解",
+        "迭代规划",
+        "范围管理",
+        "敏捷"
+      ],
+      "version": "1.0.0",
+      "author": "soulhub",
+      "minClawVersion": "2026.3.0",
+      "files": {
+        "IDENTITY.md": 1665,
+        "SOUL.md": 2007
+      },
+      "skills": [],
+      "downloads": 0,
+      "stars": 0
+    },
+    {
       "name": "publisher-multi-platform",
       "displayName": "一文多发助手",
       "description": "一篇 Markdown 同时发布到微信公众号和小红书，微信端通过 wenyan-cli 渲染精美排版，小红书端自动适配短笔记+图片格式",
@@ -526,6 +689,30 @@
       "stars": 0
     },
     {
+      "name": "researcher-pharma",
+      "displayName": "药物发现科学家",
+      "description": "专注于医药、化学与药物靶点的AI科学家，覆盖靶点发现、虚拟筛选、ADMET预测与多组学整合",
+      "category": "research",
+      "tags": [
+        "药物发现",
+        "化学信息学",
+        "靶点研究",
+        "精准医学",
+        "生物信息学",
+        "多组学"
+      ],
+      "version": "1.0.0",
+      "author": "soulhub",
+      "minClawVersion": "2026.3.0",
+      "files": {
+        "IDENTITY.md": 2353,
+        "SOUL.md": 3377
+      },
+      "skills": [],
+      "downloads": 0,
+      "stars": 0
+    },
+    {
       "name": "researcher-trending",
       "displayName": "热点追踪分析师",
       "description": "实时追踪社交媒体热点趋势，提供创作选题与数据分析",
@@ -542,6 +729,29 @@
       "files": {
         "IDENTITY.md": 1287,
         "SOUL.md": 1441
+      },
+      "skills": [],
+      "downloads": 0,
+      "stars": 0
+    },
+    {
+      "name": "security-engineer",
+      "displayName": "安全工程师",
+      "description": "应用安全专家，精通威胁建模、漏洞评估、安全代码审查和安全架构设计",
+      "category": "security",
+      "tags": [
+        "应用安全",
+        "威胁建模",
+        "漏洞评估",
+        "安全审计",
+        "OWASP"
+      ],
+      "version": "1.0.0",
+      "author": "soulhub",
+      "minClawVersion": "2026.3.0",
+      "files": {
+        "IDENTITY.md": 1779,
+        "SOUL.md": 2356
       },
       "skills": [],
       "downloads": 0,
@@ -816,5 +1026,5 @@
       "stars": 0
     }
   ],
-  "buildTime": "2026-03-15T13:19:47.946Z"
+  "buildTime": "2026-03-17T04:07:47.353Z"
 }

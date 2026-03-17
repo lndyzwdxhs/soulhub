@@ -19,7 +19,7 @@
     },
     "category": {
       "type": "string",
-      "enum": ["self-media", "development", "operations", "support", "education", "dispatcher"],
+      "enum": ["self-media", "development", "operations", "support", "education", "design", "product", "security", "dispatcher"],
       "description": "Primary category"
     },
     "tags": {

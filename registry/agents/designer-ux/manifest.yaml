@@ -1,0 +1,8 @@
+name: designer-ux
+displayName: UX架构师
+description: 用户体验架构专家，擅长用户旅程设计、信息架构、交互模式和可用性评估
+category: design
+tags: [UX设计, 用户体验, 信息架构, 交互设计, 可用性测试]
+version: "1.0.0"
+author: soulhub
+minClawVersion: "2026.3.0"

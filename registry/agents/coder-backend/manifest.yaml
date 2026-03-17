@@ -1,0 +1,8 @@
+name: coder-backend
+displayName: 后端架构师
+description: 资深后端架构师，擅长可扩展系统设计、数据库架构、API开发和云基础设施
+category: development
+tags: [后端开发, 系统设计, 微服务, API, 云原生]
+version: "1.0.0"
+author: soulhub
+minClawVersion: "2026.3.0"

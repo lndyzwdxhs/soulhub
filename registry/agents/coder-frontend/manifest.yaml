@@ -1,0 +1,8 @@
+name: coder-frontend
+displayName: 前端工程师
+description: 现代Web前端开发专家，精通React/Vue生态，专注性能优化与无障碍设计
+category: development
+tags: [前端开发, React, Vue, TypeScript, 性能优化, 无障碍]
+version: "1.0.0"
+author: soulhub
+minClawVersion: "2026.3.0"

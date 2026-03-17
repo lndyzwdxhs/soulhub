@@ -1,0 +1,8 @@
+name: product-manager
+displayName: 产品经理
+description: 资深产品经理，精通产品全生命周期管理，从发现到度量，以结果为导向
+category: product
+tags: [产品管理, 需求分析, 路线图, 用户研究, PRD]
+version: "1.0.0"
+author: soulhub
+minClawVersion: "2026.3.0"

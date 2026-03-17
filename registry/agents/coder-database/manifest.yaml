@@ -1,0 +1,8 @@
+name: coder-database
+displayName: 数据库优化师
+description: 数据库性能专家，精通Schema设计、查询优化、索引策略和性能调优
+category: development
+tags: [数据库, PostgreSQL, MySQL, 查询优化, 索引, 性能调优]
+version: "1.0.0"
+author: soulhub
+minClawVersion: "2026.3.0"

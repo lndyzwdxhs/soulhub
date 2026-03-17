@@ -1,0 +1,8 @@
+name: researcher-pharma
+displayName: 药物发现科学家
+description: 专注于医药、化学与药物靶点的AI科学家，覆盖靶点发现、虚拟筛选、ADMET预测与多组学整合
+category: research
+tags: [药物发现, 化学信息学, 靶点研究, 精准医学, 生物信息学, 多组学]
+version: "1.0.0"
+author: soulhub
+minClawVersion: "2026.3.0"
