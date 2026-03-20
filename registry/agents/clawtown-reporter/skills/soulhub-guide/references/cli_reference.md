@@ -18,13 +18,14 @@ Search for Agent templates by keyword.
 
 **Options:**
 - `-c, --category <category>`: Filter by category (development, content, operations, support, education, dispatch)
-- `-l, --limit <number>`: Maximum number of results to show
+- `-n, --limit <number>`: Maximum number of results to show
+- `--json`: Output results in JSON format
 
 **Examples:**
 ```bash
 soulhub search python
 soulhub search -c development
-soulhub search writer -l 3
+soulhub search writer -n 3
 ```
 
 ---
@@ -39,6 +40,7 @@ View detailed information about an Agent template.
 **Options:**
 - `--identity`: Display IDENTITY.md content
 - `--soul`: Display SOUL.md content
+- `--json`: Output results in JSON format
 
 **Examples:**
 ```bash
@@ -53,46 +55,47 @@ soulhub info coder-fullstack --soul
 
 Install an Agent or Team from the registry or local source.
 
-**Default behavior**: Installs as worker (sub-agent) to all detected claw directories.
+**Default behavior**: Interactive — prompts for role (main/worker) and claw directory selection.
 
 **Arguments:**
 - `name` (optional): Agent/Team name from registry. Omit when using `--from`
 
 **Options:**
 - `--from <source>`: Install from local directory, ZIP file, or URL instead of registry
-- `--main`: Install as main Agent (deploys to `workspace/`)
+- `-r, --role <role>`: Install role: `main` or `worker` (skip role selection prompt)
 - `--dir <path>`: Custom target directory for installation
-- `--clawtype <type>`: Specify claw type: OpenClaw or LightClaw (case-insensitive). Install to that claw only instead of all detected ones
+- `--claw-type <type>`: Specify claw type: OpenClaw or LightClaw (case-insensitive). Install to that claw only
+- `-y, --yes`: Skip all confirmation prompts (auto-confirm)
 
 **Behavior:**
 - Automatically detects package type (`kind: agent` or `kind: team`)
-- Single agent: defaults to worker, installs to all detected claw directories
+- Without `--role` and `--claw-type`: enters interactive mode (prompts for selection)
 - For teams: installs dispatcher as main, workers into separate workspaces
 - Creates automatic backup before installation (supports rollback)
-- Use `--clawtype` to target a specific claw instead of all
+- Use `--claw-type` to target a specific claw
 
 **Examples:**
 ```bash
-# Install as worker to all detected claws (DEFAULT)
+# Interactive install (prompts for role & claw selection)
 soulhub install coder-python
 
-# Install as main agent to all detected claws
-soulhub install coder-python --main
+# Install as main agent (skip role selection)
+soulhub install coder-python --role main
 
-# Install to a specific claw only
-soulhub install coder-python --clawtype LightClaw
+# Install as worker to a specific claw
+soulhub install coder-python --role worker --claw-type LightClaw
 
-# Install as main agent to a specific claw
-soulhub install coder-python --main --clawtype OpenClaw
+# Fully non-interactive install (skip all prompts)
+soulhub install coder-python --role main --claw-type OpenClaw -y
 
 # Install team (role auto-assigned)
 soulhub install dev-squad
 
 # Install from local source
-soulhub install --from ./my-custom-agent/
+soulhub install --from ./my-custom-agent/ --role worker --claw-type OpenClaw
 
 # Install from ZIP to a specific claw
-soulhub install --from ./team-export.zip --clawtype OpenClaw
+soulhub install --from ./team-export.zip --role worker --claw-type OpenClaw
 ```
 
 ---
@@ -101,10 +104,14 @@ soulhub install --from ./team-export.zip --clawtype OpenClaw
 
 List all installed Agent templates.
 
+**Options:**
+- `--json`: Output results in JSON format
+
 **Examples:**
 ```bash
 soulhub list
 soulhub ls
+soulhub list --json
 ```
 
 ---
@@ -133,12 +140,13 @@ Uninstall an Agent template.
 
 **Options:**
 - `--keep-files`: Remove from registry tracking but keep files on disk
+- `-y, --yes`: Skip confirmation prompts
 
 **Examples:**
 ```bash
-soulhub uninstall coder-python
-soulhub rm coder-python
-soulhub uninstall coder-python --keep-files
+soulhub uninstall coder-python -y
+soulhub rm coder-python -y
+soulhub uninstall coder-python --keep-files -y
 ```
 
 ---
@@ -150,12 +158,15 @@ Rollback to a previous installation state using automatic backups.
 **Options:**
 - `--list`: Show available backup records
 - `--id <backup-id>`: Rollback to a specific backup by ID
+- `--last <n>`: Rollback the Nth most recent installation (1 = latest)
+- `--claw-type <type>`: Specify claw type for rollback
+- `-y, --yes`: Skip confirmation prompts
 
 **Examples:**
 ```bash
 soulhub rollback --list
-soulhub rollback
-soulhub rollback --id abc123
+soulhub rollback --last 1 -y
+soulhub rollback --id abc123 -y
 ```
 
 ---
@@ -189,16 +200,16 @@ soulhub publish
 
 ### Claw Directory Discovery Priority
 
-1. `--clawtype` CLI flag (ALWAYS prefer this in non-interactive mode)
+1. `--claw-type` CLI flag (ALWAYS prefer this in non-interactive mode)
 2. `OPENCLAW_HOME` or `LIGHTCLAW_HOME` environment variable
 3. `~/.openclaw` or `~/.lightclaw` default paths
 4. `$(pwd)/.openclaw` or `$(pwd)/.lightclaw`
 
-**NOTE**: Without `--clawtype`, the CLI installs to **all** detected claw directories. Use `--clawtype` to target a specific one.
+**NOTE**: Without `--claw-type`, the CLI enters interactive claw selection. Use `--claw-type` to skip the prompt.
 
 ### Claw Type Detection from Working Directory
 
-| Working Directory | Detected Claw Type | `--clawtype` Value |
+| Working Directory | Detected Claw Type | `--claw-type` Value |
 |-------------------|--------------------|--------------------|
 | `~/.lightclaw/workspace` | LightClaw | `LightClaw` |
 | `~/.lightclaw/workspace-xxx` | LightClaw | `LightClaw` |

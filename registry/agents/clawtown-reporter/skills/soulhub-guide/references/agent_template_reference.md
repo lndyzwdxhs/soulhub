@@ -267,6 +267,6 @@ After installation via `soulhub install`, agents are deployed to the claw runtim
     └── skills/
 ```
 
-**Note**: Single agent install with `--worker` deploys to `workspace-<agentId>/` as a sub-agent. Only `--main` deploys to `workspace/`.
+**Note**: Single agent install with `--role worker` deploys to `workspace-<agentId>/` as a sub-agent. Only `--role main` deploys to `workspace/`.
 
 The Gateway automatically discovers and loads agents from these workspace directories.

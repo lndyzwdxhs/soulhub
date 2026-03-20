@@ -142,14 +142,20 @@ SoulHub 天然为 OpenClaw 而生。
 **CLI 一键安装：**
 
 ```bash
-# 安装 CLI
+# 安装 CLI（推荐：curl 一键安装）
+curl -fsSL https://soulhub-1251783334.cos.ap-guangzhou.myqcloud.com/install.sh | bash
+
+# 或通过 npm 安装
 npm install -g soulhubcli
 
 # 搜索模板
 soulhub search 写手
 
-# 安装单个 Agent
+# 安装单个 Agent（交互式：会提示选择主/Worker 角色和目标 claw）
 soulhub install writer-xiaohongshu
+
+# 指定角色安装（跳过角色选择交互）
+soulhub install writer-xiaohongshu --role worker
 
 # 安装整个团队
 soulhub install self-media-team
@@ -164,12 +170,17 @@ soulhub install self-media-team
 
 **还支持备份和回滚：**
 
+每次安装都会自动备份已有内容到 `~/.soulhub/backups/` 目录，按 claw 类型分目录管理。
+
 ```bash
 # 查看备份记录
 soulhub rollback --list
 
-# 回滚到上一次安装前的状态
+# 交互式选择回滚
 soulhub rollback
+
+# 回滚最近一次安装
+soulhub rollback --last 1
 ```
 
 你的每次安装都有后悔药。
@@ -226,13 +237,14 @@ SoulHub 最需要的不是代码，而是**好的灵魂模板**。
 1. Fork 仓库
 2. 在 `registry/agents/` 下创建你的 Agent 目录
 3. 写好 `manifest.yaml` + `IDENTITY.md` + `SOUL.md`
-4. 运行 `soulhub publish` 验证格式
+4. 本地验证格式：`npm run validate`
 5. 提交 PR
 
-**或者用 CLI 验证：**
+**本地验证格式：**
 
 ```bash
-soulhub publish ./my-awesome-agent
+# 在 soulhub 仓库根目录执行
+npm run validate
 ```
 
 通过校验后，按提示提交 PR 即可。

@@ -392,21 +392,9 @@ fs.rmSync(pkgDir, { recursive: true, force: true });
 
 ### 5. CLI 端 `publish.ts` 改造
 
-**屏蔽 publish 上传能力**，保留本地验证功能，引导用户通过 PR 发布：
+**publish 命令已从 CLI 对外注册中移除**（在 `index.ts` 中注释掉），暂不对外开放，待 registry 审核流程和权限体系就绪后再启用。代码保留但不暴露给用户。
 
-```typescript
-// 当前行为（保持不变）：
-// 1. 验证必需文件存在（manifest.yaml, IDENTITY.md, SOUL.md）
-// 2. 验证 manifest.yaml 字段完整性
-// 3. 验证 category 合法性
-// 4. 提示通过 PR 发布（已有此提示，无需改动）
-
-// 当前 publish 命令的最后已经输出了 PR 引导信息：
-// "1. Fork github.com/soulhub-community/soulhub"
-// "2. Copy your agent directory to registry/agents/{name}/"
-// "3. Submit a Pull Request"
-// → 此处无需改动，保持现有行为即可
-```
+当前发布 Agent 的唯一方式是通过 PR 提交到 soulhub 仓库。
 
 ### 6. `index.json` 格式变更
 
@@ -455,17 +443,24 @@ soulhub install writer-wechat
 ┌── 1. GET /registry/index.json （从 COS）
 │       解析得到 writer-wechat version=1.0.0
 │
-├── 2. GET /registry/agents/writer-wechat/1.0.0.tar.gz （从 COS）
-│       下载到临时目录
+├── 2. 交互式选择安装角色（main / worker）
+│       --role main 或 --role worker 可跳过此步
+│       安装为 main 时提示覆盖警告，需用户确认（-y 可跳过）
 │
-├── 3. 解压 tar.gz
+├── 3. 交互式多选目标 claw 目录（OpenClaw / LightClaw）
+│       --claw-type 可跳过此步
+│
+├── 4. GET /registry/agents/writer-wechat/1.0.0.tar.gz （从 COS）
+│       下载到临时目录（多个 claw 共用同一份包）
+│
+├── 5. 解压 tar.gz
 │       得到 IDENTITY.md, SOUL.md, manifest.yaml 等
 │
-├── 4. 复制文件到 ~/.openclaw/workspace/
+├── 6. 备份已有内容到 ~/.soulhub/backups/<claw>/
 │
-├── 5. 更新 openclaw.json（注册主 agent）
+├── 7. 逐个 claw 目录：复制文件 + 注册 agent + 重启 Gateway
 │
-└── 6. 重启 OpenClaw Gateway
+└── 8. 清理临时包目录
 ```
 
 ### 2. 多 Agent Team 安装流程
@@ -567,7 +562,7 @@ soulhub install dev-squad
 |---|---|---|
 | `src/utils.ts` | 修改 | `DEFAULT_REGISTRY_URL` 改为 COS 地址；新增 `downloadAgentPackage()`、`fetchRecipeYaml()`；删除 `fetchAgentFile()`、`fetchRecipeFile()` |
 | `src/commands/install.ts` | 修改 | 单 agent 和 team 安装逻辑改为下载 `.tar.gz` 包 |
-| `src/commands/publish.ts` | 保留 | 保持当前仅验证+引导 PR 的行为，不做改动 |
+| `src/commands/publish.ts` | 保留（已隐藏） | 代码保留但已从 CLI 注册中注释掉，暂不对外开放 |
 | `package.json` | 修改 | 新增 `tar` 依赖（用于解压 `.tar.gz`） |
 
 ---

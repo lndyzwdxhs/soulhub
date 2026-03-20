@@ -82,7 +82,7 @@ SoulHub's answer: **Define Agent souls in Markdown, share them through open sour
    │  (separate repo) │
    │                  │
    │  Search/Install  │
-   │  Update/Publish  │
+   │  Update/Rollback │
    └──────────────────┘
 ```
 
@@ -124,26 +124,35 @@ registry/agents/your-agent-name/
 Runtime: **Node ≥ 18**
 
 ```bash
-# Install CLI globally
-npm install -g soulhub
+# Install CLI (recommended: curl one-line install)
+curl -fsSL https://soulhub-1251783334.cos.ap-guangzhou.myqcloud.com/install.sh | bash
+
+# Or install via npm
+npm install -g soulhubcli
 
 # Search for Agents
 soulhub search writer
 
-# Install as worker to all detected claws (default)
+# Interactive install (prompts for role & claw selection)
 soulhub install writer-xiaohongshu
 
-# Install as main agent
-soulhub install writer-xiaohongshu --main
+# Install as main agent (skip role prompt)
+soulhub install writer-xiaohongshu --role main
 
-# Install to a specific directory
+# Install as worker agent (skip role prompt)
+soulhub install writer-xiaohongshu --role worker
+
+# Specify claw type (skip claw prompt)
+soulhub install coder-fullstack --claw-type LightClaw
+
+# Install to a custom directory
 soulhub install coder-fullstack --dir ./my-agents
-
-# Install to a specific claw only
-soulhub install coder-fullstack --clawtype LightClaw
 
 # Install a Team Recipe (multiple Agents at once)
 soulhub install --recipe self-media-team
+
+# Rollback to a previous installation state
+soulhub rollback
 ```
 
 ### Option 2: Browse on Web Platform
@@ -193,18 +202,38 @@ Fusion is SoulHub's core innovation — visually drag & drop to assemble Agents 
 Separate repo: [soulhub-cli](https://github.com/lndyzwdxhs/soulhub-cli)
 
 ```bash
-npm install -g soulhub
+npm install -g soulhubcli
 ```
 
 | Command | Description |
 |---------|-------------|
 | `soulhub search [query]` | Search Agent templates |
+| `soulhub search -c <category>` | Filter search by category |
+| `soulhub search -n <number>` | Limit search results |
+| `soulhub search --json` | Output search results in JSON format |
 | `soulhub info <name>` | View Agent details (identity, soul, skills, etc.) |
-| `soulhub install <name>` | Install Agent (default: as worker, to all detected claws) |
-| `soulhub install <name> --main` | Install Agent as main agent |
+| `soulhub info <name> --identity` | Show IDENTITY.md content |
+| `soulhub info <name> --soul` | Show SOUL.md content |
+| `soulhub info <name> --json` | Output Agent details in JSON format |
+| `soulhub install <name>` | Install Agent (interactive: select role & target claw) |
+| `soulhub install <name> --role main` | Install as main Agent (skip role selection) |
+| `soulhub install <name> --role worker` | Install as worker Agent (skip role selection) |
+| `soulhub install <name> --claw-type <type>` | Specify target claw type (skip claw selection) |
+| `soulhub install <name> --dir <path>` | Install to a custom directory |
+| `soulhub install <name> -y` | Skip all confirmation prompts |
+| `soulhub install --from <source>` | Install from local directory, ZIP, or URL |
 | `soulhub list` | List installed Agents |
-| `soulhub update [name]` | Update installed Agents |
-| `soulhub rollback` | Rollback to previous installation state |
+| `soulhub list --json` | Output installed Agents in JSON format |
+| `soulhub update [name]` | Update installed Agents (auto-backup before update) |
+| `soulhub uninstall <name>` | Uninstall an Agent (also deletes related backups) |
+| `soulhub uninstall <name> --keep-files` | Uninstall but keep workspace files |
+| `soulhub uninstall <name> -y` | Skip uninstall confirmation |
+| `soulhub rollback` | Interactive rollback to a previous installation state |
+| `soulhub rollback --list` | List all available rollback records |
+| `soulhub rollback --last <n>` | Rollback the n-th most recent install (1 = latest) |
+| `soulhub rollback --id <id>` | Rollback to a specific backup record by ID |
+| `soulhub rollback --claw-type <type>` | Specify target claw type for rollback |
+| `soulhub rollback -y` | Skip rollback confirmation |
 
 ---
 

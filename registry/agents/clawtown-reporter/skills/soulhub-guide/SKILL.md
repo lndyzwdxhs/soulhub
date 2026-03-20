@@ -9,17 +9,18 @@ SoulHub is an open-source AI Agent persona template community — "Just like Git
 
 ## Execution Rules
 
-**The CLI now runs in fully non-interactive mode by default.** Follow these rules:
+**The CLI is interactive by default.** Follow these rules to ensure non-interactive execution:
 
-1. **Single agent defaults to worker (sub-agent)** and installs to **all detected claw directories** — no flags needed for the default behavior.
-2. Use `--main` flag only when the user explicitly requests main agent installation.
-3. Use `--clawtype` to install to a **specific** claw type only (instead of all detected ones). Only `OpenClaw` or `LightClaw` is supported (case-insensitive).
+1. **Always use `--role <main|worker>`** to skip role selection prompt.
+2. **Always use `--claw-type <type>`** to skip claw selection prompt. Only `OpenClaw` or `LightClaw` is supported (case-insensitive).
+3. **Always use `-y`** to skip confirmation prompts.
+4. Without `--role` and `--claw-type`, the CLI enters interactive mode which will hang in non-interactive terminals.
 
 ## Claw Type Auto-Detection
 
 The claw type (OpenClaw or LightClaw) can be determined by inspecting the current working directory path:
 
-| Working Directory Pattern | Claw Type | `--clawtype` Value |
+| Working Directory Pattern | Claw Type | `--claw-type` Value |
 |---------------------------|-----------|---------------------|
 | `~/.lightclaw/workspace*` | LightClaw | `LightClaw` |
 | `~/.openclaw/workspace*` | OpenClaw | `OpenClaw` |
@@ -27,9 +28,9 @@ The claw type (OpenClaw or LightClaw) can be determined by inspecting the curren
 | Contains `openclaw` in path | OpenClaw | `OpenClaw` |
 
 **Detection logic**: Check if the current working directory (`pwd`) is under a claw installation directory. For example:
-- If `pwd` = `~/.lightclaw/workspace` → claw type is `lightclaw`, use `--clawtype LightClaw`
-- If `pwd` = `~/.openclaw/workspace-python` → claw type is `openclaw`, use `--clawtype OpenClaw`
-- If `pwd` = `/home/user/.lightclaw/workspace` → claw type is `lightclaw`, use `--clawtype LightClaw`
+- If `pwd` = `~/.lightclaw/workspace` → claw type is `lightclaw`, use `--claw-type LightClaw`
+- If `pwd` = `~/.openclaw/workspace-python` → claw type is `openclaw`, use `--claw-type OpenClaw`
+- If `pwd` = `/home/user/.lightclaw/workspace` → claw type is `lightclaw`, use `--claw-type LightClaw`
 
 **Fallback priority** (if working directory detection fails):
 1. `OPENCLAW_HOME` or `LIGHTCLAW_HOME` environment variable
@@ -90,7 +91,7 @@ soulhub search -c education
 soulhub search -c dispatch
 
 # Limit results
-soulhub search <keyword> -l 5
+soulhub search <keyword> -n 5
 ```
 
 ### Step 2: View Agent Details
@@ -108,42 +109,42 @@ soulhub info <agent-name> --soul
 
 ### Step 3: Install the Agent
 
-**Default behavior**: Installs as worker (sub-agent) to all detected claw directories.
+**Default behavior**: Interactive — prompts for role (main/worker) and claw directory selection. To skip interaction, always pass `--role` and `--claw-type`.
 
 Install from SoulHub Registry:
 
 ```bash
-# Install as worker to all detected claws (DEFAULT)
+# Interactive install (prompts for role & claw selection)
 soulhub install <agent-name>
 
-# Install as main Agent ONLY when explicitly requested
-soulhub install <agent-name> --main
+# Install as worker (skip role prompt)
+soulhub install <agent-name> --role worker --claw-type <claw-type>
 
-# Install to a specific claw directory only
-soulhub install <agent-name> --clawtype <claw-type>
+# Install as main Agent (skip role prompt, -y skips confirmation)
+soulhub install <agent-name> --role main --claw-type <claw-type> -y
 ```
 
 Install from local source:
 
 ```bash
 # From local directory
-soulhub install --from ./my-agent/
+soulhub install --from ./my-agent/ --role worker --claw-type OpenClaw
 
 # From ZIP file
-soulhub install --from ./agent.zip
+soulhub install --from ./agent.zip --role worker --claw-type LightClaw
 
 # From URL
-soulhub install --from https://example.com/agent.zip
+soulhub install --from https://example.com/agent.zip --role worker --claw-type OpenClaw
 ```
 
 Advanced options:
 
 ```bash
 # Specify custom target directory (bypasses claw detection)
-soulhub install <agent-name> --dir ./custom-path
+soulhub install <agent-name> --role worker --dir ./custom-path
 
-# Install to a specific claw as main agent
-soulhub install <agent-name> --main --clawtype LightClaw
+# Fully non-interactive install with -y
+soulhub install <agent-name> --role main --claw-type LightClaw -y
 ```
 
 ### Step 4: Verify Installation
@@ -159,24 +160,23 @@ soulhub ls
 
 | Command | Behavior |
 |---------|----------|
-| `soulhub install <name>` | Install as worker to **all** detected claws |
-| `soulhub install <name> --main` | Install as main agent to **all** detected claws |
-| `soulhub install <name> --clawtype <type>` | Install as worker to **specific** claw only |
-| `soulhub install <name> --main --clawtype <type>` | Install as main agent to **specific** claw only |
+| `soulhub install <name>` | Interactive — prompts for role & claw selection |
+| `soulhub install <name> --role worker --claw-type <type>` | Install as worker to **specific** claw (non-interactive) |
+| `soulhub install <name> --role main --claw-type <type> -y` | Install as main to **specific** claw (fully non-interactive) |
 
 ## Installing a Team (Multi-Agent)
 
 Teams use the Dispatcher + Worker pattern. The CLI automatically detects `kind: team` and handles role assignment (dispatcher → main, workers → worker).
 
 ```bash
-# From registry (installs to all detected claws)
+# From registry (interactive claw selection)
 soulhub install dev-squad
 
-# From local ZIP (e.g., exported from SoulHub Fusion editor)
-soulhub install --from ./team-export.zip
+# From registry to a specific claw
+soulhub install dev-squad --claw-type LightClaw
 
-# Install to a specific claw only
-soulhub install dev-squad --clawtype LightClaw
+# From local ZIP
+soulhub install --from ./team-export.zip --claw-type OpenClaw
 ```
 
 The CLI automatically installs the dispatcher as the main Agent and workers into their respective workspace directories.
@@ -190,22 +190,22 @@ soulhub update <agent-name>
 # Update all agents
 soulhub update
 
-# Uninstall an agent
-soulhub uninstall <agent-name>
+# Uninstall an agent (-y to skip confirmation)
+soulhub uninstall <agent-name> -y
 # or
-soulhub rm <agent-name>
+soulhub rm <agent-name> -y
 
 # Uninstall but keep files
-soulhub uninstall <agent-name> --keep-files
+soulhub uninstall <agent-name> --keep-files -y
 
 # View rollback history
 soulhub rollback --list
 
-# Rollback to previous state
-soulhub rollback
+# Rollback the most recent install (-y to skip confirmation)
+soulhub rollback --last 1 -y
 
 # Rollback to specific backup
-soulhub rollback --id <backup-id>
+soulhub rollback --id <backup-id> -y
 ```
 
 ## Creating and Publishing an Agent Template
@@ -335,7 +335,7 @@ metadata:
 
 - **Config file**: `~/.soulhub/config.json`
 - **Custom registry**: Set `SOULHUB_REGISTRY_URL` environment variable
-- **Claw directory discovery priority**: `--clawtype` flag (single claw) > `OPENCLAW_HOME` / `LIGHTCLAW_HOME` env vars > auto-detect all: `~/.openclaw` + `~/.lightclaw`
+- **Claw directory discovery priority**: `--claw-type` flag (single claw) > `OPENCLAW_HOME` / `LIGHTCLAW_HOME` env vars > interactive selection from detected: `~/.openclaw` + `~/.lightclaw`
 
 ## Common Workflows
 
@@ -351,8 +351,8 @@ soulhub search
 # 3. Pick one and view details
 soulhub info coder-fullstack --identity
 
-# 4. Install as worker (default, installs to all detected claws)
-soulhub install coder-fullstack
+# 4. Install as worker to detected claw
+soulhub install coder-fullstack --role worker --claw-type OpenClaw
 
 # 5. Verify
 soulhub list
@@ -361,8 +361,8 @@ soulhub list
 ### Deploy a Dev Team
 
 ```bash
-# Install the pre-built dev squad team (auto-assigns roles, installs to all claws)
-soulhub install dev-squad
+# Install the pre-built dev squad team
+soulhub install dev-squad --claw-type OpenClaw
 
 # This installs:
 #   - dispatcher-main as the main agent
@@ -378,7 +378,7 @@ soulhub install dev-squad
 soulhub rollback --list
 
 # Rollback to the previous state
-soulhub rollback
+soulhub rollback --last 1 -y
 ```
 
 ## Available Agent Categories
