@@ -9,6 +9,7 @@ IMAGE_NAME   := $(APP_NAME)
 IMAGE_TAG    := latest
 PORT         := 3000
 DOCKER_PORT  := 80
+SSL_CERT_DIR := /etc/ssl/soulhub
 
 # ---------- 帮助 ----------
 .PHONY: help
@@ -77,17 +78,17 @@ typecheck: ## 运行 TypeScript 类型检查
 .PHONY: check
 check: lint typecheck ## 运行所有代码质量检查（lint + typecheck）
 
-# ---------- Docker ----------
+# ---------- Docker（单容器，仅 HTTP） ----------
 .PHONY: docker-build
 docker-build: ## 构建 Docker 镜像
 	docker build -t $(IMAGE_NAME):$(IMAGE_TAG) .
 
 .PHONY: docker-run
-docker-run: ## 运行 Docker 容器
+docker-run: ## 运行 Docker 容器（仅 HTTP）
 	docker run --rm -p $(DOCKER_PORT):$(PORT) --name $(APP_NAME) $(IMAGE_NAME):$(IMAGE_TAG)
 
 .PHONY: docker-run-d
-docker-run-d: ## 后台运行 Docker 容器
+docker-run-d: ## 后台运行 Docker 容器（仅 HTTP）
 	docker run -d -p $(DOCKER_PORT):$(PORT) --name $(APP_NAME) $(IMAGE_NAME):$(IMAGE_TAG)
 
 .PHONY: docker-stop
@@ -103,6 +104,31 @@ docker-logs: ## 查看 Docker 容器日志
 docker-shell: ## 进入 Docker 容器 Shell
 	docker exec -it $(APP_NAME) /bin/sh
 
+# ---------- Docker Compose（HTTPS） ----------
+.PHONY: compose-up
+compose-up: env ## 启动 HTTPS 服务（Nginx + Next.js）
+	@echo "\n🔒 检查 SSL 证书..."
+	@test -f $(SSL_CERT_DIR)/fullchain.pem || (echo "❌ 未找到 $(SSL_CERT_DIR)/fullchain.pem" && exit 1)
+	@test -f $(SSL_CERT_DIR)/privkey.pem || (echo "❌ 未找到 $(SSL_CERT_DIR)/privkey.pem" && exit 1)
+	@echo "✅ SSL 证书就绪"
+	docker compose up -d --build
+	@echo "\n✅ HTTPS 部署完成！访问 https://soulhub.store\n"
+
+.PHONY: compose-down
+compose-down: ## 停止 HTTPS 服务
+	docker compose down
+
+.PHONY: compose-logs
+compose-logs: ## 查看 HTTPS 服务日志
+	docker compose logs -f
+
+.PHONY: compose-restart
+compose-restart: ## 重启 HTTPS 服务
+	docker compose restart
+
+.PHONY: compose-rebuild
+compose-rebuild: env compose-down compose-up ## 重新构建并启动 HTTPS 服务
+
 # ---------- 环境准备 ----------
 .PHONY: env
 env: ## 初始化 .env 文件（若不存在则从 .env.example 复制）
@@ -115,8 +141,11 @@ env: ## 初始化 .env 文件（若不存在则从 .env.example 复制）
 
 # ---------- 一键部署 ----------
 .PHONY: deploy-docker
-deploy-docker: env docker-stop docker-build docker-run-d ## 一键 Docker 部署（构建并后台运行）
+deploy-docker: env docker-stop docker-build docker-run-d ## 一键 Docker 部署（仅 HTTP）
 	@echo "\n✅ 部署完成！访问 http://localhost:$(DOCKER_PORT)\n"
+
+.PHONY: deploy-https
+deploy-https: env compose-down compose-up ## 一键 HTTPS 部署（推荐）
 
 .PHONY: deploy-vercel
 deploy-vercel: env ## 部署到 Vercel（需要安装 vercel CLI）
