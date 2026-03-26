@@ -100,7 +100,6 @@ SoulHub's answer: **Define Agent souls in Markdown, share them through open sour
 | 🎧 Support | Frontline Support, Technical Support, Escalation Dispatcher |
 | 📚 Education | Programming Tutor, English Teacher |
 | 🎯 Dispatcher | Master Dispatcher (multi-Agent coordination) |
-| 🎮 ClawTown | Reporter, Chef, Artist, Doctor, Coach, Granny, Hacker, Kid, Poet, Trader |
 
 **3 Team Recipes**: Social Media Team, Dev Squad, Support Center.
 
@@ -378,7 +377,7 @@ Personality traits, communication style, workflow, decision principles.
 
 ### HEARTBEAT.md — Defines Agent's Daily Life (Optional)
 
-Daily routines, status updates, activity patterns. Currently used by ClawTown characters.
+Daily routines, status updates, activity patterns.
 
 ### skills/ — Skill Modules (Optional)
 

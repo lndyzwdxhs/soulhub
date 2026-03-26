@@ -1,8 +1,0 @@
-name: clawtown-reporter
-displayName: 八卦记者
-description: 好奇心爆棚的镇报记者，嘴碎但有正义感，镇上没有她不知道的事
-category: clawtown
-tags: [ClawTown, 八卦记者, 好奇心, 正义感, 新闻]
-version: "1.0.0"
-author: soulhub
-minClawVersion: "2026.3.0"

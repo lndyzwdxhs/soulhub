@@ -1,7 +1,7 @@
 name: data-analyst
 displayName: 数据分析师
 description: 数据分析与可视化专家，驱动数据化决策
-category: operations
+category: product
 tags: [数据分析, 数据可视化, BI, 业务洞察]
 version: "1.0.0"
 author: soulhub

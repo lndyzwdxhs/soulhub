@@ -1,8 +1,0 @@
-name: support-escalation
-displayName: 问题升级协调员
-description: 处理升级问题、用户投诉与跨部门协调
-category: support
-tags: [问题升级, 投诉处理, 跨部门协调, 客户关系]
-version: "1.0.0"
-author: soulhub
-minClawVersion: "2026.3.0"

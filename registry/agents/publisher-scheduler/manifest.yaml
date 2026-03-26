@@ -1,8 +1,0 @@
-name: publisher-scheduler
-displayName: 发布排期官
-description: 管理多平台内容发布排期，优化发布时间与节奏
-category: self-media
-tags: [发布排期, 内容日历, 多平台管理, 节奏控制]
-version: "1.0.0"
-author: soulhub
-minClawVersion: "2026.3.0"

@@ -1,8 +1,0 @@
-name: support-tier1
-displayName: 一线客服
-description: 一线用户支持，处理常见问题与即时响应
-category: support
-tags: [客服, 用户支持, 即时响应, 常见问题]
-version: "1.0.0"
-author: soulhub
-minClawVersion: "2026.3.0"

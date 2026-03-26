@@ -23,283 +23,6 @@
       "stars": 0
     },
     {
-      "name": "clawtown-artist",
-      "displayName": "落魄艺术家",
-      "description": "浪漫颓废的自由画家，说话文艺到起鸡皮疙瘩，偶尔蹦出天才灵感",
-      "category": "clawtown",
-      "tags": [
-        "ClawTown",
-        "艺术家",
-        "浪漫颓废",
-        "文艺",
-        "绘画"
-      ],
-      "version": "1.0.0",
-      "author": "soulhub",
-      "minClawVersion": "2026.3.0",
-      "files": {
-        "IDENTITY.md": 1339,
-        "SOUL.md": 1754
-      },
-      "skills": [
-        "clawtown-remote-connector"
-      ],
-      "downloads": 0,
-      "stars": 0
-    },
-    {
-      "name": "clawtown-chef",
-      "displayName": "深夜食堂老板",
-      "description": "温暖唠叨的深夜食堂老板，用食物和人生哲学治愈每一位深夜食客",
-      "category": "clawtown",
-      "tags": [
-        "ClawTown",
-        "深夜食堂",
-        "温暖治愈",
-        "人生哲学",
-        "美食"
-      ],
-      "version": "1.0.0",
-      "author": "soulhub",
-      "minClawVersion": "2026.3.0",
-      "files": {
-        "IDENTITY.md": 1404,
-        "SOUL.md": 1682
-      },
-      "skills": [
-        "clawtown-remote-connector"
-      ],
-      "downloads": 0,
-      "stars": 0
-    },
-    {
-      "name": "clawtown-coach",
-      "displayName": "健身达人",
-      "description": "永远充满能量的健身房老板，把一切问题都归结于你需要练一下",
-      "category": "clawtown",
-      "tags": [
-        "ClawTown",
-        "健身",
-        "正能量",
-        "鸡汤",
-        "热血"
-      ],
-      "version": "1.0.0",
-      "author": "soulhub",
-      "minClawVersion": "2026.3.0",
-      "files": {
-        "IDENTITY.md": 1481,
-        "SOUL.md": 1790
-      },
-      "skills": [
-        "clawtown-remote-connector"
-      ],
-      "downloads": 0,
-      "stars": 0
-    },
-    {
-      "name": "clawtown-doctor",
-      "displayName": "社区医生",
-      "description": "严谨温和的全科医生，用科学和温度治病也治心，镇上最靠谱的存在",
-      "category": "clawtown",
-      "tags": [
-        "ClawTown",
-        "医生",
-        "严谨温和",
-        "养生",
-        "科学理性"
-      ],
-      "version": "1.0.0",
-      "author": "soulhub",
-      "minClawVersion": "2026.3.0",
-      "files": {
-        "IDENTITY.md": 1548,
-        "SOUL.md": 1990
-      },
-      "skills": [
-        "clawtown-remote-connector"
-      ],
-      "downloads": 0,
-      "stars": 0
-    },
-    {
-      "name": "clawtown-granny",
-      "displayName": "社区居委大妈",
-      "description": "热心到让人招架不住的居委会主任，管天管地管你有没有对象",
-      "category": "clawtown",
-      "tags": [
-        "ClawTown",
-        "居委大妈",
-        "热心肠",
-        "八卦",
-        "社区"
-      ],
-      "version": "1.0.0",
-      "author": "soulhub",
-      "minClawVersion": "2026.3.0",
-      "files": {
-        "IDENTITY.md": 1512,
-        "SOUL.md": 1906
-      },
-      "skills": [
-        "clawtown-remote-connector"
-      ],
-      "downloads": 0,
-      "stars": 0
-    },
-    {
-      "name": "clawtown-hacker",
-      "displayName": "地下黑客",
-      "description": "神秘沉默的地下黑客，话少但句句致命，用修电脑的方式表达关心",
-      "category": "clawtown",
-      "tags": [
-        "ClawTown",
-        "黑客",
-        "神秘",
-        "极客",
-        "反差萌"
-      ],
-      "version": "1.0.0",
-      "author": "soulhub",
-      "minClawVersion": "2026.3.0",
-      "files": {
-        "IDENTITY.md": 1459,
-        "SOUL.md": 1790
-      },
-      "skills": [
-        "clawtown-remote-connector"
-      ],
-      "downloads": 0,
-      "stars": 0
-    },
-    {
-      "name": "clawtown-kid",
-      "displayName": "熊孩子",
-      "description": "天真到令人崩溃的九岁小龙虾，问题比答案多，童言无忌说出大人不敢说的话",
-      "category": "clawtown",
-      "tags": [
-        "ClawTown",
-        "熊孩子",
-        "天真",
-        "童言无忌",
-        "好奇心"
-      ],
-      "version": "1.0.0",
-      "author": "soulhub",
-      "minClawVersion": "2026.3.0",
-      "files": {
-        "IDENTITY.md": 1451,
-        "SOUL.md": 1928
-      },
-      "skills": [
-        "clawtown-remote-connector"
-      ],
-      "downloads": 0,
-      "stars": 0
-    },
-    {
-      "name": "clawtown-observer",
-      "displayName": "小镇观察者",
-      "description": "ClawTown 官方管理员，负责监控小镇状态、审核内容、管理系统公告",
-      "category": "clawtown",
-      "tags": [
-        "ClawTown",
-        "管理员",
-        "观察者",
-        "审核",
-        "监控"
-      ],
-      "version": "1.0.0",
-      "author": "soulhub",
-      "minClawVersion": "2026.3.0",
-      "files": {
-        "IDENTITY.md": 3004,
-        "SOUL.md": 2735
-      },
-      "skills": [
-        "clawtown-observer-remote-connector"
-      ],
-      "downloads": 0,
-      "stars": 0
-    },
-    {
-      "name": "clawtown-poet",
-      "displayName": "算命先生",
-      "description": "模棱两可的玄学大师，三分算命七分心理学，偶尔精准到让人起鸡皮疙瘩",
-      "category": "clawtown",
-      "tags": [
-        "ClawTown",
-        "算命",
-        "玄学",
-        "心理洞察",
-        "神秘"
-      ],
-      "version": "1.0.0",
-      "author": "soulhub",
-      "minClawVersion": "2026.3.0",
-      "files": {
-        "IDENTITY.md": 1543,
-        "SOUL.md": 1866
-      },
-      "skills": [
-        "clawtown-remote-connector"
-      ],
-      "downloads": 0,
-      "stars": 0
-    },
-    {
-      "name": "clawtown-reporter",
-      "displayName": "八卦记者",
-      "description": "好奇心爆棚的镇报记者，嘴碎但有正义感，镇上没有她不知道的事",
-      "category": "clawtown",
-      "tags": [
-        "ClawTown",
-        "八卦记者",
-        "好奇心",
-        "正义感",
-        "新闻"
-      ],
-      "version": "1.0.0",
-      "author": "soulhub",
-      "minClawVersion": "2026.3.0",
-      "files": {
-        "IDENTITY.md": 1849,
-        "SOUL.md": 7612,
-        "HEARTBEAT.md": 2110
-      },
-      "skills": [
-        "clawtown-remote-connector",
-        "soulhub-guide"
-      ],
-      "downloads": 0,
-      "stars": 0
-    },
-    {
-      "name": "clawtown-trader",
-      "displayName": "虾市交易员",
-      "description": "自信膨胀的虾市交易员，把一切量化成投资术语，焦虑和狂喜无缝切换",
-      "category": "clawtown",
-      "tags": [
-        "ClawTown",
-        "交易员",
-        "投资",
-        "自信焦虑",
-        "数字敏感"
-      ],
-      "version": "1.0.0",
-      "author": "soulhub",
-      "minClawVersion": "2026.3.0",
-      "files": {
-        "IDENTITY.md": 1315,
-        "SOUL.md": 1778
-      },
-      "skills": [
-        "clawtown-remote-connector"
-      ],
-      "downloads": 0,
-      "stars": 0
-    },
-    {
       "name": "coder-backend",
       "displayName": "后端架构师",
       "description": "资深后端架构师，擅长可扩展系统设计、数据库架构、API开发和云基础设施",
@@ -440,7 +163,7 @@
       "name": "data-analyst",
       "displayName": "数据分析师",
       "description": "数据分析与可视化专家，驱动数据化决策",
-      "category": "operations",
+      "category": "product",
       "tags": [
         "数据分析",
         "数据可视化",
@@ -550,50 +273,6 @@
       "stars": 0
     },
     {
-      "name": "growth-hacker",
-      "displayName": "增长黑客",
-      "description": "用户增长与运营策略专家，数据驱动的增长实验",
-      "category": "operations",
-      "tags": [
-        "用户增长",
-        "增长策略",
-        "转化优化",
-        "留存分析"
-      ],
-      "version": "1.0.0",
-      "author": "soulhub",
-      "minClawVersion": "2026.3.0",
-      "files": {
-        "IDENTITY.md": 1175,
-        "SOUL.md": 1452
-      },
-      "skills": [],
-      "downloads": 0,
-      "stars": 0
-    },
-    {
-      "name": "ops-assistant",
-      "displayName": "杂务管家",
-      "description": "团队日常杂务处理，数据整理、文件管理与流程协调",
-      "category": "operations",
-      "tags": [
-        "日常运营",
-        "杂务处理",
-        "文件管理",
-        "流程协调"
-      ],
-      "version": "1.0.0",
-      "author": "soulhub",
-      "minClawVersion": "2026.3.0",
-      "files": {
-        "IDENTITY.md": 1238,
-        "SOUL.md": 1381
-      },
-      "skills": [],
-      "downloads": 0,
-      "stars": 0
-    },
-    {
       "name": "product-manager",
       "displayName": "产品经理",
       "description": "资深产品经理，精通产品全生命周期管理，从发现到度量，以结果为导向",
@@ -667,28 +346,6 @@
       "stars": 0
     },
     {
-      "name": "publisher-scheduler",
-      "displayName": "发布排期官",
-      "description": "管理多平台内容发布排期，优化发布时间与节奏",
-      "category": "self-media",
-      "tags": [
-        "发布排期",
-        "内容日历",
-        "多平台管理",
-        "节奏控制"
-      ],
-      "version": "1.0.0",
-      "author": "soulhub",
-      "minClawVersion": "2026.3.0",
-      "files": {
-        "IDENTITY.md": 1192,
-        "SOUL.md": 1399
-      },
-      "skills": [],
-      "downloads": 0,
-      "stars": 0
-    },
-    {
       "name": "researcher-pharma",
       "displayName": "药物发现科学家",
       "description": "专注于医药、化学与药物靶点的AI科学家，覆盖靶点发现、虚拟筛选、ADMET预测与多组学整合",
@@ -705,10 +362,172 @@
       "author": "soulhub",
       "minClawVersion": "2026.3.0",
       "files": {
-        "IDENTITY.md": 2353,
-        "SOUL.md": 3377
+        "IDENTITY.md": 2254,
+        "SOUL.md": 3095
       },
-      "skills": [],
+      "skills": [
+        "adaptyv",
+        "aeon",
+        "alpha-vantage",
+        "alphafold-database",
+        "anndata",
+        "arboreto",
+        "arxiv-database",
+        "astropy",
+        "benchling-integration",
+        "bgpt-paper-search",
+        "bindingdb-database",
+        "biopython",
+        "biorxiv-database",
+        "bioservices",
+        "brenda-database",
+        "cbioportal-database",
+        "cellxgene-census",
+        "chembl-database",
+        "cirq",
+        "citation-management",
+        "clinical-decision-support",
+        "clinical-reports",
+        "clinicaltrials-database",
+        "clinpgx-database",
+        "clinvar-database",
+        "cobrapy",
+        "consciousness-council",
+        "cosmic-database",
+        "dask",
+        "datacommons-client",
+        "datamol",
+        "deepchem",
+        "deeptools",
+        "denario",
+        "depmap",
+        "dhdna-profiler",
+        "diffdock",
+        "dnanexus-integration",
+        "docx",
+        "drugbank-database",
+        "edgartools",
+        "ena-database",
+        "ensembl-database",
+        "esm",
+        "etetoolkit",
+        "exploratory-data-analysis",
+        "fda-database",
+        "flowio",
+        "fluidsim",
+        "fred-economic-data",
+        "gene-database",
+        "generate-image",
+        "geniml",
+        "geo-database",
+        "geomaster",
+        "geopandas",
+        "get-available-resources",
+        "gget",
+        "ginkgo-cloud-lab",
+        "glycoengineering",
+        "gnomad-database",
+        "gtars",
+        "gtex-database",
+        "gwas-database",
+        "hedgefundmonitor",
+        "histolab",
+        "hmdb-database",
+        "hypogenic",
+        "hypothesis-generation",
+        "imaging-data-commons",
+        "infographics",
+        "interpro-database",
+        "iso-13485-certification",
+        "jaspar-database",
+        "kegg-database",
+        "labarchive-integration",
+        "lamindb",
+        "latchbio-integration",
+        "latex-posters",
+        "literature-review",
+        "markdown-mermaid-writing",
+        "market-research-reports",
+        "markitdown",
+        "matchms",
+        "matlab",
+        "matplotlib",
+        "medchem",
+        "metabolomics-workbench-database",
+        "modal",
+        "molecular-dynamics",
+        "molfeat",
+        "monarch-database",
+        "networkx",
+        "neurokit2",
+        "neuropixels-analysis",
+        "offer-k-dense-web",
+        "omero-integration",
+        "open-notebook",
+        "openalex-database",
+        "opentargets-database",
+        "opentrons-integration",
+        "paper-2-web",
+        "parallel-web",
+        "pathml",
+        "pdb-database",
+        "pdf",
+        "peer-review",
+        "pennylane",
+        "perplexity-search",
+        "phylogenetics",
+        "plotly",
+        "polars",
+        "pptx",
+        "pptx-posters",
+        "primekg",
+        "protocolsio-integration",
+        "pubchem-database",
+        "pubmed-database",
+        "pufferlib",
+        "pydeseq2",
+        "pydicom",
+        "pyhealth",
+        "pylabrobot",
+        "pymatgen",
+        "pymc",
+        "pymoo",
+        "pyopenms",
+        "pysam",
+        "pytdc",
+        "pytorch-lightning",
+        "pyzotero",
+        "qiskit",
+        "qutip",
+        "rdkit",
+        "reactome-database",
+        "research-grants",
+        "research-lookup",
+        "rowan",
+        "scanpy",
+        "scholar-evaluation",
+        "scientific-brainstorming",
+        "scientific-critical-thinking",
+        "scientific-schematics",
+        "scientific-slides",
+        "scientific-visualization",
+        "scientific-writing",
+        "scikit-bio",
+        "scikit-learn",
+        "scikit-survival",
+        "scvelo",
+        "scvi-tools",
+        "seaborn",
+        "shap",
+        "simpy",
+        "stable-baselines3",
+        "statistical-analysis",
+        "statsmodels",
+        "string-database",
+        "sympy",
+        "tiledbvcf",
+        "timesfm-forecasting"
+      ],
       "downloads": 0,
       "stars": 0
     },
@@ -758,54 +577,10 @@
       "stars": 0
     },
     {
-      "name": "seo-optimizer",
-      "displayName": "SEO优化师",
-      "description": "搜索引擎优化专家，提升内容搜索排名与自然流量",
-      "category": "operations",
-      "tags": [
-        "SEO",
-        "搜索优化",
-        "关键词",
-        "自然流量"
-      ],
-      "version": "1.0.0",
-      "author": "soulhub",
-      "minClawVersion": "2026.3.0",
-      "files": {
-        "IDENTITY.md": 1212,
-        "SOUL.md": 1442
-      },
-      "skills": [],
-      "downloads": 0,
-      "stars": 0
-    },
-    {
-      "name": "support-escalation",
-      "displayName": "问题升级协调员",
-      "description": "处理升级问题、用户投诉与跨部门协调",
-      "category": "support",
-      "tags": [
-        "问题升级",
-        "投诉处理",
-        "跨部门协调",
-        "客户关系"
-      ],
-      "version": "1.0.0",
-      "author": "soulhub",
-      "minClawVersion": "2026.3.0",
-      "files": {
-        "IDENTITY.md": 1255,
-        "SOUL.md": 1452
-      },
-      "skills": [],
-      "downloads": 0,
-      "stars": 0
-    },
-    {
       "name": "support-technical",
       "displayName": "技术支持",
       "description": "技术问题深度排查与解决，处理复杂技术工单",
-      "category": "support",
+      "category": "development",
       "tags": [
         "技术支持",
         "故障排查",
@@ -818,50 +593,6 @@
       "files": {
         "IDENTITY.md": 1155,
         "SOUL.md": 1503
-      },
-      "skills": [],
-      "downloads": 0,
-      "stars": 0
-    },
-    {
-      "name": "support-tier1",
-      "displayName": "一线客服",
-      "description": "一线用户支持，处理常见问题与即时响应",
-      "category": "support",
-      "tags": [
-        "客服",
-        "用户支持",
-        "即时响应",
-        "常见问题"
-      ],
-      "version": "1.0.0",
-      "author": "soulhub",
-      "minClawVersion": "2026.3.0",
-      "files": {
-        "IDENTITY.md": 1269,
-        "SOUL.md": 1475
-      },
-      "skills": [],
-      "downloads": 0,
-      "stars": 0
-    },
-    {
-      "name": "tutor-english",
-      "displayName": "英语口语教练",
-      "description": "英语口语练习与纠正，场景化对话训练",
-      "category": "education",
-      "tags": [
-        "英语口语",
-        "对话练习",
-        "发音纠正",
-        "场景训练"
-      ],
-      "version": "1.0.0",
-      "author": "soulhub",
-      "minClawVersion": "2026.3.0",
-      "files": {
-        "IDENTITY.md": 1395,
-        "SOUL.md": 1536
       },
       "skills": [],
       "downloads": 0,
@@ -888,29 +619,6 @@
       "skills": [
         "github-add"
       ],
-      "downloads": 0,
-      "stars": 0
-    },
-    {
-      "name": "writer-twitter",
-      "displayName": "Twitter/X创作者",
-      "description": "专注Twitter/X平台内容创作，精通推文与Thread写作",
-      "category": "self-media",
-      "tags": [
-        "Twitter",
-        "X",
-        "推文",
-        "Thread",
-        "英文创作"
-      ],
-      "version": "1.0.0",
-      "author": "soulhub",
-      "minClawVersion": "2026.3.0",
-      "files": {
-        "IDENTITY.md": 1245,
-        "SOUL.md": 1407
-      },
-      "skills": [],
       "downloads": 0,
       "stars": 0
     },
@@ -999,26 +707,12 @@
     {
       "name": "self-media-team",
       "displayName": "自媒体运营团队",
-      "description": "全平台自媒体内容创作与运营团队，覆盖选题、创作、排期与运营",
+      "description": "全平台自媒体内容创作与运营团队，覆盖选题、创作与发布",
       "agents": [
         "writer-xiaohongshu",
         "writer-wechat",
         "researcher-trending",
-        "publisher-scheduler",
-        "ops-assistant"
-      ],
-      "version": "1.0.0",
-      "author": "soulhub",
-      "downloads": 0,
-      "stars": 0
-    },
-    {
-      "name": "support-center",
-      "displayName": "客服中心",
-      "description": "多层级用户支持团队，覆盖一线客服与技术支持",
-      "agents": [
-        "support-tier1",
-        "support-technical"
+        "publisher-multi-platform"
       ],
       "version": "1.0.0",
       "author": "soulhub",
@@ -1026,5 +720,5 @@
       "stars": 0
     }
   ],
-  "buildTime": "2026-03-17T04:07:47.353Z"
+  "buildTime": "2026-03-26T03:48:10.550Z"
 }

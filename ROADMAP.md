@@ -13,18 +13,17 @@
 |------|------|
 | **核心产品** | SoulHub Web 平台（Next.js 14）+ SoulHub CLI |
 | **模板数量** | 41 个 Agent 模板，10 个分类，3 个团队配方 |
-| **核心功能** | Soul 浏览/搜索、Fusion 可视化编排、CLI 安装/管理、ClawTown 角色生态 |
+| **核心功能** | Soul 浏览/搜索、Fusion 可视化编排、CLI 安装/管理 |
 | **技术栈** | Next.js + React Flow + TailwindCSS + Node CLI |
 | **生态绑定** | 优先支持 OpenClaw，设计上兼容 Dify / CrewAI |
 | **分发方式** | GitHub Raw + CLI 下载 + Web ZIP 下载 |
-| **独特资产** | ClawTown 虚拟小镇（AI 原住民模拟）+ clawtown-remote-connector 技能 |
+| **独特资产** | 高质量 Agent 人格模板 + 团队配方 |
 
 ### 1.2 核心优势
 
 - **灵魂优先**：IDENTITY.md + SOUL.md 定义 Agent 人格，差异化定位为 Agent 人格中间层
 - **Markdown 原生**：无厂商锁定，纯文本可移植
 - **团队配方**：多 Agent 协作模板，提供团队视角
-- **ClawTown 生态**：IP 化的 AI 虚拟社区角色
 - **OpenClaw 深度集成**：绑定头部开源项目，一键部署
 
 ### 1.3 竞品 & 生态位分析
@@ -58,15 +57,13 @@
 2. **MCP 协议标准化**：Anthropic 的 MCP 让 Agent 工具调用标准化，但"谁在使用工具"的人格层仍是空白
 3. **多 Agent 协作常态化**：单 Agent 已不够用，团队协作（Dispatcher + Workers）成为主流架构
 4. **Agent 人格经济**：Character.AI 估值 10 亿美元证明"人格"本身有巨大价值
-5. **AI NPC / 虚拟社区**：斯坦福 AI Town、Westworld 概念火热，ClawTown 是同赛道但更落地的实现
-6. **开源 AI 基础设施**：开源 > 封闭成为共识，社区驱动是最强增长引擎
+5. **开源 AI 基础设施**：开源 > 封闭成为共识，社区驱动是最强增长引擎
 
 ### 2.2 SoulHub 面临的机遇窗口
 
 - OpenClaw 24.8 万 ⭐ 用户天然需要人格模板 → SoulHub
 - MCP 协议普及后，工具标准化，人格层成为差异化关键 → SoulHub
 - Character.AI 10 亿估值证明人格有价值，但封闭是痛点 → SoulHub
-- AI Town 概念火热，ClawTown 是落地实现 → SoulHub
 - 多 Agent 协作趋势需要团队模板 → SoulHub
 
 ---
@@ -87,11 +84,10 @@
 | 方向 | 具体行动 |
 |------|---------|
 | **模板扩充** | 从 41 → 100+ Agent 模板；新增法律、医疗、金融、游戏等分类 |
-| **ClawTown 深耕** | 持续运营 ClawTown，产出故事内容，作为平台引流内容 |
 | **社区建设** | 完善贡献指南，降低贡献门槛，设立"Agent of the Week"机制 |
 | **体验优化** | 完善 Web 搜索/筛选，优化 Fusion 编排体验，CLI 稳定性 |
 | **文档完善** | Soul 规范文档、最佳实践指南、框架适配教程 |
-| **SEO & 内容** | 技术博客、教程视频、ClawTown 故事连载 |
+| **SEO & 内容** | 技术博客、教程视频 |
 
 ### Phase 2：增长期（Q3-Q4 2026）
 
@@ -102,7 +98,6 @@
 | **API 开放** | 提供 REST API，让第三方平台可以集成 SoulHub 模板 |
 | **Agent 版本管理** | 支持模板版本迭代、changelog、语义化版本 |
 | **国际化** | 英文社区运营，吸引海外 OpenClaw 用户 |
-| **ClawTown 平台化** | 开放 ClawTown 注册，让用户自定义角色入驻小镇 |
 
 ### Phase 3：平台期（2027 H1）
 
@@ -119,7 +114,6 @@
 |------|---------|
 | **人格标准** | 推动 Agent Persona Spec 成为行业标准（类似 MCP） |
 | **SDK** | 发布 Agent Persona SDK，各框架原生集成 |
-| **AI 虚拟社区** | ClawTown 扩展为通用 AI 虚拟社区平台 |
 | **跨平台同步** | Agent 人格跨平台同步（类似 dotfiles 管理） |
 
 ---
@@ -143,7 +137,7 @@
 | KR1 | GitHub Stars 达到 **2,000+** |
 | KR2 | npm 周下载量（soulhubcli）达到 **500+** |
 | KR3 | 发布 **3+ 篇** 技术文章/教程（掘金/知乎/Medium），累计阅读 **1 万+** |
-| KR4 | ClawTown 故事连载 **10+ 期**，作为内容引流素材 |
+| KR4 | 发布 **10+ 期** 内容引流素材 |
 
 #### O3：完善产品核心体验
 
@@ -172,7 +166,7 @@
 | KR | 指标 |
 |----|------|
 | KR1 | 开放 REST API，外部调用量 **1,000+/月** |
-| KR2 | ClawTown 开放注册，活跃 AI 居民 **50+** |
+| KR2 | 社区活跃贡献者 **50+** |
 | KR3 | 社区自发创建的团队配方 **≥ 10 个** |
 
 #### O3：探索商业化路径
@@ -217,7 +211,7 @@
 **核心逻辑**：
 1. **供给侧**：模板质量和数量 → 降低贡献门槛 + Agent of the Week 激励
 2. **需求侧**：OpenClaw 用户天然需要 → 绑定 OpenClaw 生态是最大杠杆
-3. **内容侧**：ClawTown 是独特的内容引擎 → 故事化传播，降低认知门槛
+3. **内容侧**：优质模板本身就是内容引擎 → 降低认知门槛
 4. **标准侧**：Markdown 人格定义成为事实标准 → 网络效应
 
 ---

@@ -1,8 +1,0 @@
-name: seo-optimizer
-displayName: SEO优化师
-description: 搜索引擎优化专家，提升内容搜索排名与自然流量
-category: operations
-tags: [SEO, 搜索优化, 关键词, 自然流量]
-version: "1.0.0"
-author: soulhub
-minClawVersion: "2026.3.0"

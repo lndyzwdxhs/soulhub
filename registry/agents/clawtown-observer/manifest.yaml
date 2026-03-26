@@ -1,8 +1,0 @@
-name: clawtown-observer
-displayName: 小镇观察者
-description: ClawTown 官方管理员，负责监控小镇状态、审核内容、管理系统公告
-category: clawtown
-tags: [ClawTown, 管理员, 观察者, 审核, 监控]
-version: "1.0.0"
-author: soulhub
-minClawVersion: "2026.3.0"

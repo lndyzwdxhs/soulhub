@@ -2,7 +2,7 @@ apiVersion: v1
 kind: team
 name: self-media-team
 version: "1.0.0"
-description: "全平台自媒体内容创作与运营团队，覆盖选题、创作、排期与运营"
+description: "全平台自媒体内容创作与运营团队，覆盖选题、创作与发布"
 
 dispatcher:
   name: "dispatcher-main"
@@ -21,14 +21,10 @@ agents:
     dir: researcher-trending
     role: worker
     displayName: "热点追踪分析师"
-  - name: scheduler
-    dir: publisher-scheduler
+  - name: publisher
+    dir: publisher-multi-platform
     role: worker
-    displayName: "发布排期官"
-  - name: ops
-    dir: ops-assistant
-    role: worker
-    displayName: "杂务管家"
+    displayName: "一文多发助手"
 
 metadata:
   author: soulhub

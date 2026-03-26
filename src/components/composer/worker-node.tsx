@@ -8,29 +8,23 @@ import { getCategoryIcon } from "@/lib/data";
 const CATEGORY_COLORS: Record<string, string> = {
   "self-media": "border-l-pink-400",
   development: "border-l-emerald-400",
-  operations: "border-l-amber-400",
-  support: "border-l-sky-400",
   education: "border-l-purple-400",
   design: "border-l-rose-400",
   product: "border-l-indigo-400",
   security: "border-l-red-400",
   dispatcher: "border-l-blue-400",
   research: "border-l-teal-400",
-  clawtown: "border-l-orange-400",
 };
 
 const CATEGORY_BADGE_COLORS: Record<string, string> = {
   "self-media": "bg-pink-500/15 text-pink-600 dark:text-pink-300 border-pink-500/20",
   development: "bg-emerald-500/15 text-emerald-600 dark:text-emerald-300 border-emerald-500/20",
-  operations: "bg-amber-500/15 text-amber-600 dark:text-amber-300 border-amber-500/20",
-  support: "bg-sky-500/15 text-sky-600 dark:text-sky-300 border-sky-500/20",
   education: "bg-purple-500/15 text-purple-600 dark:text-purple-300 border-purple-500/20",
   design: "bg-rose-500/15 text-rose-600 dark:text-rose-300 border-rose-500/20",
   product: "bg-indigo-500/15 text-indigo-600 dark:text-indigo-300 border-indigo-500/20",
   security: "bg-red-500/15 text-red-600 dark:text-red-300 border-red-500/20",
   dispatcher: "bg-blue-500/15 text-blue-600 dark:text-blue-300 border-blue-500/20",
   research: "bg-teal-500/15 text-teal-600 dark:text-teal-300 border-teal-500/20",
-  clawtown: "bg-orange-500/15 text-orange-600 dark:text-orange-300 border-orange-500/20",
 };
 
 interface WorkerNodeData {

@@ -1,11 +1,8 @@
 import {
   PenTool,
   Code,
-  Settings,
-  Headphones,
   GraduationCap,
   Network,
-  Gamepad2,
   Palette,
   Compass,
   Shield,
@@ -28,20 +25,6 @@ export const CATEGORIES: Category[] = [
     nameEn: "Development",
     icon: "code",
     description: "Software development and engineering tools",
-  },
-  {
-    id: "operations",
-    name: "运营",
-    nameEn: "Operations",
-    icon: "settings",
-    description: "Business operations and data analysis",
-  },
-  {
-    id: "support",
-    name: "客服",
-    nameEn: "Support",
-    icon: "headphones",
-    description: "Customer support and service management",
   },
   {
     id: "education",
@@ -85,27 +68,17 @@ export const CATEGORIES: Category[] = [
     icon: "microscope",
     description: "药物发现、生物信息学、化学信息学等科学研究相关 Agent",
   },
-  {
-    id: "clawtown",
-    name: "ClawTown角色",
-    nameEn: "ClawTown",
-    icon: "gamepad-2",
-    description: "ClawTown 小镇模拟游戏角色，每只小龙虾都有独特的人格与故事",
-  },
 ];
 
 const iconMap: Record<string, LucideIcon> = {
   "pen-tool": PenTool,
   code: Code,
-  settings: Settings,
-  headphones: Headphones,
   "graduation-cap": GraduationCap,
   palette: Palette,
   compass: Compass,
   shield: Shield,
   network: Network,
   microscope: Microscope,
-  "gamepad-2": Gamepad2,
 };
 
 export function getCategoryIcon(categoryId: string): LucideIcon {

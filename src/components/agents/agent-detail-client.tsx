@@ -14,6 +14,7 @@ import {
   Cpu,
   Archive,
   Zap,
+  MessageSquareText,
 } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
@@ -43,15 +44,12 @@ type TabId = "overview" | "identity" | "soul" | "heartbeat" | "skills" | "files"
 const categoryColors: Record<string, string> = {
   "self-media": "text-pink-400 bg-pink-400/10 border-pink-400/20",
   development: "text-blue-400 bg-blue-400/10 border-blue-400/20",
-  operations: "text-amber-400 bg-amber-400/10 border-amber-400/20",
-  support: "text-green-400 bg-green-400/10 border-green-400/20",
   education: "text-violet-400 bg-violet-400/10 border-violet-400/20",
   design: "text-rose-400 bg-rose-400/10 border-rose-400/20",
   product: "text-indigo-400 bg-indigo-400/10 border-indigo-400/20",
   security: "text-red-400 bg-red-400/10 border-red-400/20",
   dispatcher: "text-cyan-400 bg-cyan-400/10 border-cyan-400/20",
   research: "text-teal-400 bg-teal-400/10 border-teal-400/20",
-  clawtown: "text-orange-400 bg-orange-400/10 border-orange-400/20",
 };
 
 function formatBytes(bytes: number): string {
@@ -69,6 +67,7 @@ export function AgentDetailClient({
   relatedAgents,
 }: AgentDetailClientProps) {
   const [activeTab, setActiveTab] = useState<TabId>("overview");
+  const [installTab, setInstallTab] = useState<"prompt" | "sub-prompt" | "cli">("prompt");
 
   // 动态构建 tabs，当有 skills 时才显示 Skills 页签
   const tabs: { id: TabId; label: string; icon: typeof Package }[] = [
@@ -90,6 +89,35 @@ export function AgentDetailClient({
     categoryColors[agent.category] ||
     "text-muted-foreground bg-[hsl(var(--glass-bg)/0.05)] border-[hsl(var(--glass-border)/0.1)]";
   const installCommand = `soulhub install ${agent.name}`;
+  const installPrompt = `请帮我安装 ${agent.name} 这个 Agent 作为主角色。按以下步骤执行：
+
+1. 执行 \`which soulhub\`，如果输出为空或报错，先执行：
+   curl -fsSL https://soulhub-1251783334.cos.ap-guangzhou.myqcloud.com/install.sh | bash
+   安装后执行 \`hash -r\`，再执行 \`soulhub --version\` 确认成功。
+
+2. 执行 \`pwd\`，根据路径判断 claw 类型：
+   - 路径含 .openclaw 或 OpenClaw → 类型为 OpenClaw
+   - 路径含 .lightclaw 或 LightClaw → 类型为 LightClaw
+
+3. 执行安装命令（必须带全参数，不能遗漏任何一个）：
+   soulhub install ${agent.name} --role main --claw-type <上一步判断的类型> -y
+
+注意：第3步的 --role main、--claw-type、-y 三个参数缺一不可，否则会卡住。`;
+
+  const installSubPrompt = `请帮我安装 ${agent.name} 这个 Agent 作为子角色（subagent）。按以下步骤执行：
+
+1. 执行 \`which soulhub\`，如果输出为空或报错，先执行：
+   curl -fsSL https://soulhub-1251783334.cos.ap-guangzhou.myqcloud.com/install.sh | bash
+   安装后执行 \`hash -r\`，再执行 \`soulhub --version\` 确认成功。
+
+2. 执行 \`pwd\`，根据路径判断 claw 类型：
+   - 路径含 .openclaw 或 OpenClaw → 类型为 OpenClaw
+   - 路径含 .lightclaw 或 LightClaw → 类型为 LightClaw
+
+3. 执行安装命令（必须带全参数，不能遗漏任何一个）：
+   soulhub install ${agent.name} --role worker --claw-type <上一步判断的类型> -y
+
+注意：第3步的 --role worker、--claw-type、-y 三个参数缺一不可，否则会卡住。`;
 
   const handleDownloadZip = useCallback(async () => {
     const JSZip = (await import("jszip")).default;
@@ -194,31 +222,177 @@ export function AgentDetailClient({
             </div>
           </motion.div>
 
-          {/* CLI Install Section */}
+          {/* Install Section - 终端风格页签切换 */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             className="mb-10"
           >
-            <div className="relative rounded-xl p-[1px] bg-gradient-to-r from-blue-400/50 via-violet-400/50 to-cyan-400/50 glow">
-              <div className="rounded-xl bg-background/95 backdrop-blur-xl p-5">
-                <div className="flex items-center gap-2 mb-3">
-                  <Terminal className="h-4 w-4 text-violet-400" />
-                  <span className="text-sm font-medium text-foreground">
-                    一行命令安装灵魂
-                  </span>
+            <div className="relative rounded-xl p-[1px] bg-gradient-to-br from-cyan-400/50 via-blue-500/50 to-violet-500/50 glow">
+              <div className="rounded-xl bg-gray-50 dark:bg-[hsl(220,15%,8%)] overflow-hidden">
+                {/* 终端标题栏 */}
+                <div className="flex items-center gap-3 px-4 py-3 bg-gray-100 dark:bg-[hsl(220,15%,12%)] border-b border-black/[0.06] dark:border-white/[0.06]">
+                  {/* 红黄绿三点 */}
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-3 h-3 rounded-full bg-[#ff5f57]" />
+                    <span className="w-3 h-3 rounded-full bg-[#febc2e]" />
+                    <span className="w-3 h-3 rounded-full bg-[#28c840]" />
+                  </div>
+
+                  {/* 页签 */}
+                  <div className="flex items-center gap-0.5 ml-2">
+                    <button
+                      onClick={() => setInstallTab("prompt")}
+                      className={cn(
+                        "relative flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-medium rounded-md transition-all duration-200",
+                        installTab === "prompt"
+                          ? "bg-black/[0.07] dark:bg-white/[0.1] text-gray-900 dark:text-white shadow-sm"
+                          : "text-gray-400 dark:text-white/40 hover:text-gray-600 dark:hover:text-white/70 hover:bg-black/[0.03] dark:hover:bg-white/[0.04]"
+                      )}
+                    >
+                      <MessageSquareText className="h-3.5 w-3.5" />
+                      Prompt（安装为主Agent）
+                      {installTab === "prompt" && (
+                        <span className="ml-1 text-[9px] font-bold uppercase tracking-wider px-1 py-px rounded bg-cyan-600/15 text-cyan-700 dark:bg-cyan-400/20 dark:text-cyan-400">
+                          推荐
+                        </span>
+                      )}
+                    </button>
+                    <button
+                      onClick={() => setInstallTab("sub-prompt")}
+                      className={cn(
+                        "relative flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-medium rounded-md transition-all duration-200",
+                        installTab === "sub-prompt"
+                          ? "bg-black/[0.07] dark:bg-white/[0.1] text-gray-900 dark:text-white shadow-sm"
+                          : "text-gray-400 dark:text-white/40 hover:text-gray-600 dark:hover:text-white/70 hover:bg-black/[0.03] dark:hover:bg-white/[0.04]"
+                      )}
+                    >
+                      <MessageSquareText className="h-3.5 w-3.5" />
+                      Prompt（安装为SubAgent）
+                    </button>
+                    <button
+                      onClick={() => setInstallTab("cli")}
+                      className={cn(
+                        "flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-medium rounded-md transition-all duration-200",
+                        installTab === "cli"
+                          ? "bg-black/[0.07] dark:bg-white/[0.1] text-gray-900 dark:text-white shadow-sm"
+                          : "text-gray-400 dark:text-white/40 hover:text-gray-600 dark:hover:text-white/70 hover:bg-black/[0.03] dark:hover:bg-white/[0.04]"
+                      )}
+                    >
+                      <Terminal className="h-3.5 w-3.5" />
+                      使用 CLI 安装
+                    </button>
+                  </div>
+
+                  {/* 右侧复制按钮 */}
+                  <div className="ml-auto">
+                    <CopyButton
+                      text={installTab === "prompt" ? installPrompt : installTab === "sub-prompt" ? installSubPrompt : installCommand}
+                    />
+                  </div>
                 </div>
-                <div className="flex items-center gap-3">
-                  <code className="flex-1 text-sm font-mono bg-[hsl(var(--glass-bg)/0.05)] rounded-lg px-4 py-2.5 text-green-700 dark:text-green-300/90 border border-[hsl(var(--glass-border)/0.05)]">
-                    {installCommand}
-                  </code>
-                  <CopyButton text={installCommand} />
+
+                {/* 内容区域 */}
+                <div className="p-5">
+                  <AnimatePresence mode="wait">
+                    {installTab === "prompt" ? (
+                      <motion.div
+                        key="prompt"
+                        initial={{ opacity: 0, y: 6 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -6 }}
+                        transition={{ duration: 0.15 }}
+                      >
+                        {/* 提示词描述 */}
+                        <p className="text-xs text-gray-400 dark:text-white/30 mb-3">
+                          复制以下提示词发送给 AI，即可将该 Agent 安装为<strong className="text-gray-600 dark:text-white/60">主 Agent</strong>
+                        </p>
+
+                        {/* 提示词内容 */}
+                        <pre className="text-[13px] font-mono text-gray-700 dark:text-white/80 whitespace-pre-wrap leading-relaxed max-h-52 overflow-y-auto pr-2 scrollbar-thin">
+                          {installPrompt}
+                        </pre>
+
+                        {/* 底部步骤指引 */}
+                        <div className="mt-4 pt-3 border-t border-black/[0.06] dark:border-white/[0.06] flex items-center gap-4 text-[11px] text-gray-400 dark:text-white/30">
+                          <span className="flex items-center gap-1.5">
+                            <span className="inline-flex items-center justify-center w-4 h-4 rounded-full bg-cyan-400/15 text-cyan-400 text-[10px] font-bold">1</span>
+                            检测环境
+                          </span>
+                          <span className="text-gray-300 dark:text-white/10">→</span>
+                          <span className="flex items-center gap-1.5">
+                            <span className="inline-flex items-center justify-center w-4 h-4 rounded-full bg-blue-400/15 text-blue-400 text-[10px] font-bold">2</span>
+                            识别 Claw
+                          </span>
+                          <span className="text-gray-300 dark:text-white/10">→</span>
+                          <span className="flex items-center gap-1.5">
+                            <span className="inline-flex items-center justify-center w-4 h-4 rounded-full bg-violet-400/15 text-violet-400 text-[10px] font-bold">3</span>
+                            一键安装
+                          </span>
+                        </div>
+                      </motion.div>
+                    ) : installTab === "sub-prompt" ? (
+                      <motion.div
+                        key="sub-prompt"
+                        initial={{ opacity: 0, y: 6 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -6 }}
+                        transition={{ duration: 0.15 }}
+                      >
+                        {/* 提示词描述 */}
+                        <p className="text-xs text-gray-400 dark:text-white/30 mb-3">
+                          复制以下提示词发送给 AI，即可将该 Agent 安装为<strong className="text-gray-600 dark:text-white/60">子 Agent</strong>
+                        </p>
+
+                        {/* 提示词内容 */}
+                        <pre className="text-[13px] font-mono text-gray-700 dark:text-white/80 whitespace-pre-wrap leading-relaxed max-h-52 overflow-y-auto pr-2 scrollbar-thin">
+                          {installSubPrompt}
+                        </pre>
+
+                        {/* 底部步骤指引 */}
+                        <div className="mt-4 pt-3 border-t border-black/[0.06] dark:border-white/[0.06] flex items-center gap-4 text-[11px] text-gray-400 dark:text-white/30">
+                          <span className="flex items-center gap-1.5">
+                            <span className="inline-flex items-center justify-center w-4 h-4 rounded-full bg-cyan-400/15 text-cyan-400 text-[10px] font-bold">1</span>
+                            检测环境
+                          </span>
+                          <span className="text-gray-300 dark:text-white/10">→</span>
+                          <span className="flex items-center gap-1.5">
+                            <span className="inline-flex items-center justify-center w-4 h-4 rounded-full bg-blue-400/15 text-blue-400 text-[10px] font-bold">2</span>
+                            识别 Claw
+                          </span>
+                          <span className="text-gray-300 dark:text-white/10">→</span>
+                          <span className="flex items-center gap-1.5">
+                            <span className="inline-flex items-center justify-center w-4 h-4 rounded-full bg-violet-400/15 text-violet-400 text-[10px] font-bold">3</span>
+                            一键安装
+                          </span>
+                        </div>
+                      </motion.div>
+                    ) : (
+                      <motion.div
+                        key="cli"
+                        initial={{ opacity: 0, y: 6 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -6 }}
+                        transition={{ duration: 0.15 }}
+                      >
+                        <p className="text-xs text-gray-400 dark:text-white/30 mb-3">
+                          需已安装 soulhub CLI，在终端中执行以下命令
+                        </p>
+                        <div className="font-mono">
+                          <span className="text-gray-400 dark:text-white/30 select-none">$ </span>
+                          <span className="text-green-600 dark:text-green-400/90 text-sm">
+                            {installCommand}
+                          </span>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               </div>
             </div>
 
-            {/* ZIP Download button */}
+            {/* ZIP 下载 - 辅助链接 */}
             <button
               onClick={handleDownloadZip}
               className="mt-3 inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors px-4 py-2 rounded-lg hover:bg-[hsl(var(--glass-bg)/0.05)] border border-transparent hover:border-[hsl(var(--glass-border)/0.1)]"

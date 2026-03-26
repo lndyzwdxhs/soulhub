@@ -1,8 +1,0 @@
-name: writer-twitter
-displayName: Twitter/X创作者
-description: 专注Twitter/X平台内容创作，精通推文与Thread写作
-category: self-media
-tags: [Twitter, X, 推文, Thread, 英文创作]
-version: "1.0.0"
-author: soulhub
-minClawVersion: "2026.3.0"
