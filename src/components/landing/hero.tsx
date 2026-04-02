@@ -353,7 +353,7 @@ function TerminalPreview() {
       </div>
 
       {/* Terminal body */}
-      <div className="py-4 font-mono text-sm text-left overflow-x-auto">
+      <div className="py-4 font-mono text-sm text-left overflow-x-auto scrollbar-none">
         <div className="px-5 min-w-max">
         {activeCommand.command.split("\n").map((line, i) => {
           const isComment = line.startsWith("#");
@@ -427,7 +427,7 @@ function Step02Terminal() {
       </div>
 
       {/* Terminal body */}
-      <div className="px-5 py-4 font-mono text-sm text-left overflow-x-auto">
+      <div className="px-5 py-4 font-mono text-sm text-left overflow-x-auto scrollbar-none">
         {step02Commands.split("\n").map((line, i) => {
           const isComment = line.startsWith("#");
           return (
@@ -515,7 +515,7 @@ function ClawTerminal() {
       </div>
 
       {/* Terminal body */}
-      <div className="py-4 font-mono text-sm text-left overflow-x-auto">
+      <div className="py-4 font-mono text-sm text-left overflow-x-auto scrollbar-none">
         <div className="px-5 min-w-max">
           {activeCommand.command.split("\n").map((line, i) => {
             const isComment = line.startsWith("#");

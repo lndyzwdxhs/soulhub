@@ -310,7 +310,7 @@ export function AgentDetailClient({
                         </p>
 
                         {/* 提示词内容 */}
-                        <pre className="text-[13px] font-mono text-gray-700 dark:text-white/80 whitespace-pre-wrap leading-relaxed max-h-52 overflow-y-auto pr-2 scrollbar-thin">
+                        <pre className="text-[13px] font-mono text-gray-700 dark:text-white/80 whitespace-pre-wrap leading-relaxed max-h-52 overflow-y-auto pr-2 scrollbar-none">
                           {installPrompt}
                         </pre>
 
@@ -346,7 +346,7 @@ export function AgentDetailClient({
                         </p>
 
                         {/* 提示词内容 */}
-                        <pre className="text-[13px] font-mono text-gray-700 dark:text-white/80 whitespace-pre-wrap leading-relaxed max-h-52 overflow-y-auto pr-2 scrollbar-thin">
+                        <pre className="text-[13px] font-mono text-gray-700 dark:text-white/80 whitespace-pre-wrap leading-relaxed max-h-52 overflow-y-auto pr-2 scrollbar-none">
                           {installSubPrompt}
                         </pre>
 
